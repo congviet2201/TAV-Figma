@@ -64,7 +64,7 @@ export default function Navigation({ currentPage, navigate, lang, setLang, menuO
             </span>
           </button>
 
-          {/* High-Tech Floating Navigation Pill Container (Targeted from image) */}
+          {/* High-Tech Floating Navigation Pill Container */}
           <nav className="hidden md:flex items-center nav-pill-container">
             {pages.map((page) => {
               const isActive = currentPage === page
@@ -130,7 +130,7 @@ export default function Navigation({ currentPage, navigate, lang, setLang, menuO
         </div>
       </header>
 
-      {/* Mobile Full-Screen Menu Overlay */}
+      {/* Mobile Full-Screen Menu Overlay (Clean Hover: Only Color Change + Scale Up) */}
       <div
         className="fixed inset-0 z-40 mobile-menu"
         style={{
@@ -148,15 +148,17 @@ export default function Navigation({ currentPage, navigate, lang, setLang, menuO
               <button
                 key={page}
                 onClick={() => navigate(page)}
-                className={`flex items-center gap-3 font-display text-4xl md:text-5xl font-bold tracking-tight transition-all duration-300 active:scale-95 ${
-                  isActive ? 'text-[#FF9E00] drop-shadow-[0_0_25px_rgba(255,107,0,0.8)]' : 'text-white/80 hover:text-white'
-                }`}
+                className={`mobile-nav-link ${isActive ? 'active' : ''}`}
                 style={{
                   transitionDelay: menuOpen ? `${i * 70}ms` : '0ms',
                 }}
               >
-                <span className="font-mono text-base text-[#FF6B00]/70 font-normal">0{i + 1}.</span>
-                <span>{labels[page as keyof typeof labels]}</span>
+                <span className="mobile-nav-num font-mono text-lg md:text-2xl text-[#FF6B00] font-bold transition-colors">0{i + 1}.</span>
+                <span className={`mobile-nav-title font-display text-4xl md:text-5xl font-bold tracking-tight transition-all duration-300 ${
+                  isActive ? 'text-[#FF9E00]' : 'text-white/90'
+                }`}>
+                  {labels[page as keyof typeof labels]}
+                </span>
               </button>
             )
           })}

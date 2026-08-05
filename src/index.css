@@ -195,6 +195,50 @@ body {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MOBILE OVERLAY HAMBURGER MENU HOVER EFFECT
+   (Clean: Only Color Change + Scale Enlarge, No Lines, No Shadow)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.mobile-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+  will-change: transform;
+}
+
+/* Remove underline line completely */
+.mobile-nav-link::after {
+  display: none !important;
+}
+
+/* Hover: Scale up & change color only, zero shadow blur */
+.mobile-nav-link:hover {
+  transform: scale(1.12);
+}
+
+.mobile-nav-link:hover .mobile-nav-title {
+  color: #FF9E00;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+.mobile-nav-link:hover .mobile-nav-num {
+  color: #FF9E00;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+.mobile-nav-link:active {
+  transform: scale(1.02);
+  transition: transform 0.12s ease;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    HEADER FLOATING PILL & NAV BUTTON SYSTEM
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
@@ -239,7 +283,6 @@ body {
   will-change: transform, box-shadow;
 }
 
-/* Light sweep pass on nav buttons */
 .nav-pill-btn::before {
   content: '';
   position: absolute;
