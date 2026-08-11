@@ -139,7 +139,7 @@ export default function BlogPage({ lang }: Props) {
         <div className="absolute inset-0 grid-overlay" />
         <div className="relative max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="section-label mb-6">◆ {tx.label}</div>
-          <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white mb-8">
+          <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white mb-8 uppercase">
             {tx.headline}<br />
             <span className="text-gradient">{tx.headline2}</span>
           </h1>

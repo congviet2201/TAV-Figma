@@ -155,7 +155,8 @@ export default function ProjectsPage({ lang }: Props) {
             {filtered.map((proj, i) => (
               <div
                 key={proj.title}
-                className={`group relative overflow-hidden rounded-2xl cursor-pointer card-hover border border-white/10 ${
+                data-cursor="EXPLORE"
+                className={`group relative overflow-hidden rounded-2xl cursor-pointer interactive-card border border-white/10 ${
                   proj.size === 'large' && i === 0 ? 'md:col-span-2 md:row-span-2' : ''
                 }`}
                 style={{ minHeight: proj.size === 'large' && i === 0 ? '520px' : '350px' }}
@@ -175,9 +176,9 @@ export default function ProjectsPage({ lang }: Props) {
                     <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-2.5 py-0.5 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
                       {lang === 'ENG' ? proj.category : proj.categoryVIE}
                     </span>
-                    <span className="project-card-meta text-white/70 font-mono text-[11px]">— {proj.year}</span>
+                    <span className="project-card-meta text-white/70 font-mono text-[11px] font-semibold">— {proj.location || 'TP.HCM'} &bull; {proj.year}</span>
                   </div>
-                  <h3 className="project-card-title font-display text-2xl font-bold text-white mb-2 group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
+                  <h3 className="project-card-title font-display text-2xl font-bold text-white mb-2 group-hover:text-[#FF9E00] transition-colors drop-shadow-md uppercase">
                     {proj.title}
                   </h3>
                   <p className="project-card-desc text-white/80 text-sm leading-relaxed max-h-0 group-hover:max-h-24 overflow-hidden transition-all duration-300 drop-shadow">

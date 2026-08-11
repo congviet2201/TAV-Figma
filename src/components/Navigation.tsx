@@ -15,26 +15,26 @@ interface Props {
 
 const t = {
   ENG: {
-    intro: 'Intro Video',
-    home: 'Home Page',
+    home: 'Home',
     about: 'About Us',
     services: 'Services',
     projects: 'Projects',
     blog: 'Blog',
-    contact: 'Contact & Consult',
+    news: 'News',
+    contact: 'Contact',
   },
   VIE: {
-    intro: 'Video Intro',
     home: 'Trang Chủ',
     about: 'Về Chúng Tôi',
     services: 'Dịch Vụ',
     projects: 'Dự Án',
     blog: 'Blog',
-    contact: 'Tư Vấn & Liên Hệ',
+    news: 'Tin Tức',
+    contact: 'Liên Hệ',
   },
 }
 
-const pages: Page[] = ['intro', 'home', 'about', 'services', 'projects', 'blog']
+const navPages: Page[] = ['home', 'about', 'services', 'projects', 'blog', 'news']
 
 export default function Navigation({
   currentPage,
@@ -185,46 +185,66 @@ export default function Navigation({
           WebkitBackdropFilter: 'blur(6px)',
         }}
       >
-        <div className="flex flex-col justify-center items-center h-full gap-7 p-6">
-          {pages.map((page, i) => {
-            const isActive = currentPage === page
-            return (
-              <button
-                key={page}
-                onClick={() => {
-                  navigate(page)
-                  setMenuOpen(false)
-                }}
-                className={`mobile-nav-link ${isActive ? 'active' : ''}`}
-                style={{
-                  transitionDelay: menuOpen ? `${i * 60}ms` : '0ms',
-                }}
-              >
-                <span className="mobile-nav-num font-mono text-lg md:text-2xl text-[#FF6B00] font-bold transition-colors">0{i + 1}.</span>
-                <span className={`mobile-nav-title font-display text-3xl md:text-5xl font-bold tracking-tight transition-all duration-300 drop-shadow-md ${
-                  isActive
-                    ? 'text-[#FF9E00]'
-                    : theme === 'dark'
-                    ? 'text-white'
-                    : 'text-slate-900 font-extrabold'
-                }`}>
-                  {labels[page as keyof typeof labels]}
-                </span>
-              </button>
-            )
-          })}
+        <div className="flex flex-col justify-center items-center h-full max-w-[650px] w-full mx-auto px-6 py-12 overflow-y-auto">
+          <div className="w-full flex flex-col gap-3">
+            {navPages.map((page, i) => {
+              const isActive = currentPage === page
+              return (
+                <button
+                  key={page}
+                  onClick={() => {
+                    navigate(page)
+                    setMenuOpen(false)
+                  }}
+                  className={`w-full flex items-center justify-between py-3.5 px-6 rounded-2xl border transition-all duration-300 group ${
+                    isActive
+                      ? 'bg-[#FF6B00]/15 border-[#FF9E00]/60 shadow-[0_0_20px_rgba(255,107,0,0.2)]'
+                      : 'border-white/10 hover:border-[#FF9E00]/40 hover:bg-white/5'
+                  }`}
+                  style={{
+                    transitionDelay: menuOpen ? `${i * 50}ms` : '0ms',
+                  }}
+                >
+                  <div className="flex items-center gap-4">
+                    <span className="font-mono text-base md:text-xl text-[#FF6B00] font-bold">0{i + 1}.</span>
+                    <span className={`font-display text-2xl md:text-4xl font-bold tracking-tight uppercase transition-colors ${
+                      isActive
+                        ? 'text-[#FF9E00]'
+                        : theme === 'dark'
+                        ? 'text-white group-hover:text-[#FF9E00]'
+                        : 'text-slate-900 group-hover:text-[#FF6B00]'
+                    }`}>
+                      {labels[page as keyof typeof labels]}
+                    </span>
+                  </div>
 
-          {onOpenContact && (
-            <button
-              onClick={() => {
-                setMenuOpen(false)
-                onOpenContact()
-              }}
-              className="btn-outline mt-4 px-8 py-3.5 rounded-full text-sm group"
-            >
-              <span>{labels.contact}</span>
-            </button>
-          )}
+                  <div className="flex items-center">
+                    {isActive ? (
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#FF9E00] animate-pulse" />
+                    ) : (
+                      <span className="text-white/40 group-hover:text-[#FF9E00] group-hover:translate-x-1.5 transition-all text-xl">
+                        →
+                      </span>
+                    )}
+                  </div>
+                </button>
+              )
+            })}
+
+            {onOpenContact && (
+              <button
+                onClick={() => {
+                  setMenuOpen(false)
+                  onOpenContact()
+                }}
+                className="btn-outline w-full mt-4 py-4 rounded-2xl text-base group text-center flex items-center justify-center gap-3"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#FF9E00] animate-pulse" />
+                <span>{labels.contact}</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </>

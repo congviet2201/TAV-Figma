@@ -95,16 +95,16 @@ export default function ContactModal({ isOpen, onClose, lang }: Props) {
 
         {/* Header */}
         <div className="mb-6 pr-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF6B00]/15 border border-[#FF6B00]/40 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#FF9E00] animate-pulse" />
-            <span className="font-mono text-xs font-bold text-[#FF9E00] uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/15 mb-3 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
+            <span className="font-mono text-xs font-bold text-white/80 uppercase tracking-wider">
               TAV 3D CONSULTING
             </span>
           </div>
-          <h2 className="font-display text-2xl md:text-3xl font-extrabold text-white mb-2">
+          <h2 className="font-display text-2xl md:text-3xl font-extrabold text-white mb-2 uppercase">
             {tx.title}
           </h2>
-          <p className="text-white/60 text-xs md:text-sm">{tx.subtitle}</p>
+          <p className="text-white/70 text-xs md:text-sm">{tx.subtitle}</p>
         </div>
 
         {/* Direct Quick Contact Cards */}

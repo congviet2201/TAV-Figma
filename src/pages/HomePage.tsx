@@ -178,7 +178,7 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
   return (
     <>
       {/* ── HERO SECTION ── */}
-      <section className="relative w-full h-screen min-h-[700px] overflow-hidden flex items-center bg-[#050505]">
+      <section className="relative w-full h-screen min-h-[720px] overflow-hidden flex items-center bg-[#050505]">
         {/* Background Video */}
         <div className="absolute inset-0 bg-[#050505]">
           <video
@@ -190,17 +190,17 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
             playsInline
             className="w-full h-full object-cover opacity-75 transition-all duration-1000"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-[#050505]/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/60 via-transparent to-[#050505]/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/90 via-[#050505]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/70 via-transparent to-[#050505]/90" />
         </div>
 
         {/* Hero content */}
         <div className="relative z-10 max-w-[1400px] w-full mx-auto px-6 md:px-12 pt-20">
           <div className={`transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF6B00]/15 border border-[#FF6B00]/40 shadow-[0_0_20px_rgba(255,107,0,0.25)] mb-6 animate-fade-in-up animate-delay-100">
-              <span className="w-2 h-2 rounded-full bg-[#FF9E00] animate-pulse" />
-              <span className="font-mono text-xs font-bold text-[#FF9E00] tracking-wider uppercase">
-                ◆ {tx.tagline}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/15 mb-6 animate-fade-in-up animate-delay-100 backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
+              <span className="font-mono text-xs font-bold text-white/80 tracking-wider uppercase">
+                {tx.tagline}
               </span>
             </div>
 
@@ -220,7 +220,8 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
             <div className="flex flex-wrap items-center gap-4 animate-fade-in-up animate-delay-500">
               <button
                 onClick={() => navigate('projects')}
-                className="btn-primary px-8 py-4 text-sm font-display font-extrabold group"
+                data-cursor="EXPLORE"
+                className="btn-primary btn-magnetic px-8 py-4 text-sm font-display font-extrabold group"
               >
                 <span>{tx.cta1}</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="group-hover:translate-x-1.5 transition-transform">
@@ -231,7 +232,8 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
 
               <button
                 onClick={() => navigate('intro')}
-                className="btn-outline px-8 py-4 text-sm group"
+                data-cursor="PLAY"
+                className="btn-outline btn-magnetic px-8 py-4 text-sm group"
               >
                 <span className="w-2 h-2 rounded-full bg-[#FF9E00] animate-pulse" />
                 <span>{tx.cta2}</span>
@@ -240,7 +242,8 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
               {onOpenContact && (
                 <button
                   onClick={onOpenContact}
-                  className="btn-outline px-8 py-4 text-sm group"
+                  data-cursor="CONTACT"
+                  className="btn-outline btn-magnetic px-8 py-4 text-sm group"
                 >
                   <span>{tx.cta3}</span>
                 </button>
@@ -256,16 +259,16 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section className="py-20 border-y border-white/10 bg-[#0A0A0A] relative">
+      {/* ── STATS SECTION ── */}
+      <section className="py-20 border-y border-white/10 bg-[#0E1217] relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((s) => (
-              <div key={s.key} className="text-center group">
+              <div key={s.key} className="p-6 text-center group interactive-card rounded-2xl bg-[#050505]/50 border border-white/10">
                 <div className="font-display text-4xl md:text-6xl font-extrabold text-gradient mb-2 group-hover:scale-105 transition-transform duration-300">
                   {s.value}
                 </div>
-                <div className="font-mono text-xs tracking-widest text-white/50 uppercase">{tx[s.key as keyof typeof tx]}</div>
+                <div className="font-mono text-xs tracking-widest text-white/70 uppercase font-bold">{tx[s.key as keyof typeof tx]}</div>
               </div>
             ))}
           </div>
@@ -275,16 +278,17 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
       {/* ── SERVICES PREVIEW ── */}
       <section className="py-28 relative bg-[#050505]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 border-b border-white/10 pb-8">
             <div>
               <div className="section-label mb-4">◆ {tx.servicesTitle}</div>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-white leading-tight">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-white leading-tight uppercase">
                 {tx.servicesHeadline}
               </h2>
             </div>
             <button
               onClick={() => navigate('services')}
-              className="btn-page-switch group self-start md:self-auto whitespace-nowrap"
+              data-cursor="DISCOVER"
+              className="btn-page-switch btn-magnetic group self-start md:self-auto whitespace-nowrap"
             >
               <span>{lang === 'ENG' ? 'View All Services' : 'Xem Tất Cả'}</span>
               <span className="group-hover:translate-x-1.5 transition-transform">→</span>
@@ -295,23 +299,24 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
             {services.map((svc, i) => (
               <div
                 key={i}
-                className="glass-panel rounded-2xl p-6 card-hover cursor-pointer group flex flex-col justify-between"
+                data-cursor="DISCOVER"
+                className="card-highlight p-6 cursor-pointer group flex flex-col justify-between"
                 onClick={() => navigate('services')}
               >
                 <div>
-                  <div className="mb-6 w-12 h-12 rounded-xl flex items-center justify-center bg-[#FF6B00]/10 border border-[#FF6B00]/25 group-hover:border-[#FF6B00]/60 group-hover:bg-[#FF6B00]/20 transition-all duration-300">
+                  <div className="mb-6 w-14 h-14 rounded-2xl flex items-center justify-center bg-[#FF6B00]/15 border border-[#FF6B00]/40 group-hover:border-[#FF9E00] group-hover:bg-[#FF6B00]/30 transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.2)]">
                     {svc.icon}
                   </div>
-                  <h3 className="font-display font-bold text-white mb-2 text-base group-hover:text-[#FF9E00] transition-colors">
+                  <h3 className="font-display font-extrabold text-white mb-3 text-lg group-hover:text-[#FF9E00] transition-colors uppercase tracking-tight">
                     {lang === 'ENG' ? svc.titleENG : svc.titleVIE}
                   </h3>
-                  <p className="text-white/55 text-sm leading-relaxed">
+                  <p className="text-white/70 text-xs md:text-sm leading-relaxed">
                     {lang === 'ENG' ? svc.descENG : svc.descVIE}
                   </p>
                 </div>
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[#FF9E00] text-xs font-mono font-bold group-hover:translate-x-1 transition-transform">
-                  <span>{lang === 'ENG' ? 'Learn More' : 'Tìm Hiểu'}</span>
-                  <span>→</span>
+                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[#FF9E00] text-xs font-mono font-bold group-hover:translate-x-1.5 transition-transform">
+                  <span>{lang === 'ENG' ? 'Explore Solution' : 'Khám Phá'}</span>
+                  <span className="text-base">→</span>
                 </div>
               </div>
             ))}
@@ -324,17 +329,17 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="text-center max-w-[700px] mx-auto mb-16">
             <div className="section-label mb-4">◆ {tx.techTitle}</div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4">{tx.techHeadline}</h2>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4 uppercase">{tx.techHeadline}</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {techStack.map((tech, i) => (
-              <div key={i} className="glass-panel p-6 rounded-2xl border border-white/10 card-hover">
+              <div key={i} data-cursor="EXPLORE" className="card-highlight p-7 group">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-3 h-3 rounded-full bg-[#FF6B00] shadow-[0_0_10px_#FF6B00]" />
-                  <h3 className="font-display font-bold text-white text-lg">{tech.name}</h3>
+                  <div className="w-3.5 h-3.5 rounded-full bg-[#FF9E00] shadow-[0_0_15px_#FF6B00] animate-pulse" />
+                  <h3 className="font-display font-extrabold text-white text-xl uppercase tracking-wide group-hover:text-[#FF9E00] transition-colors">{tech.name}</h3>
                 </div>
-                <p className="text-white/60 text-xs md:text-sm font-mono">{tech.detail}</p>
+                <p className="text-white/75 text-sm font-mono leading-relaxed">{tech.detail}</p>
               </div>
             ))}
           </div>

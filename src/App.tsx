@@ -8,13 +8,17 @@ import BlogPage from './pages/BlogPage'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
+import PageTransitionController from './components/PageTransitionController'
+import CustomCursor from './components/CustomCursor'
 
-export type Page = 'intro' | 'home' | 'about' | 'services' | 'projects' | 'blog'
+export type Page = 'intro' | 'home' | 'about' | 'services' | 'projects' | 'blog' | 'news'
 export type Lang = 'ENG' | 'VIE'
 export type ThemeMode = 'dark' | 'light'
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('intro')
+  const [targetPage, setTargetPage] = useState<Page | null>(null)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const [lang, setLang] = useState<Lang>('VIE')
   const [theme, setTheme] = useState<ThemeMode>('dark')
   const [menuOpen, setMenuOpen] = useState(false)
@@ -40,14 +44,28 @@ export default function App() {
     }
   }, [theme])
 
-  const navigate = (page: Page) => setCurrentPage(page)
-
-  const handleOpenContact = () => {
-    setContactOpen(true)
+  const navigate = (p: Page) => {
+    if (p === currentPage || isTransitioning) return
+    setTargetPage(p)
+    setIsTransitioning(true)
   }
+
+  const handleTransitionComplete = () => {
+    if (targetPage) {
+      setCurrentPage(targetPage)
+    }
+  }
+
+  const handleTransitionEnd = () => {
+    setTargetPage(null)
+    setIsTransitioning(false)
+  }
+
+  const handleOpenContact = () => setContactOpen(true)
 
   return (
     <div className={`min-h-screen transition-colors duration-400 ${theme === 'dark' ? 'bg-[#050505] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'}`}>
+      <CustomCursor />
       <Navigation
         currentPage={currentPage}
         navigate={navigate}
@@ -61,14 +79,23 @@ export default function App() {
         onOpenContact={handleOpenContact}
       />
 
-      <main>
-        {currentPage === 'intro' && <IntroPage navigate={navigate} lang={lang} onOpenContact={handleOpenContact} />}
-        {currentPage === 'home' && <HomePage navigate={navigate} lang={lang} onOpenContact={handleOpenContact} />}
-        {currentPage === 'about' && <AboutPage lang={lang} />}
-        {currentPage === 'services' && <ServicesPage lang={lang} navigate={navigate} />}
-        {currentPage === 'projects' && <ProjectsPage lang={lang} />}
-        {currentPage === 'blog' && <BlogPage lang={lang} />}
-      </main>
+      <PageTransitionController
+        currentPage={currentPage}
+        targetPage={targetPage}
+        lang={lang}
+        isTransitioning={isTransitioning}
+        onTransitionComplete={handleTransitionComplete}
+        onTransitionEnd={handleTransitionEnd}
+      >
+        <main>
+          {currentPage === 'intro' && <IntroPage navigate={navigate} lang={lang} onOpenContact={handleOpenContact} />}
+          {currentPage === 'home' && <HomePage navigate={navigate} lang={lang} onOpenContact={handleOpenContact} />}
+          {currentPage === 'about' && <AboutPage lang={lang} />}
+          {currentPage === 'services' && <ServicesPage lang={lang} navigate={navigate} />}
+          {currentPage === 'projects' && <ProjectsPage lang={lang} />}
+          {(currentPage === 'blog' || currentPage === 'news') && <BlogPage lang={lang} />}
+        </main>
+      </PageTransitionController>
 
       {currentPage !== 'intro' && <Footer navigate={navigate} lang={lang} />}
 

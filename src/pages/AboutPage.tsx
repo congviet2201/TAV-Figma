@@ -105,15 +105,14 @@ export default function AboutPage({ lang }: Props) {
             className="w-full h-full object-cover opacity-20"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 to-[#050505]" />
-          <div className="absolute inset-0 grid-overlay" />
         </div>
         <div className="relative max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="section-label mb-6">◆ {tx.label}</div>
-          <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white mb-8">
+          <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white mb-8 uppercase">
             {tx.headline}<br />
             <span className="text-gradient">{tx.headline2}</span>
           </h1>
-          <p className="max-w-[620px] text-white/70 text-lg leading-relaxed">{tx.intro}</p>
+          <p className="max-w-[620px] text-white/75 text-lg leading-relaxed">{tx.intro}</p>
         </div>
       </section>
 
@@ -151,12 +150,12 @@ export default function AboutPage({ lang }: Props) {
           <div className="section-label mb-4">◆ {tx.valuesLabel}</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
             {tx.values.map((val, i) => (
-              <div key={i} className="glass-panel rounded-2xl p-8 card-hover">
-                <div className="font-display text-5xl font-extrabold text-gradient mb-4 opacity-40">
+              <div key={i} data-cursor="DISCOVER" className="card-highlight p-8 group">
+                <div className="font-display text-5xl font-extrabold text-[#FF9E00] mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
                   0{i + 1}
                 </div>
-                <h3 className="font-display text-xl font-bold text-white mb-3">{val.title}</h3>
-                <p className="text-white/55 text-sm leading-relaxed">{val.desc}</p>
+                <h3 className="font-display text-xl font-bold text-white mb-3 uppercase tracking-wide group-hover:text-[#FF9E00] transition-colors">{val.title}</h3>
+                <p className="text-white/70 text-sm leading-relaxed">{val.desc}</p>
               </div>
             ))}
           </div>
@@ -167,24 +166,24 @@ export default function AboutPage({ lang }: Props) {
       <section className="py-24 bg-[#050505]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="section-label mb-4">◆ {tx.teamLabel}</div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16">{tx.teamHeadline}</h2>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16 uppercase">{tx.teamHeadline}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, i) => (
-              <div key={i} className="group card-hover rounded-2xl overflow-hidden glass-panel">
+              <div key={i} data-cursor="DISCOVER" className="group card-highlight overflow-hidden">
                 <div className="relative overflow-hidden" style={{ height: '280px' }}>
                   <img
                     src={member.img}
                     alt={member.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E1217] via-transparent to-transparent" />
                 </div>
                 <div className="p-6">
-                  <h3 className="font-display font-bold text-white text-lg group-hover:text-[#FF9E00] transition-colors">{member.name}</h3>
-                  <div className="text-[#FF9E00] text-xs font-mono mt-1 mb-3 bg-[#FF6B00]/15 px-2.5 py-1 rounded-full inline-block border border-[#FF6B00]/30 font-semibold">
+                  <h3 className="font-display font-bold text-white text-lg group-hover:text-[#FF9E00] transition-colors uppercase">{member.name}</h3>
+                  <div className="text-[#FF9E00] text-xs font-mono mt-1.5 mb-3 bg-[#FF6B00]/15 px-3 py-1 rounded-full inline-block border border-[#FF6B00]/40 font-bold uppercase">
                     {lang === 'ENG' ? member.role : member.roleVIE}
                   </div>
-                  <p className="text-white/55 text-sm leading-relaxed">
+                  <p className="text-white/70 text-sm leading-relaxed">
                     {lang === 'ENG' ? member.bio : member.bioVIE}
                   </p>
                 </div>
@@ -198,7 +197,7 @@ export default function AboutPage({ lang }: Props) {
       <section className="py-24 bg-[#0A0A0A]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="section-label mb-4">◆ {tx.milestoneLabel}</div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16">{tx.milestoneHeadline}</h2>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16 uppercase">{tx.milestoneHeadline}</h2>
           <div className="relative">
             <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] timeline-line transform md:-translate-x-1/2" />
             <div className="flex flex-col gap-12">
@@ -209,13 +208,14 @@ export default function AboutPage({ lang }: Props) {
                 >
                   <div className="md:w-1/2 pl-8 md:pl-0">
                     <div
-                      className={`glass-panel rounded-2xl p-7 card-hover ${i % 2 === 0 ? 'md:mr-12' : 'md:ml-12'}`}
+                      data-cursor="DISCOVER"
+                      className={`card-highlight p-7 group ${i % 2 === 0 ? 'md:mr-12' : 'md:ml-12'}`}
                     >
-                      <div className="font-display text-3xl font-bold text-gradient mb-2">{m.year}</div>
-                      <h3 className="font-display font-bold text-white text-lg mb-2">
+                      <div className="font-display text-3xl font-extrabold text-[#FF9E00] mb-2">{m.year}</div>
+                      <h3 className="font-display font-bold text-white text-lg mb-2 uppercase group-hover:text-[#FF9E00] transition-colors">
                         {lang === 'ENG' ? m.title : m.titleVIE}
                       </h3>
-                      <p className="text-white/55 text-sm leading-relaxed">{m.desc}</p>
+                      <p className="text-white/70 text-sm leading-relaxed">{m.desc}</p>
                     </div>
                   </div>
                   {/* Glowing Dot */}

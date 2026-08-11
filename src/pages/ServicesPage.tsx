@@ -115,43 +115,46 @@ export default function ServicesPage({ lang, navigate }: Props) {
           {services.map((svc, i) => (
             <div
               key={i}
-              className={`glass-panel rounded-2xl overflow-hidden card-hover flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              data-cursor="DISCOVER"
+              className={`glass-panel rounded-2xl overflow-hidden interactive-card border border-white/10 flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
             >
-              <div className="relative md:w-1/2 overflow-hidden" style={{ minHeight: '320px' }}>
+              <div className="relative md:w-1/2 overflow-hidden" style={{ minHeight: '340px' }}>
                 <img
                   src={svc.img}
                   alt={lang === 'ENG' ? svc.titleENG : svc.titleVIE}
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  style={{ minHeight: '320px' }}
+                  style={{ minHeight: '340px' }}
                 />
-                <div className="absolute inset-0" style={{ background: `linear-gradient(${i % 2 === 0 ? '90deg' : '270deg'}, rgba(5,5,5,0.85), transparent)` }} />
+                <div className="absolute top-6 left-6 z-10 font-display text-5xl md:text-7xl font-extrabold text-white/20 select-none">
+                  0{i + 1}
+                </div>
+                <div className="absolute inset-0" style={{ background: `linear-gradient(${i % 2 === 0 ? '90deg' : '270deg'}, rgba(5,5,5,0.9), transparent)` }} />
               </div>
               <div className="md:w-1/2 p-10 md:p-14 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-2xl" style={{ color: svc.color }}>{svc.icon}</span>
-                  <span className="font-mono text-xs tracking-widest uppercase bg-[#FF6B00]/15 px-3 py-1 rounded-full border border-[#FF6B00]/30 font-semibold" style={{ color: svc.color }}>
-                    {lang === 'ENG' ? `Service 0${i + 1}` : `Dịch Vụ 0${i + 1}`}
+                  <span className="font-mono text-xs tracking-widest uppercase bg-white/5 px-3 py-1 rounded-full border border-white/15 font-semibold text-white/80">
+                    {lang === 'ENG' ? `SERVICE 0${i + 1}` : `DỊCH VỤ 0${i + 1}`}
                   </span>
                 </div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4 uppercase">
                   {lang === 'ENG' ? svc.titleENG : svc.titleVIE}
                 </h2>
-                <p className="text-white/60 leading-relaxed mb-6 text-base">
+                <p className="text-white/70 leading-relaxed mb-6 text-base">
                   {lang === 'ENG' ? svc.descENG : svc.descVIE}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {svc.tags.map((tag) => (
-                    <span key={tag} className="font-mono text-[11px] px-3 py-1 rounded-full glass-pill text-white/70 border border-white/10">
+                    <span key={tag} className="font-mono text-[11px] px-3 py-1 rounded-full bg-white/5 text-white/80 border border-white/15 uppercase font-semibold">
                       {tag}
                     </span>
                   ))}
                 </div>
                 <button
                   onClick={() => navigate('projects')}
-                  className="btn-outline px-6 py-3 text-sm self-start"
+                  className="btn-outline px-6 py-3 text-sm self-start group"
                 >
                   <span>{tx.learnMore}</span>
-                  <span>→</span>
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </button>
               </div>
             </div>
