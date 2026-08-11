@@ -100,6 +100,37 @@ body.light-mode .text-white\/20 {
   color: #64748B !important;
 }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EXPLICIT HIGH-CONTRAST OVERLAY TEXT PRESERVATION
+   (Preserves 100% pure white text over photo/video background overlays in Light Mode)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+body.light-mode .project-card-title,
+body.light-mode .blog-featured-title,
+body.light-mode .overlay-title,
+body.light-mode .img-overlay ~ div h3,
+body.light-mode .img-overlay ~ div h2,
+body.light-mode .hero-overlay-text h1,
+body.light-mode .hero-overlay-text h2 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95) !important;
+}
+
+body.light-mode .project-card-desc,
+body.light-mode .blog-featured-desc,
+body.light-mode .overlay-desc,
+body.light-mode .img-overlay ~ div p,
+body.light-mode .hero-overlay-text p {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.95) !important;
+}
+
+body.light-mode .project-card-meta,
+body.light-mode .blog-featured-meta,
+body.light-mode .img-overlay ~ div span {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
 /* Card & Glass Panels Overrides */
 body.light-mode .glass-panel {
   background: #FFFFFF !important;
@@ -150,6 +181,137 @@ body.light-mode .section-label {
   color: #C2410C !important;
 }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HIGH-CONTRAST FILTER CATEGORY BUTTONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   100% UNIVERSAL SIGNATURE HOVER SYSTEM
+   (Excluding Hamburger Menu Button & Menu Links)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+button:not([aria-label="Toggle menu"]):not(.mobile-nav-link),
+.btn-primary,
+.btn-outline,
+.filter-btn,
+.btn-page-switch,
+.btn-icon:not([aria-label="Toggle menu"]),
+.btn-page-num,
+.btn-lang-toggle {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: transform, box-shadow;
+}
+
+/* Universal Hover State - Excludes Hamburger Menu Controls */
+button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover,
+.btn-primary:hover,
+.btn-outline:hover,
+.filter-btn:hover,
+.btn-page-switch:hover,
+.btn-icon:not([aria-label="Toggle menu"]):hover,
+.btn-page-num:hover,
+.btn-lang-toggle:hover {
+  background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 100%) !important;
+  border-color: #FF9E00 !important;
+  color: #050505 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 35px rgba(255, 107, 0, 0.85), 0 6px 20px rgba(255, 107, 0, 0.45) !important;
+  transform: translateY(-3px) scale(1.04) !important;
+  text-shadow: none !important;
+}
+
+button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover *,
+.btn-primary:hover *,
+.btn-outline:hover *,
+.filter-btn:hover *,
+.btn-page-switch:hover *,
+.btn-icon:not([aria-label="Toggle menu"]):hover *,
+.btn-page-num:hover *,
+.btn-lang-toggle:hover * {
+  color: #050505 !important;
+  stroke: #050505 !important;
+  fill: opacity-100 !important;
+}
+
+/* Light mode universal hover override */
+body.light-mode button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover,
+body.light-mode .btn-primary:hover,
+body.light-mode .btn-outline:hover,
+body.light-mode .filter-btn:hover,
+body.light-mode .btn-page-switch:hover,
+body.light-mode .btn-icon:not([aria-label="Toggle menu"]):hover,
+body.light-mode .btn-page-num:hover,
+body.light-mode .btn-lang-toggle:hover {
+  background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
+  border-color: #EA580C !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 35px rgba(234, 88, 12, 0.7), 0 6px 20px rgba(234, 88, 12, 0.4) !important;
+  transform: translateY(-3px) scale(1.04) !important;
+  text-shadow: none !important;
+}
+
+body.light-mode button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover *,
+body.light-mode .btn-primary:hover *,
+body.light-mode .btn-outline:hover *,
+body.light-mode .filter-btn:hover *,
+body.light-mode .btn-page-switch:hover *,
+body.light-mode .btn-icon:not([aria-label="Toggle menu"]):hover *,
+body.light-mode .btn-page-num:hover *,
+body.light-mode .btn-lang-toggle:hover * {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+/* Specific Hamburger Trigger Button Hover (Clean Glow & Line Accent, No Solid Orange Box) */
+button[aria-label="Toggle menu"]:hover {
+  background: rgba(255, 107, 0, 0.2) !important;
+  border-color: #FF6B00 !important;
+  box-shadow: 0 0 25px rgba(255, 107, 0, 0.5) !important;
+  transform: scale(1.08) !important;
+}
+
+button[aria-label="Toggle menu"]:hover .hamburger-line {
+  background-color: #FF6B00 !important;
+}
+
+/* Mobile Nav Link Hover (Clean Scale Enlarge, No Orange Box Background) */
+.mobile-nav-link:hover {
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: scale(1.12) !important;
+}
+
+.mobile-nav-link:hover .mobile-nav-title {
+  color: #FF9E00 !important;
+  text-shadow: 0 0 22px rgba(255, 158, 0, 0.9) !important;
+}
+
+/* Active press feedback */
+button:active,
+.btn-primary:active,
+.btn-outline:active,
+.filter-btn:active,
+.btn-page-switch:active,
+.btn-icon:active {
+  transform: scale(0.94) translateY(0) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* Light mode input override */
+body.light-mode input[type="text"] {
+  background: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+/* Light mode sticky section backdrop override */
+body.light-mode section.sticky {
+  background-color: rgba(248, 250, 252, 0.92) !important;
+  border-bottom-color: #E2E8F0 !important;
+}
+
 /* Buttons in Light Mode */
 body.light-mode .btn-outline {
   background: #FFFFFF !important;
@@ -159,8 +321,11 @@ body.light-mode .btn-outline {
 }
 
 body.light-mode .btn-outline:hover {
-  background: #EA580C !important;
+  background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
   color: #FFFFFF !important;
+  border-color: #EA580C !important;
+  box-shadow: 0 0 30px rgba(234, 88, 12, 0.6), 0 4px 15px rgba(234, 88, 12, 0.35) !important;
+  transform: translateY(-3px) scale(1.03) !important;
 }
 
 body.light-mode .btn-page-switch {
@@ -170,8 +335,11 @@ body.light-mode .btn-page-switch {
 }
 
 body.light-mode .btn-page-switch:hover {
-  background: #EA580C !important;
+  background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
   color: #FFFFFF !important;
+  border-color: #EA580C !important;
+  box-shadow: 0 0 30px rgba(234, 88, 12, 0.6) !important;
+  transform: translateY(-3px) scale(1.03) !important;
 }
 
 body.light-mode .btn-icon {
@@ -181,9 +349,10 @@ body.light-mode .btn-icon {
 }
 
 body.light-mode .btn-icon:hover {
-  background: rgba(234, 88, 12, 0.15) !important;
+  background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
   border-color: #EA580C !important;
-  color: #EA580C !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 25px rgba(234, 88, 12, 0.5) !important;
 }
 
 body.light-mode .card-hover:hover {
@@ -294,17 +463,17 @@ body.light-mode footer a:hover {
 
 /* Card hover lift & specular orange border glow */
 .card-hover {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.35s ease,
-              background-color 0.35s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.4s ease;
   will-change: transform, box-shadow;
 }
 .card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(255, 107, 0, 0.2), 0 0 25px rgba(255, 107, 0, 0.1);
-  border-color: rgba(255, 107, 0, 0.45);
-  background-color: rgba(255, 255, 255, 0.06);
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 25px 60px rgba(255, 107, 0, 0.3), 0 0 35px rgba(255, 107, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 107, 0, 0.65);
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Animations */
@@ -504,10 +673,25 @@ body.light-mode footer a:hover {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   ADVANCED CYBER TECH BUTTON SYSTEM
+   ADVANCED CYBER TECH BUTTON & HOVER SYSTEM
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-/* Primary Button - Cyber Tech Orange & Black Gradient */
+/* Light sweep shimmer effect keyframe */
+@keyframes lightSweep {
+  0% { transform: translateX(-150%) skewX(-25deg); }
+  100% { transform: translateX(250%) skewX(-25deg); }
+}
+
+@keyframes cyberPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.5), 0 0 40px rgba(255, 158, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 107, 0, 0.85), 0 0 70px rgba(255, 158, 0, 0.5);
+  }
+}
+
+/* Primary Button - Cyber Tech Orange & Amber Gradient */
 .btn-primary {
   position: relative;
   display: inline-flex;
@@ -516,16 +700,16 @@ body.light-mode footer a:hover {
   gap: 0.6rem;
   background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 60%, #E65100 100%);
   color: #050505;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Be Vietnam Pro', 'Outfit', sans-serif;
   font-weight: 800;
   letter-spacing: 0.04em;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   overflow: hidden;
   cursor: pointer;
   outline: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 25px rgba(255, 107, 0, 0.45), 0 4px 15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 25px rgba(255, 107, 0, 0.5), 0 4px 15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   will-change: transform, box-shadow;
 }
 
@@ -534,74 +718,77 @@ body.light-mode footer a:hover {
   position: absolute;
   top: 0;
   left: 0;
-  width: 40%;
+  width: 45%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
   transform: translateX(-150%) skewX(-25deg);
   pointer-events: none;
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 45px rgba(255, 107, 0, 0.8), 0 8px 28px rgba(255, 107, 0, 0.45);
-  transform: translateY(-2px);
-  filter: brightness(1.08);
+  box-shadow: 0 0 50px rgba(255, 107, 0, 0.9), 0 8px 30px rgba(255, 107, 0, 0.5);
+  transform: translateY(-3px) scale(1.02);
+  filter: brightness(1.12);
+  border-color: #FFFFFF;
 }
 
 .btn-primary:hover::before {
-  animation: lightSweep 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: lightSweep 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary:active {
-  transform: scale(0.94) translateY(0);
+  transform: scale(0.95) translateY(0);
   box-shadow: 0 0 18px rgba(255, 107, 0, 0.5);
   transition: transform 0.12s ease;
 }
 
-.btn-primary:focus-visible {
-  outline: 2px solid #FF6B00;
-  outline-offset: 3px;
-}
-
-/* Outline / Secondary Button - Futuristic Cyber Glass */
+/* Secondary / Outline Button */
 .btn-outline {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 107, 0, 0.4);
+  border: 1px solid rgba(255, 107, 0, 0.45);
   color: #FF9E00;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Be Vietnam Pro', 'Outfit', sans-serif;
   font-weight: 700;
   letter-spacing: 0.03em;
-  border-radius: 12px;
+  border-radius: 9999px;
+  padding: 0.6rem 1.4rem;
   overflow: hidden;
   cursor: pointer;
   outline: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: none;
   will-change: transform, box-shadow;
 }
 
-.btn-outline:hover {
-  background: rgba(255, 107, 0, 0.14);
-  border-color: #FF6B00;
-  color: #FFFFFF;
-  box-shadow: 0 0 30px rgba(255, 107, 0, 0.4), inset 0 0 15px rgba(255, 107, 0, 0.2);
-  transform: translateY(-2px);
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  transform: translateX(-150%) skewX(-25deg);
+  pointer-events: none;
 }
 
-.btn-outline:active {
-  transform: scale(0.94) translateY(0);
-  transition: transform 0.12s ease;
+.btn-outline:hover::before {
+  animation: lightSweep 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-outline:focus-visible {
-  outline: 2px solid #FF9E00;
-  outline-offset: 3px;
+.btn-outline.active {
+  background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 100%) !important;
+  border-color: #FF9E00 !important;
+  color: #050505 !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
 }
 
 /* Icon Button System */
@@ -613,18 +800,22 @@ body.light-mode footer a:hover {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.75);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
+
 .btn-icon:hover {
-  background: rgba(255, 107, 0, 0.16);
-  border-color: rgba(255, 107, 0, 0.5);
+  background: rgba(255, 107, 0, 0.25);
+  border-color: #FF6B00;
   color: #FF9E00;
-  box-shadow: 0 0 22px rgba(255, 107, 0, 0.4);
-  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(255, 107, 0, 0.6);
+  transform: translateY(-2px) scale(1.08) rotate(4deg);
 }
+
 .btn-icon:active {
   transform: scale(0.90);
   transition: transform 0.12s ease;
@@ -655,8 +846,10 @@ body.light-mode footer a:hover {
   color: rgba(255, 255, 255, 0.55);
 }
 .btn-lang-toggle.inactive:hover {
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.08);
+  color: #FF9E00;
+  background: rgba(255, 107, 0, 0.18);
+  box-shadow: 0 0 16px rgba(255, 107, 0, 0.45);
+  transform: scale(1.06);
 }
 
 .btn-lang-toggle:active {
@@ -665,39 +858,59 @@ body.light-mode footer a:hover {
 
 /* Page Navigation / Switcher Buttons (Next, Prev, View All) */
 .btn-page-switch {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
   padding: 0.75rem 1.4rem;
   border-radius: 12px;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Be Vietnam Pro', 'Outfit', sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: #FF9E00;
-  background: rgba(255, 107, 0, 0.08);
-  border: 1px solid rgba(255, 107, 0, 0.35);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 107, 0, 0.4);
+  box-shadow: none;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-page-switch::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+  transform: translateX(-150%) skewX(-25deg);
+  pointer-events: none;
 }
 
 .btn-page-switch:hover {
-  color: #FFFFFF;
-  background: rgba(255, 107, 0, 0.22);
-  border-color: #FF6B00;
-  box-shadow: 0 0 28px rgba(255, 107, 0, 0.45);
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 100%) !important;
+  border-color: #FF9E00 !important;
+  color: #050505 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 35px rgba(255, 107, 0, 0.85), 0 6px 20px rgba(255, 107, 0, 0.45) !important;
+  transform: translateY(-3px) scale(1.04) !important;
+}
+
+.btn-page-switch:hover::before {
+  animation: lightSweep 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-page-switch:active {
-  transform: scale(0.94);
+  transform: scale(0.94) translateY(0);
   transition: transform 0.12s ease;
 }
 
 /* Numbered Pagination Buttons */
 .btn-page-num {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -708,26 +921,31 @@ body.light-mode footer a:hover {
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-page-num.active {
   background: linear-gradient(135deg, #FF9E00, #FF6B00);
+  border: 1px solid #FF9E00;
   color: #050505;
-  box-shadow: 0 0 22px rgba(255, 107, 0, 0.65);
+  font-weight: 800;
+  box-shadow: none;
 }
 
 .btn-page-num.inactive {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 107, 0, 0.35);
+  color: #FF9E00;
 }
 
 .btn-page-num.inactive:hover {
-  color: #FFFFFF;
-  border-color: rgba(255, 107, 0, 0.4);
-  background: rgba(255, 107, 0, 0.12);
-  box-shadow: 0 0 15px rgba(255, 107, 0, 0.25);
+  background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 100%) !important;
+  border-color: #FF9E00 !important;
+  color: #050505 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 35px rgba(255, 107, 0, 0.85) !important;
+  transform: translateY(-3px) scale(1.06) !important;
 }
 
 .btn-page-num:active {

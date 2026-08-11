@@ -69,7 +69,7 @@ export default function Navigation({
           boxShadow: scrolled ? '0 10px 35px rgba(0, 0, 0, 0.15)' : 'none',
         }}
       >
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 h-[78px] flex items-center justify-between">
+        <div className="w-full px-4 sm:px-6 md:px-8 h-[78px] flex items-center justify-between">
           {/* Logo TAV 3D Button */}
           <button
             onClick={() => navigate('home')}
@@ -180,8 +180,9 @@ export default function Navigation({
           transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? 'auto' : 'none',
-          background: theme === 'dark' ? 'rgba(5, 5, 5, 0.98)' : 'rgba(248, 250, 252, 0.98)',
-          backdropFilter: 'blur(32px)',
+          background: theme === 'dark' ? 'rgba(5, 5, 5, 0.35)' : 'rgba(248, 250, 252, 0.45)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
         }}
       >
         <div className="flex flex-col justify-center items-center h-full gap-7 p-6">
@@ -200,12 +201,12 @@ export default function Navigation({
                 }}
               >
                 <span className="mobile-nav-num font-mono text-lg md:text-2xl text-[#FF6B00] font-bold transition-colors">0{i + 1}.</span>
-                <span className={`mobile-nav-title font-display text-3xl md:text-5xl font-bold tracking-tight transition-all duration-300 ${
+                <span className={`mobile-nav-title font-display text-3xl md:text-5xl font-bold tracking-tight transition-all duration-300 drop-shadow-md ${
                   isActive
                     ? 'text-[#FF9E00]'
                     : theme === 'dark'
-                    ? 'text-white/90'
-                    : 'text-slate-800'
+                    ? 'text-white'
+                    : 'text-slate-900 font-extrabold'
                 }`}>
                   {labels[page as keyof typeof labels]}
                 </span>
@@ -219,9 +220,9 @@ export default function Navigation({
                 setMenuOpen(false)
                 onOpenContact()
               }}
-              className="mt-4 px-8 py-3.5 rounded-full bg-[#FF6B00] text-black font-display font-extrabold text-sm shadow-[0_0_25px_rgba(255,107,0,0.6)] active:scale-95 transition-all"
+              className="btn-outline mt-4 px-8 py-3.5 rounded-full text-sm group"
             >
-              {labels.contact}
+              <span>{labels.contact}</span>
             </button>
           )}
         </div>

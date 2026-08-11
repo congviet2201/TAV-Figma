@@ -211,9 +211,9 @@ export default function ContactModal({ isOpen, onClose, lang }: Props) {
 
             <button
               type="submit"
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#FF9E00] to-[#FF6B00] text-black font-display font-extrabold text-sm hover:brightness-110 transition-all shadow-[0_0_25px_rgba(255,107,0,0.5)] active:scale-[0.99]"
+              className="btn-outline w-full py-3.5 rounded-xl text-sm group font-bold"
             >
-              {tx.submitBtn}
+              <span>{tx.submitBtn}</span>
             </button>
           </form>
         )}

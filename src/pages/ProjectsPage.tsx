@@ -126,22 +126,21 @@ export default function ProjectsPage({ lang }: Props) {
       </section>
 
       {/* Filter Bar */}
-      <section className="py-6 sticky top-[76px] z-20 bg-[#050505]/90 backdrop-blur-xl border-b border-white/10 shadow-lg">
+      <section className="py-4 sticky top-[76px] z-20 bg-[#050505]/90 backdrop-blur-xl border-b border-white/10">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="flex gap-2.5 overflow-x-auto pb-1 no-scrollbar">
+          <div className="flex gap-3 overflow-x-auto pt-3 pb-4 px-2 -mx-2 no-scrollbar items-center">
             {cats.map((cat, i) => {
               const isActive = cat === activeFilter || (activeFilter === 'All' && i === 0) || (activeFilter === 'Tất Cả' && i === 0)
               return (
                 <button
                   key={cat}
                   onClick={() => setActiveFilter(cat)}
-                  className={`whitespace-nowrap font-mono text-xs px-5 py-2.5 rounded-full border transition-all duration-200 active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B00] ${
-                    isActive
-                      ? 'border-[#FF6B00] text-[#FF9E00] bg-[#FF6B00]/20 shadow-[0_0_20px_rgba(255,107,0,0.4)] font-bold'
-                      : 'border-white/10 text-white/60 hover:text-white hover:border-white/30 bg-white/5'
+                  className={`btn-outline px-6 py-2.5 rounded-full text-xs font-mono group whitespace-nowrap ${
+                    isActive ? 'active' : ''
                   }`}
                 >
-                  {cat}
+                  <span className={`w-2 h-2 rounded-full transition-colors ${isActive ? 'bg-black' : 'bg-[#FF9E00] group-hover:bg-black'}`} />
+                  <span>{cat}</span>
                 </button>
               )
             })}
@@ -169,20 +168,22 @@ export default function ProjectsPage({ lang }: Props) {
                   style={{ minHeight: 'inherit' }}
                 />
                 <div className="absolute inset-0 img-overlay" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent transition-opacity duration-300" />
 
                 <div className="absolute bottom-0 left-0 right-0 p-8 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/15 px-2.5 py-0.5 rounded-full border border-[#FF6B00]/40 font-semibold">
+                    <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-2.5 py-0.5 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
                       {lang === 'ENG' ? proj.category : proj.categoryVIE}
                     </span>
-                    <span className="text-white/40 font-mono text-[11px]">— {proj.year}</span>
+                    <span className="project-card-meta text-white/70 font-mono text-[11px]">— {proj.year}</span>
                   </div>
-                  <h3 className="font-display text-2xl font-bold text-white mb-2 group-hover:text-[#FF9E00] transition-colors">{proj.title}</h3>
-                  <p className="text-white/60 text-sm leading-relaxed max-h-0 group-hover:max-h-24 overflow-hidden transition-all duration-300">
+                  <h3 className="project-card-title font-display text-2xl font-bold text-white mb-2 group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
+                    {proj.title}
+                  </h3>
+                  <p className="project-card-desc text-white/80 text-sm leading-relaxed max-h-0 group-hover:max-h-24 overflow-hidden transition-all duration-300 drop-shadow">
                     {lang === 'ENG' ? proj.descENG : proj.descVIE}
                   </p>
-                  <div className="mt-4 font-mono text-xs text-[#FF9E00] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2">
+                  <div className="mt-4 font-mono text-xs text-[#FF9E00] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2 font-bold">
                     <span>{tx.viewDetails}</span>
                     <span>→</span>
                   </div>

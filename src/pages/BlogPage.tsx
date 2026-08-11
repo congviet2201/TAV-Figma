@@ -156,24 +156,24 @@ export default function BlogPage({ lang }: Props) {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               style={{ minHeight: '480px' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/95 via-[#050505]/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent" />
             <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-14">
               <div className="max-w-[600px]">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="font-mono text-[10px] px-3 py-1 rounded-full bg-[#FF6B00]/20 border border-[#FF6B00]/40 text-[#FF9E00] uppercase tracking-widest font-bold">
+                  <span className="font-mono text-[10px] px-3 py-1 rounded-full bg-[#FF6B00]/25 border border-[#FF6B00]/50 text-[#FF9E00] uppercase tracking-widest font-bold shadow-md">
                     ★ {tx.featured}
                   </span>
-                  <span className="font-mono text-[11px] text-white/50 uppercase tracking-widest">
+                  <span className="blog-featured-meta font-mono text-[11px] text-white/80 uppercase tracking-widest">
                     {lang === 'ENG' ? featured.category : featured.categoryVIE}
                   </span>
                 </div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-[#FF9E00] transition-colors">
+                <h2 className="blog-featured-title font-display text-3xl md:text-4xl font-bold text-white mb-4 leading-tight group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
                   {lang === 'ENG' ? featured.title : featured.titleVIE}
                 </h2>
-                <p className="text-white/60 leading-relaxed mb-6">
+                <p className="blog-featured-desc text-white/85 leading-relaxed mb-6 drop-shadow">
                   {lang === 'ENG' ? featured.excerpt : featured.excerptVIE}
                 </p>
-                <div className="flex items-center gap-4 text-white/40 font-mono text-xs mb-8">
+                <div className="blog-featured-meta flex items-center gap-4 text-white/70 font-mono text-xs mb-8">
                   <span>{lang === 'ENG' ? featured.date : featured.dateVIE}</span>
                   <span>·</span>
                   <span>{featured.readTime}</span>
@@ -201,20 +201,22 @@ export default function BlogPage({ lang }: Props) {
               className="w-full glass-panel border border-white/10 rounded-2xl pl-12 pr-4 py-3.5 text-white placeholder:text-white/30 font-body text-sm focus:outline-none focus:border-[#FF6B00]/60 focus:ring-2 focus:ring-[#FF6B00]/30 transition-all bg-transparent"
             />
           </div>
-          <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
-            {tx.categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => { setActiveCategory(cat); setPage(1) }}
-                className={`whitespace-nowrap font-mono text-xs px-4 py-3.5 rounded-2xl border transition-all duration-200 active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B00] ${
-                  activeCategory === cat
-                    ? 'border-[#FF6B00] text-[#FF9E00] bg-[#FF6B00]/20 shadow-[0_0_20px_rgba(255,107,0,0.4)] font-bold'
-                    : 'border-white/10 text-white/50 hover:text-white hover:border-white/30 bg-white/5'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="flex gap-3 overflow-x-auto pt-3 pb-4 px-2 -mx-2 no-scrollbar items-center">
+            {tx.categories.map((cat) => {
+              const isActive = activeCategory === cat
+              return (
+                <button
+                  key={cat}
+                  onClick={() => { setActiveCategory(cat); setPage(1) }}
+                  className={`btn-outline px-6 py-2.5 rounded-full text-xs font-mono group whitespace-nowrap ${
+                    isActive ? 'active' : ''
+                  }`}
+                >
+                  <span className={`w-2 h-2 rounded-full transition-colors ${isActive ? 'bg-black' : 'bg-[#FF9E00] group-hover:bg-black'}`} />
+                  <span>{cat}</span>
+                </button>
+              )
+            })}
           </div>
         </div>
 

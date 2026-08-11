@@ -240,9 +240,9 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
               {onOpenContact && (
                 <button
                   onClick={onOpenContact}
-                  className="px-6 py-4 rounded-xl bg-white/10 hover:bg-[#FF6B00] border border-white/20 hover:border-[#FF6B00] text-white hover:text-black font-display text-sm font-bold transition-all"
+                  className="btn-outline px-8 py-4 text-sm group"
                 >
-                  {tx.cta3}
+                  <span>{tx.cta3}</span>
                 </button>
               )}
             </div>
@@ -374,11 +374,12 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
                 style={{ minHeight: '420px' }}
               />
               <div className="absolute inset-0 img-overlay" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
               <div className="absolute bottom-0 left-0 p-8">
-                <span className="font-mono text-[11px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/15 px-3 py-1 rounded-full border border-[#FF6B00]/40 font-semibold">
+                <span className="font-mono text-[11px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3 py-1 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
                   {featuredProjects[0].category}
                 </span>
-                <h3 className="font-display text-3xl font-bold text-white mt-3 group-hover:text-[#FF9E00] transition-colors">
+                <h3 className="project-card-title font-display text-3xl font-bold text-white mt-3 group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
                   {featuredProjects[0].title}
                 </h3>
               </div>
@@ -400,11 +401,12 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
                     style={{ minHeight: '200px' }}
                   />
                   <div className="absolute inset-0 img-overlay" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-6">
-                    <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/15 px-2.5 py-1 rounded-full border border-[#FF6B00]/40 font-semibold">
+                    <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-2.5 py-1 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
                       {proj.category}
                     </span>
-                    <h3 className="font-display text-xl font-bold text-white mt-2 group-hover:text-[#FF9E00] transition-colors">
+                    <h3 className="project-card-title font-display text-xl font-bold text-white mt-2 group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
                       {proj.title}
                     </h3>
                   </div>
