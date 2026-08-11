@@ -12,7 +12,7 @@ const t = {
     company: 'Company',
     contact: 'Contact',
     address: '194 Nguyễn Mậu Tài - Hòa Xuân - Đà Nẵng',
-    email: 'hello@sensia3d.vn',
+    email: 'info@tav.vn',
     phone: '+84 28 3822 4488',
     copyright: '© 2026 TAV 3D. All rights reserved.',
     links: {
@@ -26,7 +26,7 @@ const t = {
     company: 'Công Ty',
     contact: 'Liên Hệ',
     address: '194 Nguyễn Mậu Tài - Hòa Xuân - Đà Nẵng',
-    email: 'hello@sensia3d.vn',
+    email: 'info@tav.vn',
     phone: '+84 28 3822 4488',
     copyright: '© 2026 TAV 3D. Tất cả quyền được bảo lưu.',
     links: {
