@@ -57,7 +57,7 @@ export default function CustomCursor() {
       <div
         className={`rounded-full border flex items-center justify-center transition-all duration-300 ease-out ${
           isHovered
-            ? 'w-11 h-11 bg-[#FF6B00]/15 border-[#FF9E00]/80 backdrop-blur-xs scale-105 shadow-[0_0_20px_rgba(255,107,0,0.4)]'
+            ? 'w-11 h-11 bg-[#FF6B00]/15 border-[#FF9E00]/80 scale-105'
             : 'w-5 h-5 bg-transparent border-white/40 scale-100'
         }`}
       >

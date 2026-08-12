@@ -1,0 +1,3 @@
+/* Styles for 3D Render are now in src/pages/products/products.css */
+/* This file is kept for compatibility — it imports the shared sheet. */
+@import "../../products.css";

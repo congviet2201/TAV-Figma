@@ -1,0 +1,551 @@
+/* ============================================
+   TAV Products — shared design tokens & utilities
+   ============================================ */
+
+/* ---- Tokens ---- */
+:root {
+  --tav-brand: rgba(245, 113, 42, 1);
+  --tav-brand-glow: rgba(245, 113, 42, 0.35);
+  --tav-border-radius-card: 3.2rem;
+  --tav-border-radius-media: 2.4rem;
+  --tav-border-radius-pill: 10rem;
+  --tav-border-light: 1px solid rgba(200, 200, 200, 0.25);
+  --tav-border-dark: 1px solid rgba(80, 80, 80, 0.4);
+  --tav-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --tav-tab-height: 56px;
+}
+
+/* ---- Sticky tab bar ---- */
+.products-tab-bar {
+  position: sticky;
+  /* Desktop: site header is sticky (in-flow, 61px tall) + 8px gap */
+  top: 69px;
+  z-index: 2;
+  width: 100%;
+  /* Desktop: solid fill matching the site header */
+  background: #fff;
+}
+
+.products-tab-bar--light {
+  background: #fff;
+}
+
+.products-tab-bar--dark {
+  background: #000;
+}
+
+.products-tab-inner {
+  max-width: 192rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Allow wrapping so tabs reflow to 2×2 (or more rows) when space is tight */
+  flex-wrap: wrap;
+  /* Each row of wrapped tabs gets the full tab height */
+  min-height: var(--tav-tab-height);
+  padding: 0.6rem 2rem;
+  gap: 0;
+  /* No overflow scroll — let it wrap instead */
+}
+
+/* When wrapping occurs, add vertical rhythm between rows */
+.products-tab-inner .products-tab-btn {
+  margin-bottom: 0.4rem;
+}
+
+/* ---- Parallelogram tab button ----
+   The parallelogram shape is painted by ::before with skewX(-12deg),
+   so the button itself has zero transforms — the label text renders at
+   native sharpness with no sub-pixel blur.
+   border-radius on the skewed box naturally rounds all four corners,
+   matching the old sprite aesthetic (slightly rounded parallelogram).
+*/
+.products-tab-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2.8rem;
+  height: 44px;
+  min-height: 44px;
+  min-width: 130px;
+  margin: 4px;
+  border: none;
+  border-radius: 8px;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.12s, color var(--tav-transition);
+  outline: none;
+  isolation: isolate;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.products-tab-btn:active {
+  transform: scale(0.97);
+}
+
+/* Parallelogram shape via pseudo-element: the button itself has no transform,
+   so the label text renders at native sharpness with zero sub-pixel blur. */
+.products-tab-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  transform: skewX(-12deg);
+  z-index: -1;
+  background: #4a4a4a;
+  transition: background var(--tav-transition);
+}
+
+.products-tab-btn:first-child {
+  margin-left: 0;
+  /* Left edge: less rounding to butt cleanly against the bar edge */
+  border-radius: 6px 8px 8px 6px;
+}
+
+.products-tab-btn:last-child {
+  border-radius: 8px 6px 6px 8px;
+}
+
+/* Label stays upright naturally — the button itself has no transform */
+.products-tab-btn-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.products-tab-btn:focus-visible {
+  outline: 2px solid var(--tav-brand);
+  outline-offset: 3px;
+}
+
+/* Inactive: fill comes from ::before, text color stays on the button */
+.products-tab-btn--light,
+.products-tab-btn--dark {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.products-tab-btn--light::before,
+.products-tab-btn--dark::before {
+  background: #4a4a4a;
+}
+
+.products-tab-btn--light:hover::before,
+.products-tab-btn--dark:hover::before {
+  background: #3c3c3c;
+}
+
+.products-tab-btn--light:hover,
+.products-tab-btn--dark:hover {
+  color: #fff;
+}
+
+/* Active: brand orange fill via ::before */
+.products-tab-btn--active {
+  color: #fff !important;
+  z-index: 2;
+}
+
+.products-tab-btn--active::before {
+  background: var(--tav-brand) !important;
+}
+
+/* ---- Page wrapper ---- */
+.products-page {
+  max-width: 192rem;
+  margin: 0 auto;
+  padding: 4rem 2rem 6rem;
+}
+
+/* ---- Section heading block ---- */
+.products-section-heading {
+  margin-bottom: 3.2rem;
+}
+
+.products-section-title {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.4rem, 4vw, 4.8rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
+.products-section-subtitle {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.6;
+  opacity: 0.55;
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* ---- Featured projects row (3D Render top section) ---- */
+.products-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2.4rem;
+  margin-bottom: 5rem;
+}
+
+.products-featured-card {
+  position: relative;
+  border-radius: var(--tav-border-radius-card);
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
+}
+
+.products-featured-card:focus-visible {
+  outline: 2px solid var(--tav-brand);
+  outline-offset: 3px;
+}
+
+.products-featured-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.products-featured-card:hover .products-featured-media {
+  transform: scale(1.03);
+}
+
+.products-featured-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.products-featured-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.4rem;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+/* ---- Section divider ---- */
+.products-section-divider {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 2.4rem;
+}
+
+/* ---- Filter button group ---- */
+.products-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2.8rem;
+}
+
+.products-filter-btn {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 2rem;
+  border-radius: var(--tav-border-radius-pill);
+  font-family: "Manrope", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--tav-transition);
+  border: 1px solid rgba(150, 150, 150, 0.3);
+  background: transparent;
+  outline: none;
+}
+
+.products-filter-btn:focus-visible {
+  outline: 2px solid var(--tav-brand);
+  outline-offset: 2px;
+}
+
+.products-filter-btn--light {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.products-filter-btn--light:hover {
+  border-color: var(--tav-brand);
+  color: var(--tav-brand);
+  background: rgba(245, 113, 42, 0.1);
+}
+
+.products-filter-btn--dark {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.products-filter-btn--dark:hover {
+  border-color: var(--tav-brand);
+  color: var(--tav-brand);
+  background: rgba(245, 113, 42, 0.12);
+}
+
+.products-filter-btn--active {
+  background: var(--tav-brand) !important;
+  color: #fff !important;
+  border-color: var(--tav-brand) !important;
+  box-shadow: 0 4px 16px var(--tav-brand-glow);
+}
+
+/* ---- Masonry gallery ---- */
+.products-masonry {
+  display: flex;
+  margin-left: -1.6rem;
+  width: auto;
+}
+
+.products-masonry-col {
+  padding-left: 1.6rem;
+  background-clip: padding-box;
+}
+
+.products-gallery-item {
+  width: 100%;
+  display: block;
+  border-radius: var(--tav-border-radius-media);
+  margin-bottom: 1.6rem;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.products-gallery-item:hover {
+  transform: scale(1.015);
+}
+
+.products-gallery-item:focus-visible {
+  outline: 2px solid var(--tav-brand);
+  outline-offset: 3px;
+}
+
+.products-gallery-item-with-title {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: block;
+  border-radius: var(--tav-border-radius-media);
+  margin-bottom: 1.6rem;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.products-gallery-item-with-title:hover {
+  transform: scale(1.015);
+}
+
+.products-gallery-item-with-title:focus-visible {
+  outline: 2px solid var(--tav-brand);
+  outline-offset: 3px;
+}
+
+/* ---- Mapping full-width video ---- */
+.products-mapping-item {
+  margin-bottom: 4rem;
+}
+
+.products-mapping-name {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.6rem, 2vw, 2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 1.6rem;
+}
+
+.products-mapping-video {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--tav-border-radius-card);
+  display: block;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.products-mapping-video:hover {
+  transform: scale(1.005);
+}
+
+.products-mapping-video:focus-visible {
+  outline: 2px solid var(--tav-brand);
+  outline-offset: 3px;
+}
+
+/* ---- Interactive 2-col grid ---- */
+.products-interactive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.4rem;
+}
+
+.products-interactive-item {
+  position: relative;
+  border-radius: var(--tav-border-radius-card);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.products-interactive-item:focus-visible {
+  outline: 2px solid var(--tav-brand);
+  outline-offset: 3px;
+}
+
+.products-interactive-media {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.products-interactive-item:hover .products-interactive-media {
+  transform: scale(1.03);
+}
+
+/* ---- Loading overlay ---- */
+.products-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  gap: 1.6rem;
+}
+
+.products-loading-text {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ---- Skeleton pulse ---- */
+.products-skeleton {
+  border-radius: var(--tav-border-radius-media);
+  background: linear-gradient(90deg,
+      rgba(130, 130, 130, 0.12) 25%,
+      rgba(130, 130, 130, 0.22) 50%,
+      rgba(130, 130, 130, 0.12) 75%);
+  background-size: 200% 100%;
+  animation: products-shimmer 1.6s infinite;
+}
+
+@keyframes products-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ---- Responsive ---- */
+
+/*
+  Below 1280px the site header switches to position:fixed (mobile/tablet mode).
+  The fixed header is 65px tall (measured).
+  - Tab bar top must equal the fixed header height so it sticks just below it.
+  - Tab bar background switches to transparent + blur to match the header's
+    backdropFilter="blur(10px)" treatment.
+  - .products-page gets padding-top to push content below both the fixed header
+    and the sticky tab bar (65px header + tab bar height).
+*/
+@media (max-width: 1279px) {
+
+  .products-tab-bar,
+  .products-tab-bar--light,
+  .products-tab-bar--dark {
+    top: 65px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .products-tab-bar--light { background: rgba(255, 255, 255, 0.75); }
+  .products-tab-bar--dark  { background: rgba(0, 0, 0, 0.75); }
+
+  /*
+    Push page content below fixed header (65px) + tab bar height (56px) + gap.
+    Using padding-top rather than margin-top so sticky positioning still works.
+  */
+  .products-page {
+    padding-top: calc(65px + var(--tav-tab-height) + 1.6rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-page {
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    padding-bottom: 5rem;
+  }
+
+  .products-featured-grid {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+  .products-interactive-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .products-tab-inner {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    padding: 0.6rem 1.6rem;
+  }
+
+  .products-tab-btn {
+    margin: 0;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .products-tab-btn:first-child,
+  .products-tab-btn:last-child {
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-tab-btn {
+    font-size: 1.2rem;
+    padding: 0 1.8rem;
+    min-width: 90px;
+    height: 40px;
+    min-height: 40px;
+  }
+}

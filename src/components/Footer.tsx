@@ -7,37 +7,37 @@ interface Props {
 
 const t = {
   ENG: {
-    tagline: 'Crafting immersive visual experiences that transform ideas into breathtaking realities.',
+    tagline: 'T Architect & Visualization Co., Ltd. - Crafting immersive 3D visual experiences.',
     services: 'Services',
     company: 'Company',
     contact: 'Contact',
-    address: '194 Nguyễn Mậu Tài - Hòa Xuân - Đà Nẵng',
-    email: 'info@tav.vn',
-    phone: '+84 28 3822 4488',
-    copyright: '© 2026 TAV 3D. All rights reserved.',
+    address: '194-Nguyen Mau Tai, Hoa Xuan, Cam Le, Da Nang, Viet Nam',
+    email: 'tuantn@tav.vn / info@tav.vn',
+    phone: '0775 315 323 / 077 646 9999',
+    copyright: '© 2025 T Architect & Visualization Co., Ltd. All rights reserved.',
     links: {
-      services: ['3D Rendering', 'VR Tour', '3D Mapping', '3D Modeling', 'AR Experience'],
-      company: ['About Us', 'Projects', 'Blog', 'Careers', 'Contact'],
+      services: ['3D Rendering', '3D Mapping', '3D Modeling', 'VR/AR Tour', 'Interactive App'],
+      company: ['About Us', 'Projects', 'Blog', 'Contact'],
     },
   },
   VIE: {
-    tagline: 'Tạo ra những trải nghiệm thị giác đắm chìm biến ý tưởng thành những thực tế tuyệt vời.',
+    tagline: 'Công ty TNHH T Architect & Visualization - Giải pháp trực quan hóa 3D đắm chìm cao cấp.',
     services: 'Dịch Vụ',
     company: 'Công Ty',
     contact: 'Liên Hệ',
-    address: '194 Nguyễn Mậu Tài - Hòa Xuân - Đà Nẵng',
-    email: 'info@tav.vn',
-    phone: '+84 28 3822 4488',
-    copyright: '© 2026 TAV 3D. Tất cả quyền được bảo lưu.',
+    address: '194-Nguyễn Mậu Tài, P. Hòa Xuân, Q. Cẩm Lệ, Đà Nẵng, Việt Nam',
+    email: 'tuantn@tav.vn / info@tav.vn',
+    phone: '0775 315 323 / 077 646 9999',
+    copyright: '© 2025 Công ty TNHH T Architect & Visualization. Tất cả quyền được bảo lưu.',
     links: {
-      services: ['Kết Xuất 3D', 'Tour VR', '3D Mapping', 'Mô Hình 3D', 'Trải Nghiệm AR'],
-      company: ['Về Chúng Tôi', 'Dự Án', 'Blog', 'Tuyển Dụng', 'Liên Hệ'],
+      services: ['Kết Xuất 3D', '3D Mapping', 'Mô Hình 3D', 'Tour VR/AR', 'Ứng Dụng Tương Tác'],
+      company: ['Về Chúng Tôi', 'Dự Án', 'Blog', 'Liên Hệ'],
     },
   },
 }
 
 const servicePages: Page[] = ['services', 'services', 'services', 'services', 'services']
-const companyPages: Page[] = ['about', 'projects', 'blog', 'about', 'about']
+const companyPages: Page[] = ['about', 'projects', 'blog', 'about']
 
 export default function Footer({ navigate, lang }: Props) {
   const tx = t[lang]
@@ -48,20 +48,15 @@ export default function Footer({ navigate, lang }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <button onClick={() => navigate('home')} className="flex items-center gap-3 mb-5 group active:scale-95 transition-transform">
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#FF9E00] to-[#FF6B00] opacity-30 group-hover:opacity-70 transition-opacity blur-sm" />
-                <div className="relative w-10 h-10 rounded-xl bg-[#0A0A0A] border border-[#FF6B00]/40 group-hover:border-[#FF6B00] flex items-center justify-center transition-colors">
-                  <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-                    <polygon points="10,2 18,7 18,13 10,18 2,13 2,7" stroke="#FF6B00" strokeWidth="1.4" fill="none" />
-                    <polygon points="10,5 15,8 15,12 10,15 5,12 5,8" fill="rgba(255,107,0,0.18)" stroke="#FF6B00" strokeWidth="0.8" />
-                    <circle cx="10" cy="10" r="1.8" fill="#FF9E00" />
-                  </svg>
-                </div>
-              </div>
-              <span className="font-display font-extrabold text-[22px] tracking-wider text-white">
-                T<span className="text-[#FF6B00]">AV</span> <span className="text-xs font-mono tracking-widest text-[#FF9E00] uppercase px-1.5 py-0.5 rounded bg-[#FF6B00]/10 border border-[#FF6B00]/30">3D</span>
-              </span>
+            <button onClick={() => navigate('home')} className="flex items-center mb-5 group active:scale-95 transition-transform">
+              <img
+                src="/assets/gif/logoDark.gif"
+                alt="TAV 3D Animated Logo"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/assets/gif/logoLight.gif'
+                }}
+                className="h-28 md:h-[110px] w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_28px_rgba(255,107,0,0.8)]"
+              />
             </button>
             <p className="text-white/50 text-sm leading-relaxed mb-8">{tx.tagline}</p>
             <div className="flex gap-3">

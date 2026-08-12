@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Nếu file hoặc folder tồn tại thì bỏ qua
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Redirect tất cả về index.html
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>

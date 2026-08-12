@@ -69,25 +69,20 @@ export default function Navigation({
           boxShadow: scrolled ? '0 10px 35px rgba(0, 0, 0, 0.15)' : 'none',
         }}
       >
-        <div className="w-full px-4 sm:px-6 md:px-8 h-[78px] flex items-center justify-between">
+        <div className="w-full px-4 sm:px-6 md:px-8 h-[90px] flex items-center justify-between">
           {/* Logo TAV 3D Button */}
           <button
             onClick={() => navigate('home')}
-            className="flex items-center gap-3 group active:scale-95 transition-transform duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B00] rounded-xl p-1"
+            className="flex items-center group active:scale-95 transition-transform duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B00] rounded-xl p-1"
           >
-            <div className="relative w-10 h-10 flex items-center justify-center">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#FF9E00] to-[#FF6B00] opacity-30 group-hover:opacity-80 transition-opacity duration-300 blur-sm" />
-              <div className="relative w-10 h-10 rounded-xl bg-[#0A0A0A] border border-[#FF6B00]/40 group-hover:border-[#FF6B00] group-hover:shadow-[0_0_22px_rgba(255,107,0,0.6)] flex items-center justify-center transition-all duration-300">
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="none" className="group-hover:rotate-12 transition-transform duration-500">
-                  <polygon points="10,2 18,7 18,13 10,18 2,13 2,7" stroke="#FF6B00" strokeWidth="1.4" fill="none" />
-                  <polygon points="10,5 15,8 15,12 10,15 5,12 5,8" fill="rgba(255,107,0,0.18)" stroke="#FF6B00" strokeWidth="0.8" />
-                  <circle cx="10" cy="10" r="1.8" fill="#FF9E00" />
-                </svg>
-              </div>
-            </div>
-            <span className={`font-display font-extrabold text-[22px] tracking-wider ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
-              T<span className="text-[#FF6B00]">AV</span> <span className="text-xs font-mono tracking-widest text-[#FF9E00] uppercase px-1.5 py-0.5 rounded bg-[#FF6B00]/10 border border-[#FF6B00]/30 shadow-[0_0_10px_rgba(255,107,0,0.2)]">3D</span>
-            </span>
+            <img
+              src={theme === 'dark' ? '/assets/gif/logoDark.gif' : '/assets/gif/logoLight.gif'}
+              alt="TAV 3D Animated Logo"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/assets/gif/logoLight.gif'
+              }}
+              className="h-20 md:h-[84px] w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_26px_rgba(255,107,0,0.8)]"
+            />
           </button>
 
           {/* Minimalist Right Controls (Theme Toggle + Language Switcher + Main Hamburger Menu) */}

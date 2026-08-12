@@ -1,0 +1,50 @@
+{
+  "name": "tav-academy",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@chakra-ui/icons": "^2.2.4",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@tanstack/react-table": "^8.21.3",
+    "apexcharts": "^4.7.0",
+    "axios": "^1.9.0",
+    "firebase": "^11.9.1",
+    "framer-motion": "^10.18.0",
+    "react": "^18.3.1",
+    "react-apexcharts": "^1.7.0",
+    "react-calendar": "^6.0.0",
+    "react-custom-scrollbars-2": "^4.5.0",
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.3.8",
+    "react-icons": "^5.5.0",
+    "react-masonry-css": "^1.0.16",
+    "react-router-dom": "^7.6.0",
+    "stylis-plugin-rtl": "^2.1.1",
+    "swiper": "^11.2.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/node": "^22.15.17",
+    "@types/prop-types": "^15.7.14",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.2.0"
+  }
+}

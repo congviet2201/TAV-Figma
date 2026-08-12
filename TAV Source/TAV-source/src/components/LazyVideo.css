@@ -1,0 +1,26 @@
+.products-lazy-video-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #1c1c1c;
+  width: 100%;
+}
+
+.products-lazy-video-wrap--light-bg {
+  background: #e4e4e4;
+}
+
+.products-lazy-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: block;
+  cursor: pointer;
+}
+
+.products-lazy-video--ready {
+  opacity: 1;
+}

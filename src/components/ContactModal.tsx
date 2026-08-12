@@ -110,7 +110,7 @@ export default function ContactModal({ isOpen, onClose, lang }: Props) {
         {/* Direct Quick Contact Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
           <a
-            href="tel:0909123456"
+            href="tel:0775315323"
             className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/5 hover:bg-[#FF6B00]/15 border border-white/10 hover:border-[#FF6B00]/50 transition-all group"
           >
             <div className="w-10 h-10 rounded-xl bg-[#FF6B00]/20 flex items-center justify-center text-[#FF9E00] group-hover:scale-110 transition-transform">
@@ -121,13 +121,13 @@ export default function ContactModal({ isOpen, onClose, lang }: Props) {
             <div>
               <div className="font-mono text-[10px] text-white/50 uppercase">{tx.directContact}</div>
               <div className="font-display font-bold text-white text-sm group-hover:text-[#FF9E00] transition-colors">
-                0909 123 456
+                0775 315 323
               </div>
             </div>
           </a>
 
           <a
-            href="mailto:contact@tav3d.com"
+            href="mailto:tuantn@tav.vn"
             className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/5 hover:bg-[#FF6B00]/15 border border-white/10 hover:border-[#FF6B00]/50 transition-all group"
           >
             <div className="w-10 h-10 rounded-xl bg-[#FF6B00]/20 flex items-center justify-center text-[#FF9E00] group-hover:scale-110 transition-transform">
@@ -139,7 +139,7 @@ export default function ContactModal({ isOpen, onClose, lang }: Props) {
             <div>
               <div className="font-mono text-[10px] text-white/50 uppercase">{tx.emailContact}</div>
               <div className="font-display font-bold text-white text-sm group-hover:text-[#FF9E00] transition-colors">
-                contact@tav3d.com
+                tuantn@tav.vn
               </div>
             </div>
           </a>

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { type Page, type Lang } from '../App'
+import { partnersData, testimonialsData, servicesData, projectsData } from '../data/tavData'
 
 interface Props {
   navigate: (page: Page) => void
@@ -22,6 +23,12 @@ const t = {
     statsLabel4: 'Awards Won',
     servicesTitle: 'What We Do',
     servicesHeadline: 'End-to-End Immersive Solutions',
+    whyTitle: 'Why Choose TAV',
+    whyHeadline: 'Our Core Standards of Excellence',
+    testimonialsTitle: 'Client Testimonials',
+    testimonialsHeadline: 'What Industry Leaders Say About TAV',
+    partnersTitle: 'Trusted Partners',
+    partnersHeadline: 'Collaborating With Visionary Brands',
     projectsTitle: 'Featured Work',
     projectsHeadline: 'Projects That Define Us',
     viewAll: 'View All Projects',
@@ -43,10 +50,16 @@ const t = {
     statsLabel2: 'Năm Xuất Sắc',
     statsLabel3: 'Khách Hàng Toàn Cầu',
     statsLabel4: 'Giải Thưởng',
-    servicesTitle: 'Chúng Tôi Làm Gì',
-    servicesHeadline: 'Giải Pháp 3D Toàn Diện',
+    servicesTitle: 'Dịch Vụ Của Chúng Tôi',
+    servicesHeadline: 'Giải Pháp Trực Quan Đắm Chìm Toàn Diện',
+    whyTitle: 'Tại Sao Chọn TAV',
+    whyHeadline: 'Giá Trị Cốt Lõi Làm Nên Thương Hiệu TAV',
+    testimonialsTitle: 'Đánh Giá Từ Khách Hàng',
+    testimonialsHeadline: 'Khách Hàng & Đối Tác Nói Gì Về TAV',
+    partnersTitle: 'Đối Tác Hợp Tác',
+    partnersHeadline: 'Đồng Hành Cùng Các Thương Hiệu Hàng Đầu',
     projectsTitle: 'Công Trình Nổi Bật',
-    projectsHeadline: 'Những Dự Án Định Nghĩa Chúng Tôi',
+    projectsHeadline: 'Những Dự Án Khẳng Định Đẳng Cấp',
     viewAll: 'Xem Tất Cả Dự Án',
     techTitle: 'Công Nghệ & Engine 3D',
     techHeadline: 'Sức Mạnh Từ Công Nghệ Thế Hệ Mới',
@@ -57,103 +70,10 @@ const t = {
 }
 
 const stats = [
-  { value: '350+', key: 'statsLabel1' },
-  { value: '12', key: 'statsLabel2' },
-  { value: '80+', key: 'statsLabel3' },
+  { value: '400+', key: 'statsLabel1' },
+  { value: '100+', key: 'statsLabel2' },
+  { value: '12+', key: 'statsLabel3' },
   { value: '24', key: 'statsLabel4' },
-]
-
-const services = [
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 3L25 9.5V18.5L14 25L3 18.5V9.5L14 3Z" stroke="#FF6B00" strokeWidth="1.5" fill="rgba(255,107,0,0.12)" />
-        <path d="M14 8L20 11.5V18L14 21.5L8 18V11.5L14 8Z" stroke="#FF9E00" strokeWidth="0.8" fill="rgba(255,158,0,0.18)" />
-        <circle cx="14" cy="14" r="2" fill="#FF9E00" />
-      </svg>
-    ),
-    titleENG: '3D Rendering',
-    titleVIE: 'Kết Xuất 3D',
-    descENG: 'Photorealistic renders that bring architecture and design to life with stunning accuracy.',
-    descVIE: 'Hình ảnh siêu thực mang kiến trúc và thiết kế sống động với độ chính xác tuyệt vời.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="10" stroke="#FF6B00" strokeWidth="1.5" fill="rgba(255,107,0,0.12)" />
-        <ellipse cx="14" cy="14" rx="10" ry="4" stroke="#FF9E00" strokeWidth="0.8" fill="none" />
-        <line x1="14" y1="4" x2="14" y2="24" stroke="#FF9E00" strokeWidth="0.8" />
-        <circle cx="14" cy="14" r="2" fill="#FF6B00" />
-      </svg>
-    ),
-    titleENG: '3D Mapping',
-    titleVIE: '3D Mapping',
-    descENG: 'Large-scale projection mapping that transforms surfaces into immersive visual canvases.',
-    descVIE: 'Chiếu hình ảnh quy mô lớn biến bề mặt thành những tấm canvas trực quan đắm chìm.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="4" y="8" width="8" height="12" rx="1" stroke="#FF6B00" strokeWidth="1.2" fill="rgba(255,107,0,0.12)" />
-        <rect x="16" y="4" width="8" height="8" rx="1" stroke="#FF9E00" strokeWidth="1.2" fill="rgba(255,158,0,0.12)" />
-        <rect x="16" y="16" width="8" height="8" rx="1" stroke="#FF6B00" strokeWidth="1.2" fill="rgba(255,107,0,0.12)" />
-        <line x1="12" y1="12" x2="16" y2="8" stroke="#FF9E00" strokeWidth="0.8" strokeDasharray="2 2" />
-        <line x1="12" y1="16" x2="16" y2="20" stroke="#FF9E00" strokeWidth="0.8" strokeDasharray="2 2" />
-      </svg>
-    ),
-    titleENG: '3D Modeling',
-    titleVIE: 'Mô Hình 3D',
-    descENG: 'Precision 3D models built from scratch or converted from existing blueprints and plans.',
-    descVIE: 'Mô hình 3D chính xác xây dựng từ đầu hoặc chuyển đổi từ bản vẽ và kế hoạch hiện có.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <rect x="3" y="10" width="22" height="14" rx="3" stroke="#FF6B00" strokeWidth="1.5" fill="rgba(255,107,0,0.12)" />
-        <path d="M9 10V8a5 5 0 0 1 10 0v2" stroke="#FF9E00" strokeWidth="1.2" fill="none" />
-        <circle cx="14" cy="17" r="2.5" fill="#FF9E00" stroke="#FF6B00" strokeWidth="0.8" />
-      </svg>
-    ),
-    titleENG: 'VR Tour',
-    titleVIE: 'Tour VR',
-    descENG: 'Fully interactive virtual reality experiences for real estate, hospitality, and retail.',
-    descVIE: 'Trải nghiệm thực tế ảo tương tác hoàn toàn cho bất động sản, khách sạn và bán lẻ.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="6" stroke="#FF6B00" strokeWidth="1.5" fill="rgba(255,107,0,0.12)" />
-        <path d="M8 8L5 5M20 8L23 5M8 20L5 23M20 20L23 23" stroke="#FF9E00" strokeWidth="1.2" strokeLinecap="round" />
-        <circle cx="14" cy="14" r="2" fill="#FF9E00" />
-        <path d="M14 8V6M14 20v2M8 14H6M20 14h2" stroke="#FF6B00" strokeWidth="0.8" />
-      </svg>
-    ),
-    titleENG: 'AR Experience',
-    titleVIE: 'Trải Nghiệm AR',
-    descENG: 'Augmented reality overlays that let clients visualize spaces and products in the real world.',
-    descVIE: 'Lớp phủ thực tế tăng cường cho phép khách hàng hình dung không gian và sản phẩm trong thế giới thực.',
-  },
-]
-
-const featuredProjects = [
-  {
-    title: 'The SENSIA',
-    category: 'Architectural Visualization',
-    img: 'https://images.unsplash.com/photo-1678388583153-f0e667c97288?w=800&h=600&fit=crop&auto=format',
-    span: 'large',
-  },
-  {
-    title: 'Da Song Village',
-    category: '3D Rendering',
-    img: 'https://images.unsplash.com/photo-1633109713362-031e75973c1b?w=600&h=500&fit=crop&auto=format',
-    span: 'small',
-  },
-  {
-    title: 'Diamond Island',
-    category: 'VR Tour',
-    img: 'https://images.unsplash.com/photo-1682184805271-11671b7ecf4c?w=600&h=500&fit=crop&auto=format',
-    span: 'small',
-  },
 ]
 
 const techStack = [
@@ -296,22 +216,27 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {services.map((svc, i) => (
+            {servicesData.map((svc) => (
               <div
-                key={i}
+                key={svc.id}
                 data-cursor="DISCOVER"
                 className="card-running-border cursor-pointer group flex flex-col justify-between"
                 onClick={() => navigate('services')}
               >
                 <div className="card-running-border-inner p-6 flex flex-col justify-between h-full">
                   <div>
-                    <div className="mb-6 w-14 h-14 rounded-2xl flex items-center justify-center bg-[#FF6B00]/15 border border-[#FF6B00]/40 group-hover:border-[#FF9E00] group-hover:bg-[#FF6B00]/30 transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.2)]">
-                      {svc.icon}
+                    <div className="relative mb-6 overflow-hidden rounded-2xl border border-white/10 h-32">
+                      <img
+                        src={svc.poster}
+                        alt={svc.titleENG}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                     </div>
                     <h3 className="font-display font-extrabold text-white mb-3 text-lg group-hover:text-[#FF9E00] transition-colors uppercase tracking-tight">
                       {lang === 'ENG' ? svc.titleENG : svc.titleVIE}
                     </h3>
-                    <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                    <p className="text-white/70 text-xs leading-relaxed">
                       {lang === 'ENG' ? svc.descENG : svc.descVIE}
                     </p>
                   </div>
@@ -326,24 +251,70 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
         </div>
       </section>
 
-      {/* ── 3D TECH CAPABILITIES ── */}
-      <section className="py-24 bg-[#0A0A0A] relative border-t border-white/10">
+
+      {/* ── CUSTOMER TESTIMONIALS SECTION ── */}
+      <section className="py-28 bg-[#050505] relative border-t border-white/10">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="text-center max-w-[700px] mx-auto mb-16">
-            <div className="section-label mb-4">◆ {tx.techTitle}</div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-white mb-4 uppercase">{tx.techHeadline}</h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 border-b border-white/10 pb-8">
+            <div>
+              <div className="section-label mb-4">◆ {tx.testimonialsTitle}</div>
+              <h2 className="font-display text-3xl md:text-5xl font-bold text-white uppercase leading-tight">
+                {tx.testimonialsHeadline}
+              </h2>
+            </div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF6B00]/15 border border-[#FF6B00]/40 text-[#FF9E00] font-mono text-xs font-bold">
+              <span>★ 5.0 RATING</span>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {techStack.map((tech, i) => (
-              <div key={i} data-cursor="EXPLORE" className="card-running-border group">
-                <div className="card-running-border-inner p-7">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-3.5 h-3.5 rounded-full bg-[#FF9E00] shadow-[0_0_15px_#FF6B00] animate-pulse" />
-                    <h3 className="font-display font-extrabold text-white text-xl uppercase tracking-wide group-hover:text-[#FF9E00] transition-colors">{tech.name}</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonialsData.map((item) => (
+              <div key={item.id} className="glass-panel border border-white/10 p-8 rounded-2xl flex flex-col justify-between card-hover relative group">
+                <div>
+                  <div className="flex items-center gap-1 text-[#FF9E00] mb-6">
+                    {Array.from({ length: 5 }).map((_, idx) => (
+                      <span key={idx}>★</span>
+                    ))}
                   </div>
-                  <p className="text-white/75 text-sm font-mono leading-relaxed">{tech.detail}</p>
+                  <p className="text-white/85 text-sm leading-relaxed italic mb-8">
+                    "{lang === 'ENG' ? item.contentENG : item.contentVIE}"
+                  </p>
                 </div>
+                <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+                  <img
+                    src={item.img}
+                    alt={item.name}
+                    className="w-14 h-14 rounded-full object-cover border-2 border-[#FF6B00]/50 group-hover:border-[#FF9E00] transition-colors shadow-lg"
+                  />
+                  <div>
+                    <h4 className="font-display font-extrabold text-white text-base group-hover:text-[#FF9E00] transition-colors">
+                      {item.name}
+                    </h4>
+                    <p className="text-white/50 font-mono text-xs mt-0.5">{item.position}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── PARTNERS SECTION ── */}
+      <section className="py-20 bg-[#0E1217] relative border-t border-white/10">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+          <div className="text-center max-w-[700px] mx-auto mb-12">
+            <div className="section-label mb-3">◆ {tx.partnersTitle}</div>
+            <h3 className="font-display text-2xl md:text-4xl font-bold text-white uppercase">{tx.partnersHeadline}</h3>
+          </div>
+
+          <div className="grid grid-cols-3 md:grid-cols-9 gap-4 items-center">
+            {partnersData.map((partner) => (
+              <div key={partner.id} className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-[#FF6B00]/60 transition-all group">
+                <img
+                  src={partner.img}
+                  alt={partner.name}
+                  className="max-h-12 w-auto object-contain grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-300"
+                />
               </div>
             ))}
           </div>
@@ -356,7 +327,7 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
             <div>
               <div className="section-label mb-4">◆ {tx.projectsTitle}</div>
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-white">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-white uppercase">
                 {tx.projectsHeadline}
               </h2>
             </div>
@@ -377,8 +348,8 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
               onClick={() => navigate('projects')}
             >
               <img
-                src={featuredProjects[0].img}
-                alt={featuredProjects[0].title}
+                src={projectsData[0].img}
+                alt={projectsData[0].title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 style={{ minHeight: '420px' }}
               />
@@ -386,17 +357,17 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
               <div className="absolute bottom-0 left-0 p-8">
                 <span className="font-mono text-[11px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3 py-1 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
-                  {featuredProjects[0].category}
+                  {lang === 'ENG' ? projectsData[0].category : projectsData[0].categoryVIE}
                 </span>
                 <h3 className="project-card-title font-display text-3xl font-bold text-white mt-3 group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
-                  {featuredProjects[0].title}
+                  {projectsData[0].title}
                 </h3>
               </div>
             </div>
 
             {/* Two stacked */}
             <div className="flex flex-col gap-5">
-              {featuredProjects.slice(1).map((proj, i) => (
+              {projectsData.slice(1, 3).map((proj, i) => (
                 <div
                   key={i}
                   className="relative overflow-hidden rounded-2xl cursor-pointer group flex-1 border border-white/10 hover:border-[#FF6B00]/60 transition-all duration-500 shadow-xl"
@@ -413,7 +384,7 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-6">
                     <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-2.5 py-1 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
-                      {proj.category}
+                      {lang === 'ENG' ? proj.category : proj.categoryVIE}
                     </span>
                     <h3 className="project-card-title font-display text-xl font-bold text-white mt-2 group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
                       {proj.title}

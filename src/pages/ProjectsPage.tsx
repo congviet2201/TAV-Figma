@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { type Lang } from '../App'
+import { projectsData } from '../data/tavData'
 
 interface Props { lang: Lang }
 
@@ -11,6 +12,9 @@ const t = {
     all: 'All',
     viewDetails: 'View Details',
     close: 'Close',
+    gallery: 'Project Gallery & Media',
+    prev: 'Previous (←)',
+    next: 'Next (→)',
   },
   VIE: {
     label: 'Dự Án',
@@ -19,89 +23,23 @@ const t = {
     all: 'Tất Cả',
     viewDetails: 'Xem Chi Tiết',
     close: 'Đóng',
+    gallery: 'Thư Viện Ảnh & Video Dự Án',
+    prev: 'Trước (←)',
+    next: 'Tiếp (→)',
   },
 }
 
-const projects = [
-  {
-    title: 'The SENSIA',
-    category: '3D Rendering',
-    categoryVIE: 'Kết Xuất 3D',
-    descENG: 'A landmark luxury residential tower in Ho Chi Minh City. 200+ photorealistic renders for sales center and marketing campaign.',
-    descVIE: 'Tòa nhà dân cư cao cấp tiêu biểu tại TP.HCM. 200+ hình ảnh siêu thực cho trung tâm bán hàng và chiến dịch marketing.',
-    img: 'https://images.unsplash.com/photo-1678388583153-f0e667c97288?w=900&h=700&fit=crop&auto=format',
-    year: '2024',
-    size: 'large',
-  },
-  {
-    title: 'Da Song Village',
-    category: 'VR Tour',
-    categoryVIE: 'Tour VR',
-    descENG: 'Immersive virtual reality tour for a 50-hectare eco-resort development in Da Lat. Full 360° interactive experience.',
-    descVIE: 'Tour thực tế ảo đắm chìm cho khu nghỉ dưỡng sinh thái 50 héc-ta tại Đà Lạt. Trải nghiệm tương tác 360° đầy đủ.',
-    img: 'https://images.unsplash.com/photo-1633109713362-031e75973c1b?w=700&h=500&fit=crop&auto=format',
-    year: '2024',
-    size: 'medium',
-  },
-  {
-    title: 'Đảo Kim Cương',
-    category: '3D Rendering',
-    categoryVIE: 'Kết Xuất 3D',
-    descENG: 'Diamond Island masterplan visualization. Aerial views, villa renders, and amenity spaces for one of Vietnam\'s largest island developments.',
-    descVIE: 'Trực quan hóa quy hoạch tổng thể Đảo Kim Cương. Góc nhìn trên không, hình ảnh biệt thự và không gian tiện ích cho một trong những dự án đảo lớn nhất Việt Nam.',
-    img: 'https://images.unsplash.com/photo-1660361338517-8c8fbb3ac264?w=700&h=500&fit=crop&auto=format',
-    year: '2023',
-    size: 'medium',
-  },
-  {
-    title: 'Hanoi Skyline Residences',
-    category: '3D Mapping',
-    categoryVIE: '3D Mapping',
-    descENG: 'Grand opening projection mapping event covering the entire facade of a 40-story tower in downtown Hanoi.',
-    descVIE: 'Sự kiện projection mapping khai trương phủ toàn bộ mặt tiền tòa nhà 40 tầng tại trung tâm Hà Nội.',
-    img: 'https://images.unsplash.com/photo-1784358582539-f10766868e9e?w=700&h=500&fit=crop&auto=format',
-    year: '2023',
-    size: 'medium',
-  },
-  {
-    title: 'Riviera Wellness Resort',
-    category: 'AR Experience',
-    categoryVIE: 'Trải Nghiệm AR',
-    descENG: 'AR application enabling potential buyers to place and explore villa units in real-time on their mobile devices.',
-    descVIE: 'Ứng dụng AR cho phép người mua tiềm năng đặt và khám phá các căn biệt thự trong thời gian thực trên thiết bị di động.',
-    img: 'https://images.unsplash.com/photo-1682184805271-11671b7ecf4c?w=700&h=500&fit=crop&auto=format',
-    year: '2023',
-    size: 'medium',
-  },
-  {
-    title: 'The Grand Palazzo',
-    category: '3D Modeling',
-    categoryVIE: 'Mô Hình 3D',
-    descENG: 'Detailed 3D model of a heritage-listed palazzo in Singapore for digital preservation and architectural review.',
-    descVIE: 'Mô hình 3D chi tiết của một palazzo được bảo tồn di sản tại Singapore để bảo tồn kỹ thuật số và xem xét kiến trúc.',
-    img: 'https://images.unsplash.com/photo-1633109741715-59b57495bbdc?w=700&h=500&fit=crop&auto=format',
-    year: '2022',
-    size: 'medium',
-  },
-  {
-    title: 'Urban Bloom Condominiums',
-    category: '3D Rendering',
-    categoryVIE: 'Kết Xuất 3D',
-    descENG: 'Full-suite exterior and interior renders for a mid-rise residential development in Binh Thanh District.',
-    descVIE: 'Bộ đầy đủ hình ảnh ngoại thất và nội thất cho dự án chung cư tầm trung tại Quận Bình Thạnh.',
-    img: 'https://images.unsplash.com/photo-1782297247938-bfc51277b82f?w=700&h=500&fit=crop&auto=format',
-    year: '2022',
-    size: 'medium',
-  },
-]
+const projects = projectsData
 
-const categories = ['All', '3D Rendering', 'VR Tour', '3D Mapping', 'AR Experience', '3D Modeling']
-const categoriesVIE = ['Tất Cả', 'Kết Xuất 3D', 'Tour VR', '3D Mapping', 'Trải Nghiệm AR', 'Mô Hình 3D']
+const categories = ['All', '3D Rendering', '3D Mapping', 'VR Tour', '3D Modeling', 'Interactive App']
+const categoriesVIE = ['Tất Cả', 'Kết Xuất 3D', '3D Mapping', 'Tour VR', 'Mô Hình 3D', 'Ứng Dụng Tương Tác']
 
 export default function ProjectsPage({ lang }: Props) {
   const tx = t[lang]
   const [activeFilter, setActiveFilter] = useState('All')
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null)
+  const [currentMediaIndex, setCurrentMediaIndex] = useState<number>(0)
+  const [mediaList, setMediaList] = useState<string[]>([])
 
   const cats = lang === 'ENG' ? categories : categoriesVIE
 
@@ -109,16 +47,65 @@ export default function ProjectsPage({ lang }: Props) {
     ? projects
     : projects.filter(p => lang === 'ENG' ? p.category === activeFilter : p.categoryVIE === activeFilter)
 
+  const isVideoUrl = (url?: string) => {
+    if (!url) return false
+    return url.endsWith('.mp4') || url.endsWith('.webm') || url.includes('/video/') || url.includes('video/upload')
+  }
+
+  const handleOpenModal = (proj: typeof projects[0]) => {
+    const list: string[] = []
+    if (proj.img) list.push(proj.img)
+    if (proj.video && !list.includes(proj.video)) list.push(proj.video)
+    if (proj.subMedia) {
+      proj.subMedia.forEach(m => {
+        if (!list.includes(m)) list.push(m)
+      })
+    }
+    setMediaList(list)
+    setCurrentMediaIndex(0)
+    setSelectedProject(proj)
+  }
+
+  const nextMedia = useCallback(() => {
+    if (mediaList.length <= 1) return
+    setCurrentMediaIndex(prev => (prev + 1) % mediaList.length)
+  }, [mediaList.length])
+
+  const prevMedia = useCallback(() => {
+    if (mediaList.length <= 1) return
+    setCurrentMediaIndex(prev => (prev - 1 + mediaList.length) % mediaList.length)
+  }, [mediaList.length])
+
+  // Keyboard navigation listener (Left, Right, Escape)
+  useEffect(() => {
+    if (!selectedProject) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        nextMedia()
+      } else if (e.key === 'ArrowLeft') {
+        prevMedia()
+      } else if (e.key === 'Escape') {
+        setSelectedProject(null)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedProject, nextMedia, prevMedia])
+
   return (
     <div className="pt-[76px]">
       {/* Hero */}
       <section className="relative py-28 overflow-hidden bg-[#050505]">
         <div className="absolute inset-0 grid-overlay" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[850px] h-[400px] opacity-20 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse, #FF6B00 0%, transparent 70%)', filter: 'blur(50px)' }} />
+        <div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[850px] h-[400px] opacity-20 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse, #FF6B00 0%, transparent 70%)', filter: 'blur(50px)' }}
+        />
         <div className="relative max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="section-label mb-6">◆ {tx.label}</div>
-          <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white mb-8">
+          <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white mb-8 uppercase">
             {tx.headline}<br />
             <span className="text-gradient">{tx.headline2}</span>
           </h1>
@@ -126,45 +113,44 @@ export default function ProjectsPage({ lang }: Props) {
       </section>
 
       {/* Filter Bar */}
-      <section className="py-4 sticky top-[76px] z-20 bg-[#050505]/90 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="flex gap-3 overflow-x-auto pt-3 pb-4 px-2 -mx-2 no-scrollbar items-center">
-            {cats.map((cat, i) => {
-              const isActive = cat === activeFilter || (activeFilter === 'All' && i === 0) || (activeFilter === 'Tất Cả' && i === 0)
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setActiveFilter(cat)}
-                  className={`btn-outline px-6 py-2.5 rounded-full text-xs font-mono group whitespace-nowrap ${
-                    isActive ? 'active' : ''
-                  }`}
-                >
-                  <span className={`w-2 h-2 rounded-full transition-colors ${isActive ? 'bg-black' : 'bg-[#FF9E00] group-hover:bg-black'}`} />
-                  <span>{cat}</span>
-                </button>
-              )
-            })}
-          </div>
+      <section className="py-8 bg-[#050505] border-y border-white/10 sticky top-[76px] z-30 backdrop-blur-xl bg-[#050505]/80">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex gap-3 overflow-x-auto no-scrollbar items-center py-1">
+          {cats.map((cat, i) => {
+            const isActive = activeFilter === categories[i] || activeFilter === categoriesVIE[i]
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={`btn-outline px-6 py-2.5 rounded-full text-xs font-mono group whitespace-nowrap ${
+                  isActive ? 'active' : ''
+                }`}
+              >
+                <span className={`w-2 h-2 rounded-full transition-colors ${isActive ? 'bg-black' : 'bg-[#FF9E00] group-hover:bg-black'}`} />
+                <span>{cat}</span>
+              </button>
+            )
+          })}
         </div>
       </section>
 
-      {/* Grid */}
-      <section className="py-16 bg-[#050505]">
+      {/* Projects Grid */}
+      <section className="py-20 bg-[#050505]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((proj, i) => (
+            {filtered.map((proj) => (
               <div
-                key={proj.title}
-                data-cursor="EXPLORE"
-                className={`group relative overflow-hidden rounded-2xl cursor-pointer interactive-card border border-white/10 ${
-                  proj.size === 'large' && i === 0 ? 'md:col-span-2 md:row-span-2' : ''
-                }`}
-                style={{ minHeight: proj.size === 'large' && i === 0 ? '520px' : '350px' }}
-                onClick={() => setSelectedProject(proj)}
+                key={proj.id}
+                data-cursor="VIEW"
+                className="relative overflow-hidden rounded-2xl group cursor-pointer border border-white/10 card-hover bg-[#0A0A0A]"
+                style={{ minHeight: '340px' }}
+                onClick={() => handleOpenModal(proj)}
               >
                 <img
                   src={proj.img}
                   alt={proj.title}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/assets/image/bg-aboutus1.png'
+                  }}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   style={{ minHeight: 'inherit' }}
                 />
@@ -176,7 +162,7 @@ export default function ProjectsPage({ lang }: Props) {
                     <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-2.5 py-0.5 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
                       {lang === 'ENG' ? proj.category : proj.categoryVIE}
                     </span>
-                    <span className="project-card-meta text-white/70 font-mono text-[11px] font-semibold">— {proj.location || 'TP.HCM'} &bull; {proj.year}</span>
+                    <span className="project-card-meta text-white/70 font-mono text-[11px] font-semibold">— {proj.location || 'Việt Nam'} &bull; {proj.year}</span>
                   </div>
                   <h3 className="project-card-title font-display text-2xl font-bold text-white mb-2 group-hover:text-[#FF9E00] transition-colors drop-shadow-md uppercase">
                     {proj.title}
@@ -195,43 +181,146 @@ export default function ProjectsPage({ lang }: Props) {
         </div>
       </section>
 
-      {/* Project Modal */}
+      {/* Full-Screen Lightbox Modal with Separated Div Wrapper Controls */}
       {selectedProject && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
-          style={{ background: 'rgba(5, 5, 5, 0.94)', backdropFilter: 'blur(32px)' }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6"
+          style={{ background: 'rgba(5, 5, 5, 0.96)', backdropFilter: 'blur(32px)' }}
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="relative max-w-[900px] w-full rounded-3xl overflow-hidden glass-panel border border-[#FF6B00]/40 shadow-2xl animate-fade-in-up"
+            className="relative max-w-[1200px] w-full max-h-[94vh] overflow-y-auto rounded-3xl border border-[#FF6B00]/40 shadow-2xl animate-fade-in-up bg-[#050505] flex flex-col"
             onClick={e => e.stopPropagation()}
           >
-            <div className="relative" style={{ height: '420px' }}>
-              <img
-                src={selectedProject.img}
-                alt={selectedProject.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505]" />
+            {/* Modal Header Bar */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0A0A0A] sticky top-0 z-40">
+              <div className="flex items-center gap-3">
+                <span className="font-mono text-xs tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3 py-1 rounded-full border border-[#FF6B00]/40 font-bold">
+                  {lang === 'ENG' ? selectedProject.category : selectedProject.categoryVIE}
+                </span>
+                <h2 className="font-display font-extrabold text-white text-lg md:text-xl uppercase truncate max-w-[450px]">
+                  {selectedProject.title}
+                </h2>
+              </div>
+
+              {/* Close Button (X) positioned explicitly at Top-Right */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="btn-icon absolute top-5 right-5 w-11 h-11 rounded-full text-white hover:text-[#FF9E00] transition-colors"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#FF6B00] text-white flex items-center justify-center text-lg font-bold transition-all shadow-lg cursor-pointer hover:scale-105 active:scale-95 border border-white/20"
                 aria-label={tx.close}
+                title={tx.close}
               >
                 ✕
               </button>
             </div>
-            <div className="p-8 md:p-10 bg-[#050505]">
-              <div className="flex items-center gap-4 mb-4">
-                <span className="font-mono text-xs tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/15 px-3 py-1 rounded-full border border-[#FF6B00]/40 font-semibold">
-                  {lang === 'ENG' ? selectedProject.category : selectedProject.categoryVIE}
-                </span>
-                <span className="text-white/40 font-mono text-xs">{selectedProject.year}</span>
+
+            {/* Centered Media Viewer Frame */}
+            <div className="relative w-full bg-black flex items-center justify-center min-h-[400px] max-h-[600px] overflow-hidden select-none p-4">
+              {/* Left Navigation Button (<) Wrapped in Positioned Div */}
+              {mediaList.length > 1 && (
+                <div style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 60 }}>
+                  <button
+                    onClick={prevMedia}
+                    className="w-12 h-12 rounded-full bg-black/80 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+                    title={tx.prev}
+                    aria-label={tx.prev}
+                  >
+                    ‹
+                  </button>
+                </div>
+              )}
+
+              {/* Right Navigation Button (>) Wrapped in Positioned Div */}
+              {mediaList.length > 1 && (
+                <div style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 60 }}>
+                  <button
+                    onClick={nextMedia}
+                    className="w-12 h-12 rounded-full bg-black/80 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+                    title={tx.next}
+                    aria-label={tx.next}
+                  >
+                    ›
+                  </button>
+                </div>
+              )}
+
+              {/* Centered Media Display */}
+              {isVideoUrl(mediaList[currentMediaIndex]) ? (
+                <video
+                  src={mediaList[currentMediaIndex]}
+                  controls
+                  autoPlay
+                  className="max-h-[550px] max-w-full object-contain rounded-xl shadow-2xl"
+                />
+              ) : (
+                <img
+                  src={mediaList[currentMediaIndex]}
+                  alt={`${selectedProject.title} ${currentMediaIndex + 1}`}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/assets/image/bg-aboutus1.png'
+                  }}
+                  className="max-h-[550px] max-w-full object-contain rounded-xl shadow-2xl transition-opacity duration-300"
+                />
+              )}
+
+              {/* Media Counter Indicator */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/85 border border-[#FF6B00]/40 px-4 py-1.5 rounded-full text-xs font-mono text-[#FF9E00] font-bold z-20 backdrop-blur-md shadow-lg pointer-events-none">
+                {currentMediaIndex + 1} / {mediaList.length} &bull; {lang === 'ENG' ? 'Use ← → keys' : 'Dùng phím ← →'}
               </div>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">{selectedProject.title}</h2>
-              <p className="text-white/70 text-base leading-relaxed">
+            </div>
+
+            {/* Footer Info & Thumbnails Carousel */}
+            <div className="p-6 md:p-8 bg-[#050505] border-t border-white/10">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-white/60 font-mono text-xs font-bold">📍 {selectedProject.location} &bull; {selectedProject.year}</span>
+                <div className="hidden sm:flex items-center gap-2 text-white/50 font-mono text-xs">
+                  <kbd className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-white font-mono">←</kbd>
+                  <kbd className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-white font-mono">→</kbd>
+                </div>
+              </div>
+
+              <p className="text-white/80 text-sm leading-relaxed mb-6">
                 {lang === 'ENG' ? selectedProject.descENG : selectedProject.descVIE}
               </p>
+
+              {/* Bottom Thumbnails Carousel Strip */}
+              {mediaList.length > 1 && (
+                <div>
+                  <h3 className="font-mono text-xs font-bold text-[#FF9E00] uppercase tracking-widest mb-3">
+                    ◆ {tx.gallery} ({mediaList.length})
+                  </h3>
+                  <div className="flex gap-3 overflow-x-auto no-scrollbar py-1">
+                    {mediaList.map((mUrl, idx) => {
+                      const isVid = isVideoUrl(mUrl)
+                      const isActive = idx === currentMediaIndex
+                      return (
+                        <div
+                          key={idx}
+                          onClick={() => setCurrentMediaIndex(idx)}
+                          className={`relative w-24 h-16 shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 transition-all bg-black ${
+                            isActive ? 'border-[#FF6B00] scale-105 shadow-[0_0_15px_rgba(255,107,0,0.8)]' : 'border-white/10 opacity-60 hover:opacity-100'
+                          }`}
+                        >
+                          {isVid ? (
+                            <div className="w-full h-full flex items-center justify-center bg-black/90 text-[#FF9E00] font-mono text-[10px] font-bold">
+                              ▶ VIDEO
+                            </div>
+                          ) : (
+                            <img
+                              src={mUrl}
+                              alt={`Thumb ${idx + 1}`}
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = '/assets/image/bg-aboutus1.png'
+                              }}
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

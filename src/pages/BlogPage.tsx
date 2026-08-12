@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { type Lang } from '../App'
+import { blogsData } from '../data/tavData'
 
 interface Props { lang: Lang }
 
@@ -30,86 +31,19 @@ const t = {
   },
 }
 
-const articles = [
-  {
-    title: 'Unreal Engine 5 is Changing Everything in Architectural Visualization',
-    titleVIE: 'Unreal Engine 5 Đang Thay Đổi Tất Cả Trong Trực Quan Hóa Kiến Trúc',
-    category: 'Technology',
-    categoryVIE: 'Công Nghệ',
-    date: 'January 28, 2026',
-    dateVIE: '28 Tháng 1, 2026',
-    readTime: '8 min read',
-    img: 'https://images.unsplash.com/photo-1678388583153-f0e667c97288?w=900&h=600&fit=crop&auto=format',
-    excerpt: 'Lumen and Nanite have fundamentally shifted what\'s possible for real-time architectural previews. We explore how our pipeline evolved and what this means for client presentations.',
-    excerptVIE: 'Lumen và Nanite đã thay đổi cơ bản những gì có thể đối với preview kiến trúc thời gian thực. Chúng tôi khám phá cách pipeline của chúng tôi phát triển và điều này có nghĩa gì cho các buổi trình bày với khách hàng.',
-    featured: true,
-  },
-  {
-    title: 'How AI is Accelerating 3D Rendering Without Compromising Quality',
-    titleVIE: 'AI Đang Tăng Tốc Kết Xuất 3D Mà Không Làm Giảm Chất Lượng Như Thế Nào',
-    category: 'AI & Innovation',
-    categoryVIE: 'AI & Đổi Mới',
-    date: 'January 14, 2026',
-    dateVIE: '14 Tháng 1, 2026',
-    readTime: '6 min read',
-    img: 'https://images.unsplash.com/photo-1633109611134-c41b5c0bbc1a?w=600&h=400&fit=crop&auto=format',
-    excerpt: 'AI-based denoisers and upscalers have cut our render times by 40%. Here\'s how we integrated these tools into production without sacrificing photorealism.',
-    excerptVIE: 'Các bộ khử nhiễu và upscaler dựa trên AI đã cắt giảm thời gian render của chúng tôi 40%. Đây là cách chúng tôi tích hợp các công cụ này vào sản xuất mà không ảnh hưởng đến tính siêu thực.',
-    featured: false,
-  },
-  {
-    title: 'The Future of Real Estate Sales: VR Showrooms Are Here',
-    titleVIE: 'Tương Lai Của Bán Hàng Bất Động Sản: Phòng Trưng Bày VR Đã Đến',
-    category: 'VR/AR',
-    categoryVIE: 'VR/AR',
-    date: 'December 20, 2025',
-    dateVIE: '20 Tháng 12, 2025',
-    readTime: '5 min read',
-    img: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=600&h=400&fit=crop&auto=format',
-    excerpt: 'Vietnamese developers are adopting VR showrooms at record pace. We share data from 12 projects on conversion rate improvements and buyer confidence.',
-    excerptVIE: 'Các nhà phát triển Việt Nam đang áp dụng phòng trưng bày VR với tốc độ kỷ lục. Chúng tôi chia sẻ dữ liệu từ 12 dự án về cải thiện tỷ lệ chuyển đổi và sự tự tin của người mua.',
-    featured: false,
-  },
-  {
-    title: 'Lighting in 3D Renders: Why Most Studios Get It Wrong',
-    titleVIE: 'Ánh Sáng Trong Hình Ảnh 3D: Tại Sao Hầu Hết Các Studio Làm Sai',
-    category: '3D Rendering',
-    categoryVIE: 'Kết Xuất 3D',
-    date: 'December 5, 2025',
-    dateVIE: '5 Tháng 12, 2025',
-    readTime: '10 min read',
-    img: 'https://images.unsplash.com/photo-1633109713362-031e75973c1b?w=600&h=400&fit=crop&auto=format',
-    excerpt: 'Physically-based lighting is not just a setting — it\'s a discipline. We break down the six most common lighting mistakes and how to correct them.',
-    excerptVIE: 'Ánh sáng dựa trên vật lý không chỉ là một cài đặt — đó là một kỷ luật. Chúng tôi phân tích sáu lỗi chiếu sáng phổ biến nhất và cách khắc phục chúng.',
-    featured: false,
-  },
-  {
-    title: 'AR in Architecture: From Novelty to Essential Tool',
-    titleVIE: 'AR Trong Kiến Trúc: Từ Mới Lạ Đến Công Cụ Thiết Yếu',
-    category: 'VR/AR',
-    categoryVIE: 'VR/AR',
-    date: 'November 18, 2025',
-    dateVIE: '18 Tháng 11, 2025',
-    readTime: '7 min read',
-    img: 'https://images.unsplash.com/photo-1639174326326-6e2ef8d8ae39?w=600&h=400&fit=crop&auto=format',
-    excerpt: 'Three years ago, AR was a demo at trade shows. Today it\'s embedded in client approval workflows. We trace how this shift happened and where it\'s going next.',
-    excerptVIE: 'Ba năm trước, AR là một demo tại các hội chợ thương mại. Ngày nay nó được nhúng vào quy trình phê duyệt của khách hàng. Chúng tôi theo dõi cách sự thay đổi này xảy ra và hướng tiếp theo.',
-    featured: false,
-  },
-  {
-    title: 'Parametric Architecture and the 3D Visualization Challenge',
-    titleVIE: 'Kiến Trúc Tham Số và Thách Thức Trực Quan Hóa 3D',
-    category: 'Architecture',
-    categoryVIE: 'Kiến Trúc',
-    date: 'November 2, 2025',
-    dateVIE: '2 Tháng 11, 2025',
-    readTime: '9 min read',
-    img: 'https://images.unsplash.com/photo-1784358582539-f10766868e9e?w=600&h=400&fit=crop&auto=format',
-    excerpt: 'Zaha Hadid-inspired parametric forms are beautiful — and brutally complex to model and render. We share our workflow for handling algorithmic geometry.',
-    excerptVIE: 'Các hình dạng tham số lấy cảm hứng từ Zaha Hadid rất đẹp — và cực kỳ phức tạp để mô hình hóa và kết xuất. Chúng tôi chia sẻ quy trình xử lý hình học thuật toán.',
-    featured: false,
-  },
-]
+const articles = blogsData.map((item, index) => ({
+  title: item.titleENG,
+  titleVIE: item.titleVIE,
+  category: item.categoryENG,
+  categoryVIE: item.categoryVIE,
+  date: item.date,
+  dateVIE: item.date,
+  readTime: '6 min read',
+  img: item.img,
+  excerpt: item.descENG,
+  excerptVIE: item.descVIE,
+  featured: index === 0,
+}))
 
 const POSTS_PER_PAGE = 4
 
