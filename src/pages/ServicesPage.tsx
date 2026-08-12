@@ -166,21 +166,20 @@ export default function ServicesPage({ lang, navigate }: Props) {
       <section className="py-24 bg-[#0A0A0A]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="section-label mb-4">◆ {tx.processLabel}</div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16">{tx.processHeadline}</h2>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16 uppercase">{tx.processHeadline}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {process.map((p, i) => (
-              <div key={i} className="relative glass-panel rounded-2xl p-8 card-hover">
-                <div className="font-display text-5xl font-extrabold mb-4 text-gradient opacity-40">{p.step}</div>
-                <div className="w-10 h-[2px] bg-gradient-to-r from-[#FF9E00] to-[#FF6B00] mb-4 rounded-full" />
-                <h3 className="font-display font-bold text-white text-lg mb-3">
-                  {lang === 'ENG' ? p.titleENG : p.titleVIE}
-                </h3>
-                <p className="text-white/55 text-sm leading-relaxed">
-                  {lang === 'ENG' ? p.descENG : p.descVIE}
-                </p>
-                {i < process.length - 1 && (
-                  <div className="hidden lg:block absolute top-12 -right-3 text-[#FF9E00]/50 text-xl font-mono">›</div>
-                )}
+              <div key={i} data-cursor="DISCOVER" className="relative card-running-border group">
+                <div className="card-running-border-inner p-8">
+                  <div className="font-display text-5xl font-extrabold mb-4 text-[#FF9E00] opacity-80 group-hover:opacity-100 transition-opacity">{p.step}</div>
+                  <div className="w-10 h-[2px] bg-gradient-to-r from-[#FF9E00] to-[#FF6B00] mb-4 rounded-full" />
+                  <h3 className="font-display font-bold text-white text-lg mb-3 uppercase group-hover:text-[#FF9E00] transition-colors">
+                    {lang === 'ENG' ? p.titleENG : p.titleVIE}
+                  </h3>
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    {lang === 'ENG' ? p.descENG : p.descVIE}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

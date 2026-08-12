@@ -300,23 +300,25 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
               <div
                 key={i}
                 data-cursor="DISCOVER"
-                className="card-highlight p-6 cursor-pointer group flex flex-col justify-between"
+                className="card-running-border cursor-pointer group flex flex-col justify-between"
                 onClick={() => navigate('services')}
               >
-                <div>
-                  <div className="mb-6 w-14 h-14 rounded-2xl flex items-center justify-center bg-[#FF6B00]/15 border border-[#FF6B00]/40 group-hover:border-[#FF9E00] group-hover:bg-[#FF6B00]/30 transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.2)]">
-                    {svc.icon}
+                <div className="card-running-border-inner p-6 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="mb-6 w-14 h-14 rounded-2xl flex items-center justify-center bg-[#FF6B00]/15 border border-[#FF6B00]/40 group-hover:border-[#FF9E00] group-hover:bg-[#FF6B00]/30 transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.2)]">
+                      {svc.icon}
+                    </div>
+                    <h3 className="font-display font-extrabold text-white mb-3 text-lg group-hover:text-[#FF9E00] transition-colors uppercase tracking-tight">
+                      {lang === 'ENG' ? svc.titleENG : svc.titleVIE}
+                    </h3>
+                    <p className="text-white/70 text-xs md:text-sm leading-relaxed">
+                      {lang === 'ENG' ? svc.descENG : svc.descVIE}
+                    </p>
                   </div>
-                  <h3 className="font-display font-extrabold text-white mb-3 text-lg group-hover:text-[#FF9E00] transition-colors uppercase tracking-tight">
-                    {lang === 'ENG' ? svc.titleENG : svc.titleVIE}
-                  </h3>
-                  <p className="text-white/70 text-xs md:text-sm leading-relaxed">
-                    {lang === 'ENG' ? svc.descENG : svc.descVIE}
-                  </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[#FF9E00] text-xs font-mono font-bold group-hover:translate-x-1.5 transition-transform">
-                  <span>{lang === 'ENG' ? 'Explore Solution' : 'Khám Phá'}</span>
-                  <span className="text-base">→</span>
+                  <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-[#FF9E00] text-xs font-mono font-bold group-hover:translate-x-1.5 transition-transform">
+                    <span>{lang === 'ENG' ? 'Explore Solution' : 'Khám Phá'}</span>
+                    <span className="text-base">→</span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -334,12 +336,14 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {techStack.map((tech, i) => (
-              <div key={i} data-cursor="EXPLORE" className="card-highlight p-7 group">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-3.5 h-3.5 rounded-full bg-[#FF9E00] shadow-[0_0_15px_#FF6B00] animate-pulse" />
-                  <h3 className="font-display font-extrabold text-white text-xl uppercase tracking-wide group-hover:text-[#FF9E00] transition-colors">{tech.name}</h3>
+              <div key={i} data-cursor="EXPLORE" className="card-running-border group">
+                <div className="card-running-border-inner p-7">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#FF9E00] shadow-[0_0_15px_#FF6B00] animate-pulse" />
+                    <h3 className="font-display font-extrabold text-white text-xl uppercase tracking-wide group-hover:text-[#FF9E00] transition-colors">{tech.name}</h3>
+                  </div>
+                  <p className="text-white/75 text-sm font-mono leading-relaxed">{tech.detail}</p>
                 </div>
-                <p className="text-white/75 text-sm font-mono leading-relaxed">{tech.detail}</p>
               </div>
             ))}
           </div>

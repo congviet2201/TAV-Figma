@@ -150,12 +150,14 @@ export default function AboutPage({ lang }: Props) {
           <div className="section-label mb-4">◆ {tx.valuesLabel}</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
             {tx.values.map((val, i) => (
-              <div key={i} data-cursor="DISCOVER" className="card-highlight p-8 group">
-                <div className="font-display text-5xl font-extrabold text-[#FF9E00] mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                  0{i + 1}
+              <div key={i} data-cursor="DISCOVER" className="card-running-border group">
+                <div className="card-running-border-inner p-8">
+                  <div className="font-display text-5xl font-extrabold text-[#FF9E00] mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
+                    0{i + 1}
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-white mb-3 uppercase tracking-wide group-hover:text-[#FF9E00] transition-colors">{val.title}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed">{val.desc}</p>
                 </div>
-                <h3 className="font-display text-xl font-bold text-white mb-3 uppercase tracking-wide group-hover:text-[#FF9E00] transition-colors">{val.title}</h3>
-                <p className="text-white/70 text-sm leading-relaxed">{val.desc}</p>
               </div>
             ))}
           </div>
@@ -169,23 +171,25 @@ export default function AboutPage({ lang }: Props) {
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16 uppercase">{tx.teamHeadline}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, i) => (
-              <div key={i} data-cursor="DISCOVER" className="group card-highlight overflow-hidden">
-                <div className="relative overflow-hidden" style={{ height: '280px' }}>
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E1217] via-transparent to-transparent" />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display font-bold text-white text-lg group-hover:text-[#FF9E00] transition-colors uppercase">{member.name}</h3>
-                  <div className="text-[#FF9E00] text-xs font-mono mt-1.5 mb-3 bg-[#FF6B00]/15 px-3 py-1 rounded-full inline-block border border-[#FF6B00]/40 font-bold uppercase">
-                    {lang === 'ENG' ? member.role : member.roleVIE}
+              <div key={i} data-cursor="DISCOVER" className="group card-running-border">
+                <div className="card-running-border-inner overflow-hidden">
+                  <div className="relative overflow-hidden" style={{ height: '280px' }}>
+                    <img
+                      src={member.img}
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0E1217] via-transparent to-transparent" />
                   </div>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    {lang === 'ENG' ? member.bio : member.bioVIE}
-                  </p>
+                  <div className="p-6">
+                    <h3 className="font-display font-bold text-white text-lg group-hover:text-[#FF9E00] transition-colors uppercase">{member.name}</h3>
+                    <div className="text-[#FF9E00] text-xs font-mono mt-1.5 mb-3 bg-[#FF6B00]/15 px-3 py-1 rounded-full inline-block border border-[#FF6B00]/40 font-bold uppercase">
+                      {lang === 'ENG' ? member.role : member.roleVIE}
+                    </div>
+                    <p className="text-white/70 text-sm leading-relaxed">
+                      {lang === 'ENG' ? member.bio : member.bioVIE}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -209,13 +213,15 @@ export default function AboutPage({ lang }: Props) {
                   <div className="md:w-1/2 pl-8 md:pl-0">
                     <div
                       data-cursor="DISCOVER"
-                      className={`card-highlight p-7 group ${i % 2 === 0 ? 'md:mr-12' : 'md:ml-12'}`}
+                      className={`card-running-border group ${i % 2 === 0 ? 'md:mr-12' : 'md:ml-12'}`}
                     >
-                      <div className="font-display text-3xl font-extrabold text-[#FF9E00] mb-2">{m.year}</div>
-                      <h3 className="font-display font-bold text-white text-lg mb-2 uppercase group-hover:text-[#FF9E00] transition-colors">
-                        {lang === 'ENG' ? m.title : m.titleVIE}
-                      </h3>
-                      <p className="text-white/70 text-sm leading-relaxed">{m.desc}</p>
+                      <div className="card-running-border-inner p-7">
+                        <div className="font-display text-3xl font-extrabold text-[#FF9E00] mb-2">{m.year}</div>
+                        <h3 className="font-display font-bold text-white text-lg mb-2 uppercase group-hover:text-[#FF9E00] transition-colors">
+                          {lang === 'ENG' ? m.title : m.titleVIE}
+                        </h3>
+                        <p className="text-white/70 text-sm leading-relaxed">{m.desc}</p>
+                      </div>
                     </div>
                   </div>
                   {/* Glowing Dot */}
