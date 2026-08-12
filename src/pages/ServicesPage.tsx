@@ -29,52 +29,69 @@ const t = {
 
 const services = [
   {
-    titleENG: '3D Rendering',
-    titleVIE: 'Kết Xuất 3D',
-    descENG: 'Our photorealistic rendering service produces stills and animations indistinguishable from photography. We use ray-traced rendering engines (V-Ray, Corona, Unreal Engine 5) to capture perfect lighting, material behavior, and atmospheric depth. Ideal for marketing materials, investor decks, and sales centers.',
-    descVIE: 'Dịch vụ kết xuất siêu thực của chúng tôi tạo ra hình ảnh và hoạt hình không thể phân biệt với nhiếp ảnh. Chúng tôi sử dụng các engine kết xuất ray-traced (V-Ray, Corona, Unreal Engine 5) để nắm bắt ánh sáng hoàn hảo, vật liệu và độ sâu không khí.',
-    img: 'https://images.unsplash.com/photo-1633109713362-031e75973c1b?w=900&h=600&fit=crop&auto=format',
-    tags: ['Architecture', 'Interior', 'Product', 'Landscape'],
+    titleENG: '3D Render CG (Exterior & Interior)',
+    titleVIE: 'Kết Xuất 3D CG (Ngoại Thất & Nội Thất)',
+    descENG: 'Photorealistic architectural rendering for exterior masterplans and luxury interior spaces. Using V-Ray, Corona, and Unreal Engine 5 to capture perfect global illumination, natural materials, and depth.',
+    descVIE: 'Dịch vụ diễn họa 3D siêu thực cho quy hoạch ngoại thất và không gian nội thất cao cấp. Sử dụng V-Ray, Corona và Unreal Engine 5 để tái tạo ánh sáng tự nhiên, vật liệu và độ sâu kiến trúc.',
+    img: '/assets/image/TAVOFFICEJAPAN/TAV_villa office ariel view.png',
+    subMedia: [
+      '/assets/image/TAVOFFICEJAPAN/TAV_villa office reception.png',
+      '/assets/image/TAVOFFICEJAPAN/TAV_villa office elevator.png',
+      '/assets/image/TAVVILLAGECANADA/TAV_villa pool 001.png',
+    ],
+    tags: ['Ngoại Thất / Exterior', 'Nội Thất / Interior', 'High-End Villa', 'Masterplan'],
     icon: '◈',
     color: '#FF6B00',
   },
   {
     titleENG: '3D Mapping',
-    titleVIE: '3D Mapping',
-    descENG: 'Transform any surface — building facades, stages, exhibition halls — into a living canvas. Our projection mapping team handles full-event production: content creation, hardware setup, and live operation for corporate events, product launches, and public installations.',
-    descVIE: 'Biến mọi bề mặt — mặt tiền tòa nhà, sân khấu, phòng triển lãm — thành canvas sống động. Nhóm projection mapping của chúng tôi xử lý toàn bộ sản xuất sự kiện: tạo nội dung, cài đặt phần cứng và vận hành trực tiếp.',
-    img: 'https://images.unsplash.com/photo-1784358582539-f10766868e9e?w=900&h=600&fit=crop&auto=format',
-    tags: ['Events', 'Brand Activations', 'Installations', 'Concerts'],
+    titleVIE: 'Trình Diễn 3D Mapping',
+    descENG: 'Transform any surface — building facades, stages, exhibition halls — into a living digital canvas. Full-event projection mapping production and content creation.',
+    descVIE: 'Biến mọi bề mặt — mặt tiền tòa nhà, sân khấu, phòng triển lãm — thành bức tranh số sống động. Sản xuất trình chiếu 3D mapping sự kiện chuyên nghiệp.',
+    img: '/assets/image/sv-3d-mapping.png',
+    subMedia: [
+      '/video/mapping_3d.mp4',
+    ],
+    tags: ['Events', 'Brand Activations', 'Architectural Projection', 'Concerts'],
     icon: '◉',
     color: '#FF9E00',
   },
   {
     titleENG: '3D Modeling',
-    titleVIE: 'Mô Hình 3D',
-    descENG: 'Precision polygon modeling for architecture, product design, game assets, and film production. We work from sketches, technical drawings, point-cloud scans, or reference imagery — and deliver optimized meshes ready for rendering, game engines, or 3D printing.',
-    descVIE: 'Mô hình polygon chính xác cho kiến trúc, thiết kế sản phẩm, tài sản game và sản xuất phim. Chúng tôi làm việc từ phác thảo, bản vẽ kỹ thuật, quét point-cloud hoặc hình ảnh tham khảo.',
-    img: 'https://images.unsplash.com/photo-1633109611134-c41b5c0bbc1a?w=900&h=600&fit=crop&auto=format',
-    tags: ['Architecture', 'Product Design', 'Game Assets', '3D Printing'],
+    titleVIE: 'Dựng Mô Hình 3D',
+    descENG: 'Precision polygon modeling for architecture, product design, game assets, and film production from CAD drawings and BIM models.',
+    descVIE: 'Mô hình polygon chính xác cho kiến trúc, thiết kế sản phẩm, tài sản game và sản xuất phim từ bản vẽ CAD và mô hình BIM.',
+    img: 'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/MODEL%203D%20WEBP%2F1.webp?alt=media&token=ab0f62a3-c0f1-4bf3-b79a-d6ce940c05c9',
+    subMedia: [
+      'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/MODEL%203D%20WEBP%2F2.1.webp?alt=media&token=e729f7c7-69a7-4bdd-a7bc-2821e34cfb70',
+    ],
+    tags: ['Architecture', 'Product Design', 'BIM / CAD', 'Game Assets'],
     icon: '◇',
     color: '#FF6B00',
   },
   {
-    titleENG: 'VR Tour',
-    titleVIE: 'Tour VR',
-    descENG: 'Interactive virtual reality walkthroughs that let buyers, investors, and guests explore a space as if they were physically there — before construction is complete. Delivered as standalone VR apps, web-based experiences, or mobile-compatible 360° tours.',
-    descVIE: 'Các chuyến tham quan thực tế ảo tương tác cho phép người mua, nhà đầu tư và khách hàng khám phá không gian như thể họ đang ở đó — trước khi xây dựng hoàn thành.',
-    img: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=900&h=600&fit=crop&auto=format',
-    tags: ['Real Estate', 'Hospitality', 'Retail', 'Education'],
+    titleENG: '360 VR Tour Walkthrough',
+    titleVIE: 'Tour VR 360 Thực Tế Ảo Đắm Chìm',
+    descENG: 'Interactive 360° virtual reality walkthroughs allowing buyers, investors, and guests to explore spaces as if physically there before construction is complete.',
+    descVIE: 'Các chuyến tham quan thực tế ảo 360° tương tác đắm chìm cho phép người mua và nhà đầu tư khám phá không gian dự án trên điện thoại, máy tính và kính VR.',
+    img: 'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/RENDER%203D%20WEBP%2FAS%20Vietnamese%20three-room%20house.webp?alt=media&token=e3ffc96c-9a15-42bd-85b5-0987dfe0ccf3',
+    subMedia: [
+      'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/RENDER%203D%20WEBP%2FAS%20VIEW%20GARDEN.webp?alt=media&token=1535a251-5561-4b8b-a568-ca2b01f30a12',
+    ],
+    tags: ['Real Estate VR', 'Hospitality', 'Interactive 360', 'Spatial VR'],
     icon: '◎',
     color: '#FF9E00',
   },
   {
-    titleENG: 'AR Experience',
-    titleVIE: 'Trải Nghiệm AR',
-    descENG: 'Augmented reality applications that overlay digital content onto the physical world using smartphones or AR glasses. Used by real estate developers to show future buildings on empty lots, and by retailers to let customers visualize furniture in their homes.',
-    descVIE: 'Ứng dụng thực tế tăng cường phủ nội dung kỹ thuật số lên thế giới vật lý bằng smartphone hoặc kính AR. Được sử dụng bởi nhà phát triển bất động sản để hiển thị tòa nhà tương lai.',
-    img: 'https://images.unsplash.com/photo-1639174326326-6e2ef8d8ae39?w=900&h=600&fit=crop&auto=format',
-    tags: ['Real Estate', 'Retail', 'Marketing', 'Training'],
+    titleENG: 'Cinematic 3D Movie & Animation',
+    titleVIE: 'Phim Hoạt Họa Kiến Trúc 3D Cinematic (Movie)',
+    descENG: 'Cinematic 3D walkthrough movies combining camera movement, soundscapes, and lighting to guide viewers through luxury real estate projects.',
+    descVIE: 'Thước phim hoạt họa 3D kiến trúc điện ảnh kết hợp góc quay điện ảnh và âm thanh sống động dắt người xem tham quan toàn bộ dự án.',
+    img: 'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/icon%2FTAV%20TOWER%20DAY.jpg?alt=media&token=96afe78e-8efd-4be3-be24-ca9f2e58a5c0',
+    subMedia: [
+      'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/gif%2F0531_%20VIDEO%2016-9%20rut%20ngan%20.mp4?alt=media&token=0cb96c76-ca7d-48da-9d7c-8da18678b248',
+    ],
+    tags: ['3D Movie', 'ArchViz Film', 'Cinematic Animation', 'Commercial'],
     icon: '◑',
     color: '#FF6B00',
   },
@@ -87,7 +104,7 @@ const process = [
   { step: '04', titleENG: 'Refinement', titleVIE: 'Tinh Chỉnh', descENG: 'Two rounds of revisions are included to align the output with your vision before final delivery.', descVIE: 'Hai vòng sửa đổi được bao gồm để điều chỉnh đầu ra với tầm nhìn của bạn trước khi giao hàng cuối cùng.' },
 ]
 
-const tech = ['Unreal Engine 5', 'V-Ray', 'Corona Renderer', '3ds Max', 'Cinema 4D', 'Blender', 'Unity', 'Adobe CC', 'Substance Painter', 'ZBrush']
+const tech = ['Unreal Engine 5.5', 'V-Ray', 'Corona Renderer', '3ds Max', 'Cinema 4D', 'Blender', 'Unity', 'Adobe CC', 'Substance Painter', 'ZBrush']
 
 export default function ServicesPage({ lang, navigate }: Props) {
   const tx = t[lang]
@@ -97,8 +114,10 @@ export default function ServicesPage({ lang, navigate }: Props) {
       {/* Hero */}
       <section className="relative py-28 overflow-hidden bg-[#050505]">
         <div className="absolute inset-0 grid-overlay" />
-        <div className="absolute top-0 right-0 w-[550px] h-[550px] opacity-15 pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #FF6B00 0%, transparent 70%)', filter: 'blur(50px)' }} />
+        <div
+          className="absolute top-0 right-0 w-[550px] h-[550px] opacity-15 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #FF6B00 0%, transparent 70%)', filter: 'blur(50px)' }}
+        />
         <div className="relative max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="section-label mb-6">◆ {tx.label}</div>
           <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white mb-8">
@@ -111,21 +130,24 @@ export default function ServicesPage({ lang, navigate }: Props) {
 
       {/* Service Cards */}
       <section className="py-20 bg-[#050505]">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col gap-6">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex flex-col gap-8">
           {services.map((svc, i) => (
             <div
               key={i}
               data-cursor="DISCOVER"
-              className={`glass-panel rounded-2xl overflow-hidden interactive-card border border-white/10 flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              className={`glass-panel rounded-3xl overflow-hidden interactive-card border border-white/10 flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} bg-[#0A0A0A]`}
             >
-              <div className="relative md:w-1/2 overflow-hidden" style={{ minHeight: '340px' }}>
+              <div className="relative md:w-1/2 overflow-hidden" style={{ minHeight: '380px' }}>
                 <img
                   src={svc.img}
                   alt={lang === 'ENG' ? svc.titleENG : svc.titleVIE}
                   loading="lazy"
                   decoding="async"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                  }}
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  style={{ minHeight: '340px' }}
+                  style={{ minHeight: '380px' }}
                 />
                 <div className="absolute top-6 left-6 z-10 font-display text-5xl md:text-7xl font-extrabold text-white/20 select-none">
                   0{i + 1}
@@ -134,14 +156,14 @@ export default function ServicesPage({ lang, navigate }: Props) {
               </div>
               <div className="md:w-1/2 p-10 md:p-14 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="font-mono text-xs tracking-widest uppercase bg-white/5 px-3 py-1 rounded-full border border-white/15 font-semibold text-white/80">
+                  <span className="font-mono text-xs tracking-widest uppercase bg-white/5 px-3 py-1 rounded-full border border-white/15 font-semibold text-[#FF9E00]">
                     {lang === 'ENG' ? `SERVICE 0${i + 1}` : `DỊCH VỤ 0${i + 1}`}
                   </span>
                 </div>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4 uppercase">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 uppercase leading-tight">
                   {lang === 'ENG' ? svc.titleENG : svc.titleVIE}
                 </h2>
-                <p className="text-white/70 leading-relaxed mb-6 text-base">
+                <p className="text-white/70 leading-relaxed mb-6 text-sm md:text-base">
                   {lang === 'ENG' ? svc.descENG : svc.descVIE}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -151,36 +173,35 @@ export default function ServicesPage({ lang, navigate }: Props) {
                     </span>
                   ))}
                 </div>
-                <button
-                  onClick={() => navigate('projects')}
-                  className="btn-outline px-6 py-3 text-sm self-start group"
-                >
-                  <span>{tx.learnMore}</span>
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </button>
+                <div>
+                  <button
+                    onClick={() => navigate('projects')}
+                    className="btn-outline px-6 py-2.5 text-xs font-mono group rounded-full"
+                  >
+                    <span>{tx.learnMore}</span>
+                    <span className="group-hover:translate-x-1 transition-transform font-bold">→</span>
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Process */}
-      <section className="py-24 bg-[#0A0A0A]">
+      {/* Process Section */}
+      <section className="py-24 border-t border-white/10 bg-[#050505]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="section-label mb-4">◆ {tx.processLabel}</div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16 uppercase">{tx.processHeadline}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {process.map((p, i) => (
-              <div key={i} data-cursor="DISCOVER" className="relative card-running-border group">
-                <div className="card-running-border-inner p-8">
-                  <div className="font-display text-5xl font-extrabold mb-4 text-[#FF9E00] opacity-80 group-hover:opacity-100 transition-opacity">{p.step}</div>
-                  <div className="w-10 h-[2px] bg-gradient-to-r from-[#FF9E00] to-[#FF6B00] mb-4 rounded-full" />
-                  <h3 className="font-display font-bold text-white text-lg mb-3 uppercase group-hover:text-[#FF9E00] transition-colors">
-                    {lang === 'ENG' ? p.titleENG : p.titleVIE}
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
-                    {lang === 'ENG' ? p.descENG : p.descVIE}
-                  </p>
+          <div className="mb-16 text-center max-w-2xl mx-auto">
+            <div className="section-label justify-center mb-4">◆ {tx.processLabel}</div>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-white uppercase">{tx.processHeadline}</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {process.map((p) => (
+              <div key={p.step} className="glass-panel p-8 rounded-2xl border border-white/10 bg-[#0A0A0A] flex flex-col justify-between">
+                <div>
+                  <div className="font-mono text-3xl font-bold text-[#FF6B00] mb-6">{p.step}</div>
+                  <h3 className="font-display text-xl font-bold text-white mb-3 uppercase">{lang === 'ENG' ? p.titleENG : p.titleVIE}</h3>
+                  <p className="text-white/60 text-xs leading-relaxed">{lang === 'ENG' ? p.descENG : p.descVIE}</p>
                 </div>
               </div>
             ))}
@@ -188,19 +209,17 @@ export default function ServicesPage({ lang, navigate }: Props) {
         </div>
       </section>
 
-      {/* Tech stack */}
-      <section className="py-24 bg-[#050505]">
+      {/* Tech Stack Bar */}
+      <section className="py-16 border-t border-white/10 bg-[#050505]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="section-label mb-4">◆ {tx.techLabel}</div>
-          <h2 className="font-display text-4xl font-bold text-white mb-12">{tx.techHeadline}</h2>
-          <div className="flex flex-wrap gap-3">
-            {tech.map((t) => (
-              <div
-                key={t}
-                className="glass-pill border border-white/10 rounded-xl px-5 py-3 font-mono text-sm text-white/70 hover:text-[#FF9E00] hover:border-[#FF6B00]/50 hover:bg-[#FF6B00]/15 transition-all duration-300 cursor-default"
-              >
-                {t}
-              </div>
+          <div className="text-center mb-8 font-mono text-xs text-white/40 uppercase tracking-widest">
+            {tx.techHeadline}
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+            {tech.map((tItem) => (
+              <span key={tItem} className="px-5 py-2 rounded-full glass border border-white/15 font-mono text-xs text-white/80 font-bold bg-[#0A0A0A]">
+                {tItem}
+              </span>
             ))}
           </div>
         </div>

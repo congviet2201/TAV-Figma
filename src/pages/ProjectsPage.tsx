@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { type Lang } from '../App'
 import { projectsData } from '../data/tavData'
 
@@ -61,7 +62,7 @@ export default function ProjectsPage({ lang }: Props) {
         if (!list.includes(m)) list.push(m)
       })
     }
-    setMediaList(list)
+    setMediaList(list.length > 0 ? list : [proj.img])
     setCurrentMediaIndex(0)
     setSelectedProject(proj)
   }
@@ -76,9 +77,11 @@ export default function ProjectsPage({ lang }: Props) {
     setCurrentMediaIndex(prev => (prev - 1 + mediaList.length) % mediaList.length)
   }, [mediaList.length])
 
-  // Keyboard navigation listener (Left, Right, Escape)
+  // Body scroll lock & Keyboard listener
   useEffect(() => {
     if (!selectedProject) return
+
+    document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
@@ -91,7 +94,10 @@ export default function ProjectsPage({ lang }: Props) {
     }
 
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [selectedProject, nextMedia, prevMedia])
 
   return (
@@ -183,32 +189,41 @@ export default function ProjectsPage({ lang }: Props) {
         </div>
       </section>
 
-      {/* Full-Screen Lightbox Modal with Separated Div Wrapper Controls */}
-      {selectedProject && (
+      {/* Lightbox Modal: Portaled directly to document.body to escape any transform parent blocks */}
+      {selectedProject && createPortal(
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-6"
-          style={{ background: 'rgba(5, 5, 5, 0.96)', backdropFilter: 'blur(32px)' }}
+          style={{
+            position: 'fixed',
+            top: '76px',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 99999,
+            background: 'rgba(5, 5, 5, 0.98)',
+            backdropFilter: 'blur(32px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 0,
+          }}
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="relative max-w-[1200px] w-full max-h-[94vh] overflow-y-auto rounded-3xl border border-[#FF6B00]/40 shadow-2xl animate-fade-in-up bg-[#050505] flex flex-col"
+            style={{
+              position: 'relative',
+              width: '100vw',
+              height: 'calc(100vh - 76px)',
+              background: '#0B0B0C',
+              display: 'flex',
+            }}
+            className="flex-col md:flex-row overflow-y-auto md:overflow-hidden animate-fade-in-up"
             onClick={e => e.stopPropagation()}
           >
-            {/* Modal Header Bar */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0A0A0A] sticky top-0 z-40">
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3 py-1 rounded-full border border-[#FF6B00]/40 font-bold">
-                  {lang === 'ENG' ? selectedProject.category : selectedProject.categoryVIE}
-                </span>
-                <h2 className="font-display font-extrabold text-white text-lg md:text-xl uppercase truncate max-w-[450px]">
-                  {selectedProject.title}
-                </h2>
-              </div>
-
-              {/* Close Button (X) positioned explicitly at Top-Right */}
+            {/* Close Button (X) - Top Right */}
+            <div style={{ position: 'absolute', top: '16px', right: '20px', zIndex: 80 }}>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#FF6B00] text-white flex items-center justify-center text-lg font-bold transition-all shadow-lg cursor-pointer hover:scale-105 active:scale-95 border border-white/20"
+                className="w-11 h-11 rounded-full bg-black/90 hover:bg-[#FF6B00] text-white flex items-center justify-center text-xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95 border border-white/30"
                 aria-label={tx.close}
                 title={tx.close}
               >
@@ -216,14 +231,14 @@ export default function ProjectsPage({ lang }: Props) {
               </button>
             </div>
 
-            {/* Centered Media Viewer Frame */}
-            <div className="relative w-full bg-black flex items-center justify-center min-h-[400px] max-h-[600px] overflow-hidden select-none p-4">
-              {/* Left Navigation Button (<) Wrapped in Positioned Div */}
+            {/* LEFT COLUMN: Media Showcase - FULL FRAME WITHOUT CROPPING (object-contain) */}
+            <div className="relative w-full md:w-[62%] min-h-[360px] md:h-full bg-[#030303] flex items-center justify-center select-none p-4 md:p-8 border-b md:border-b-0 md:border-r border-white/10 shrink-0">
+              {/* Left Navigation Button (<) */}
               {mediaList.length > 1 && (
                 <div style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 60 }}>
                   <button
                     onClick={prevMedia}
-                    className="w-12 h-12 rounded-full bg-black/80 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/85 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl md:text-4xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
                     title={tx.prev}
                     aria-label={tx.prev}
                   >
@@ -232,12 +247,12 @@ export default function ProjectsPage({ lang }: Props) {
                 </div>
               )}
 
-              {/* Right Navigation Button (>) Wrapped in Positioned Div */}
+              {/* Right Navigation Button (>) */}
               {mediaList.length > 1 && (
                 <div style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 60 }}>
                   <button
                     onClick={nextMedia}
-                    className="w-12 h-12 rounded-full bg-black/80 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/85 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl md:text-4xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
                     title={tx.next}
                     aria-label={tx.next}
                   >
@@ -246,54 +261,60 @@ export default function ProjectsPage({ lang }: Props) {
                 </div>
               )}
 
-              {/* Centered Media Display */}
+              {/* Media Display (Full frame, object-contain, no cropping) */}
               {isVideoUrl(mediaList[currentMediaIndex]) ? (
                 <video
                   src={mediaList[currentMediaIndex]}
                   controls
                   autoPlay
-                  className="max-h-[550px] max-w-full object-contain rounded-xl shadow-2xl"
+                  className="w-full h-full max-h-[78vh] object-contain shadow-2xl"
                 />
               ) : (
                 <img
-                  src={mediaList[currentMediaIndex]}
+                  src={mediaList[currentMediaIndex] || selectedProject.img}
                   alt={`${selectedProject.title} ${currentMediaIndex + 1}`}
-                  loading="lazy"
-                  decoding="async"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
                   }}
-                  className="max-h-[550px] max-w-full object-contain rounded-xl shadow-2xl transition-opacity duration-300"
+                  className="w-full h-full max-h-[78vh] object-contain shadow-2xl transition-opacity duration-300"
                 />
               )}
 
-              {/* Media Counter Indicator */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/85 border border-[#FF6B00]/40 px-4 py-1.5 rounded-full text-xs font-mono text-[#FF9E00] font-bold z-20 backdrop-blur-md shadow-lg pointer-events-none">
+              {/* Counter Badge */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/85 border border-[#FF6B00]/50 px-4 py-1.5 rounded-full text-xs font-mono text-[#FF9E00] font-bold z-20 backdrop-blur-md shadow-lg pointer-events-none">
                 {currentMediaIndex + 1} / {mediaList.length} &bull; {lang === 'ENG' ? 'Use ← → keys' : 'Dùng phím ← →'}
               </div>
             </div>
 
-            {/* Footer Info & Thumbnails Carousel */}
-            <div className="p-6 md:p-8 bg-[#050505] border-t border-white/10">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-white/60 font-mono text-xs font-bold">📍 {selectedProject.location} &bull; {selectedProject.year}</span>
-                <div className="hidden sm:flex items-center gap-2 text-white/50 font-mono text-xs">
-                  <kbd className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-white font-mono">←</kbd>
-                  <kbd className="px-2 py-0.5 rounded bg-white/10 border border-white/20 text-white font-mono">→</kbd>
+            {/* RIGHT COLUMN: Project Info & Thumbnails (occupies 38% width, full height scrollable) */}
+            <div className="w-full md:w-[38%] h-full flex flex-col justify-between p-6 md:p-10 bg-[#0B0B0C] overflow-y-auto pr-8 md:pr-10">
+              <div>
+                <div className="flex items-center gap-3 mb-4 pr-14">
+                  <span className="font-mono text-xs tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3.5 py-1.5 rounded-full border border-[#FF6B00]/40 font-bold">
+                    {lang === 'ENG' ? selectedProject.category : selectedProject.categoryVIE}
+                  </span>
                 </div>
+
+                <h2 className="font-display font-extrabold text-2xl md:text-3xl text-white mb-3 uppercase leading-tight">
+                  {selectedProject.title}
+                </h2>
+
+                <div className="text-white/60 font-mono text-xs font-bold mb-6 flex items-center gap-2 pb-3 border-b border-white/10">
+                  📍 <span>{selectedProject.location} &bull; {selectedProject.year}</span>
+                </div>
+
+                <p className="text-white/85 text-sm md:text-base leading-relaxed mb-6">
+                  {lang === 'ENG' ? selectedProject.descENG : selectedProject.descVIE}
+                </p>
               </div>
 
-              <p className="text-white/80 text-sm leading-relaxed mb-6">
-                {lang === 'ENG' ? selectedProject.descENG : selectedProject.descVIE}
-              </p>
-
-              {/* Bottom Thumbnails Carousel Strip */}
+              {/* Thumbnails Carousel */}
               {mediaList.length > 1 && (
-                <div>
+                <div className="pt-4 border-t border-white/10 mt-auto">
                   <h3 className="font-mono text-xs font-bold text-[#FF9E00] uppercase tracking-widest mb-3">
                     ◆ {tx.gallery} ({mediaList.length})
                   </h3>
-                  <div className="flex gap-3 overflow-x-auto no-scrollbar py-1">
+                  <div className="flex gap-2.5 overflow-x-auto no-scrollbar py-1">
                     {mediaList.map((mUrl, idx) => {
                       const isVid = isVideoUrl(mUrl)
                       const isActive = idx === currentMediaIndex
@@ -301,12 +322,12 @@ export default function ProjectsPage({ lang }: Props) {
                         <div
                           key={idx}
                           onClick={() => setCurrentMediaIndex(idx)}
-                          className={`relative w-24 h-16 shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 transition-all bg-black ${
-                            isActive ? 'border-[#FF6B00] scale-105 shadow-[0_0_15px_rgba(255,107,0,0.8)]' : 'border-white/10 opacity-60 hover:opacity-100'
+                          className={`relative w-20 h-14 shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 transition-all bg-black ${
+                            isActive ? 'border-[#FF6B00] scale-105 shadow-[0_0_18px_rgba(255,107,0,0.8)]' : 'border-white/10 opacity-60 hover:opacity-100'
                           }`}
                         >
                           {isVid ? (
-                            <div className="w-full h-full flex items-center justify-center bg-black/90 text-[#FF9E00] font-mono text-[10px] font-bold">
+                            <div className="w-full h-full flex items-center justify-center bg-black/90 text-[#FF9E00] font-mono text-[9px] font-bold">
                               ▶ VIDEO
                             </div>
                           ) : (
@@ -329,7 +350,8 @@ export default function ProjectsPage({ lang }: Props) {
               )}
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   )

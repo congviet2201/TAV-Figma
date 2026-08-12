@@ -341,53 +341,104 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* Large feature */}
-            <div
-              className="relative overflow-hidden rounded-2xl cursor-pointer group border border-white/10 hover:border-[#FF6B00]/60 transition-all duration-500 shadow-2xl"
-              style={{ minHeight: '420px' }}
-              onClick={() => navigate('projects')}
-            >
-              <img
-                src={projectsData[0].img}
-                alt={projectsData[0].title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          {/* Full 10 Featured Projects Grid */}
+          <div className="space-y-6">
+            {/* Top Showcase Row: 1 Hero Project + 2 Secondary Projects */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Large Hero Project */}
+              <div
+                className="relative overflow-hidden rounded-2xl cursor-pointer group border border-white/10 hover:border-[#FF6B00]/60 transition-all duration-500 shadow-2xl"
                 style={{ minHeight: '420px' }}
-              />
-              <div className="absolute inset-0 img-overlay" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-8">
-                <span className="font-mono text-[11px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3 py-1 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
-                  {lang === 'ENG' ? projectsData[0].category : projectsData[0].categoryVIE}
-                </span>
-                <h3 className="project-card-title font-display text-3xl font-bold text-white mt-3 group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
-                  {projectsData[0].title}
-                </h3>
+                onClick={() => navigate('projects')}
+              >
+                <img
+                  src={projectsData[0].img}
+                  alt={projectsData[0].title}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  style={{ minHeight: '420px' }}
+                />
+                <div className="absolute inset-0 img-overlay" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="font-mono text-[11px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3 py-1 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
+                      {lang === 'ENG' ? projectsData[0].category : projectsData[0].categoryVIE}
+                    </span>
+                    <span className="text-white/70 font-mono text-xs">&bull; {projectsData[0].location}</span>
+                  </div>
+                  <h3 className="project-card-title font-display text-2xl md:text-3xl font-bold text-white group-hover:text-[#FF9E00] transition-colors drop-shadow-md uppercase">
+                    {projectsData[0].title}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Two Stacked Showcase Projects */}
+              <div className="flex flex-col gap-6">
+                {projectsData.slice(1, 3).map((proj) => (
+                  <div
+                    key={proj.id}
+                    className="relative overflow-hidden rounded-2xl cursor-pointer group flex-1 border border-white/10 hover:border-[#FF6B00]/60 transition-all duration-500 shadow-xl"
+                    style={{ minHeight: '200px' }}
+                    onClick={() => navigate('projects')}
+                  >
+                    <img
+                      src={proj.img}
+                      alt={proj.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      style={{ minHeight: '200px' }}
+                    />
+                    <div className="absolute inset-0 img-overlay" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-2.5 py-0.5 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
+                          {lang === 'ENG' ? proj.category : proj.categoryVIE}
+                        </span>
+                        <span className="text-white/70 font-mono text-[11px]">&bull; {proj.location}</span>
+                      </div>
+                      <h3 className="project-card-title font-display text-xl font-bold text-white group-hover:text-[#FF9E00] transition-colors drop-shadow-md uppercase">
+                        {proj.title}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Two stacked */}
-            <div className="flex flex-col gap-5">
-              {projectsData.slice(1, 3).map((proj, i) => (
+            {/* Remaining 7 Projects Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+              {projectsData.slice(3, 10).map((proj) => (
                 <div
-                  key={i}
-                  className="relative overflow-hidden rounded-2xl cursor-pointer group flex-1 border border-white/10 hover:border-[#FF6B00]/60 transition-all duration-500 shadow-xl"
-                  style={{ minHeight: '200px' }}
+                  key={proj.id}
+                  className="relative overflow-hidden rounded-2xl cursor-pointer group border border-white/10 hover:border-[#FF6B00]/60 transition-all duration-500 shadow-xl bg-[#0A0A0A]"
+                  style={{ minHeight: '260px' }}
                   onClick={() => navigate('projects')}
                 >
                   <img
                     src={proj.img}
                     alt={proj.title}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                    }}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    style={{ minHeight: '200px' }}
+                    style={{ minHeight: '260px' }}
                   />
                   <div className="absolute inset-0 img-overlay" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                  <div className="absolute bottom-0 left-0 p-6">
-                    <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-2.5 py-1 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
-                      {lang === 'ENG' ? proj.category : proj.categoryVIE}
-                    </span>
-                    <h3 className="project-card-title font-display text-xl font-bold text-white mt-2 group-hover:text-[#FF9E00] transition-colors drop-shadow-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="font-mono text-[10px] tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-2.5 py-0.5 rounded-full border border-[#FF6B00]/50 font-bold shadow-md">
+                        {lang === 'ENG' ? proj.category : proj.categoryVIE}
+                      </span>
+                      <span className="text-white/70 font-mono text-[11px]">&bull; {proj.location}</span>
+                    </div>
+                    <h3 className="project-card-title font-display text-lg font-bold text-white group-hover:text-[#FF9E00] transition-colors drop-shadow-md uppercase truncate">
                       {proj.title}
                     </h3>
                   </div>

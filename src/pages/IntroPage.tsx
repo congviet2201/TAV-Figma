@@ -35,7 +35,7 @@ export default function IntroPage({ navigate, lang, onOpenContact }: Props) {
       <div className="absolute inset-0 w-full h-full bg-black cursor-pointer" onClick={togglePlay}>
         <video
           ref={videoRef}
-          src="/video/home.mp4"
+          src="/video/sample-test.mp4"
           autoPlay
           loop
           muted={isMuted}
