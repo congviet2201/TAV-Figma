@@ -87,6 +87,8 @@ export default function BlogPage({ lang }: Props) {
             <img
               src={featured.img}
               alt={lang === 'ENG' ? featured.title : featured.titleVIE}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               style={{ minHeight: '480px' }}
             />
@@ -163,6 +165,8 @@ export default function BlogPage({ lang }: Props) {
                   <img
                     src={article.img}
                     alt={lang === 'ENG' ? article.title : article.titleVIE}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-4 left-4">

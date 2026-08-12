@@ -148,8 +148,10 @@ export default function ProjectsPage({ lang }: Props) {
                 <img
                   src={proj.img}
                   alt={proj.title}
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/assets/image/bg-aboutus1.png'
+                    (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
                   }}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   style={{ minHeight: 'inherit' }}
@@ -256,8 +258,10 @@ export default function ProjectsPage({ lang }: Props) {
                 <img
                   src={mediaList[currentMediaIndex]}
                   alt={`${selectedProject.title} ${currentMediaIndex + 1}`}
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/assets/image/bg-aboutus1.png'
+                    (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
                   }}
                   className="max-h-[550px] max-w-full object-contain rounded-xl shadow-2xl transition-opacity duration-300"
                 />
@@ -309,8 +313,10 @@ export default function ProjectsPage({ lang }: Props) {
                             <img
                               src={mUrl}
                               alt={`Thumb ${idx + 1}`}
+                              loading="lazy"
+                              decoding="async"
                               onError={(e) => {
-                                (e.target as HTMLImageElement).src = '/assets/image/bg-aboutus1.png'
+                                (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
                               }}
                               className="w-full h-full object-cover"
                             />

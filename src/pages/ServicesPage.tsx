@@ -122,6 +122,8 @@ export default function ServicesPage({ lang, navigate }: Props) {
                 <img
                   src={svc.img}
                   alt={lang === 'ENG' ? svc.titleENG : svc.titleVIE}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                   style={{ minHeight: '340px' }}
                 />

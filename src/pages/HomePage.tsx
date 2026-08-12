@@ -103,11 +103,12 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
         <div className="absolute inset-0 bg-[#050505]">
           <video
             ref={heroVideoRef}
-            src="/video/sample-test.mp4"
+            src="/video/home.mp4"
             autoPlay
             loop
             muted
             playsInline
+            preload="metadata"
             className="w-full h-full object-cover opacity-75 transition-all duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/90 via-[#050505]/50 to-transparent" />

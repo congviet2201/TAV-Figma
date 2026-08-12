@@ -162,7 +162,8 @@ export default function IntroModal({ isOpen, onClose, lang, initialTime = 0 }: P
       <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-black cursor-pointer" onClick={togglePlay}>
         <video
           ref={videoRef}
-          src="/video/sample-test.mp4"
+          src="/video/home.mp4"
+          preload="metadata"
           className="w-full h-full object-contain"
           playsInline
           onTimeUpdate={() => setCurrentTime(videoRef.current?.currentTime || 0)}

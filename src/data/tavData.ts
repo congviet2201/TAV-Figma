@@ -434,12 +434,12 @@ export const aboutGalleryImages = [
   '/assets/image/TAVLAOCAI/LAOCAI NIGHT.jpg',
   '/assets/image/TAVOFFICEJAPAN/TAV_villa office ariel view.png',
   '/assets/image/TAVVILLAGECANADA/TAV_villa pool 001.png',
-  '/assets/image/bg-aboutus.png',
-  '/assets/image/bg-aboutus1.png',
-  '/assets/image/bg-aboutus2.png',
-  '/assets/image/bg-aboutus3.png',
-  '/assets/image/bg-aboutus4.png',
-  '/assets/image/bg-aboutus5.png',
+  '/assets/image/blogs/blog1.png',
+  '/assets/image/blogs/blog2.png',
+  '/assets/image/blogs/blog3.png',
+  '/assets/image/blogs/blog4.png',
+  '/assets/image/blogs/blog5.png',
+  '/assets/image/blogs/blog6.png',
 ]
 
 export const blogsData = [
@@ -453,7 +453,7 @@ export const blogsData = [
     titleENG: 'What is 3D Mapping technology? Applications of 3D Mapping',
     descVIE: '3D Mapping dường như là một thuật ngữ tương đối mới. Đây là kỹ thuật sử dụng ánh sáng để tạo hiệu ứng 3D cho bề mặt tiếp xúc trong không gian 3 chiều.',
     descENG: '3D Mapping uses projection light to create 3D effects on real-world surfaces, establishing immersive 3-dimensional interactive experiences.',
-    img: '/assets/image/blog1.png',
+    img: '/assets/image/blogs/blog1.png',
   },
   {
     id: '2',
@@ -465,7 +465,7 @@ export const blogsData = [
     titleENG: 'Photorealistic 3D Architectural Visualization for Real Estate',
     descVIE: 'Giải pháp diễn họa 3D giúp các dự án bất động sản tiếp cận khách hàng tiềm năng trước khi công trình hoàn thành.',
     descENG: 'High-end 3D rendering solutions empowering developers to showcase properties prior to physical construction.',
-    img: '/assets/image/blog2.jpg',
+    img: '/assets/image/blogs/blog2.png',
   },
   {
     id: '3',
@@ -477,6 +477,6 @@ export const blogsData = [
     titleENG: 'Immersive 360 VR Tour Solutions in Design Presentation',
     descVIE: 'Trải nghiệm thực tế ảo tương tác đắm chìm hỗ trợ khám phá dự án trên máy tính, di động và kính VR.',
     descENG: 'Interactive VR walkthroughs enabling users to experience spatial concepts across web, mobile, and VR headsets.',
-    img: '/assets/image/blog3.jpg',
+    img: '/assets/image/blogs/blog3.png',
   },
 ]
