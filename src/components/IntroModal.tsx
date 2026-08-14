@@ -10,7 +10,7 @@ interface Props {
 
 const chapters = [
   { time: 0, labelENG: '00:00 Overview', labelVIE: '00:00 Tổng Quan' },
-  { time: 10, labelENG: '00:10 3D Rendering', labelVIE: '00:10 Kết Xuất 3D' },
+  { time: 10, labelENG: '00:10 3D Rendering', labelVIE: '00:10 Rendering 3D' },
   { time: 25, labelENG: '00:25 Architectural Visuals', labelVIE: '00:25 Trực Quan Kiến Trúc' },
   { time: 40, labelENG: '00:40 VR & Spatial Tech', labelVIE: '00:40 Thực Tế Ảo VR' },
   { time: 60, labelENG: '01:00 Creative Studio', labelVIE: '01:00 Studio Sáng Tạo' },

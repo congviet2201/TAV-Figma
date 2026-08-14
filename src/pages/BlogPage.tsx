@@ -160,7 +160,7 @@ export default function BlogPage({ lang }: Props) {
         {/* Featured Article Banner */}
         {featured && search === '' && activeCategory === tx.categories[0] && (
           <div
-            className="relative overflow-hidden rounded-3xl mb-16 group cursor-pointer border border-white/10 card-hover bg-[#0A0A0A]"
+            className="relative overflow-hidden rounded-3xl mb-16 group cursor-pointer border border-white/10 card-hover bg-[#0A0A0A] hero-overlay-text"
             style={{ minHeight: '480px' }}
             onClick={() => handleOpenArticle(featured)}
           >
@@ -175,24 +175,24 @@ export default function BlogPage({ lang }: Props) {
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               style={{ minHeight: '480px' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/30" />
             <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-14">
               <div className="max-w-[700px]">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="font-mono text-xs px-3.5 py-1 rounded-full bg-[#FF6B00] text-black font-bold uppercase tracking-widest shadow-md">
                     ★ {tx.featured}
                   </span>
-                  <span className="font-mono text-xs text-[#FF9E00] uppercase font-bold bg-white/10 px-3 py-1 rounded-full border border-white/15">
+                  <span className="font-mono text-xs text-[#FF9E00] uppercase font-bold bg-black/60 px-3 py-1 rounded-full border border-white/20 text-white">
                     {lang === 'ENG' ? featured.category : featured.categoryVIE}
                   </span>
                 </div>
-                <h2 className="font-display font-bold text-2xl md:text-4xl text-white mb-4 leading-tight group-hover:text-[#FF9E00] transition-colors uppercase">
+                <h2 className="blog-featured-title font-display font-bold text-2xl md:text-4xl text-white mb-4 leading-tight group-hover:text-[#FF9E00] transition-colors uppercase">
                   {lang === 'ENG' ? featured.title : featured.titleVIE}
                 </h2>
-                <p className="text-white/80 text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
+                <p className="blog-featured-desc text-white/90 text-sm md:text-base leading-relaxed mb-6 line-clamp-3">
                   {lang === 'ENG' ? featured.excerpt : featured.excerptVIE}
                 </p>
-                <div className="flex items-center gap-4 text-white/60 font-mono text-xs">
+                <div className="blog-featured-meta flex items-center gap-4 text-white/80 font-mono text-xs">
                   <span>✍ {featured.author}</span>
                   <span>&bull;</span>
                   <span>📅 {lang === 'ENG' ? featured.date : featured.dateVIE}</span>
@@ -291,121 +291,152 @@ export default function BlogPage({ lang }: Props) {
       </div>
 
       {/* Full Article Reader Modal: Portaled directly to document.body */}
-      {selectedArticle && createPortal(
-        <div
-          style={{
-            position: 'fixed',
-            top: '76px',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 99999,
-            background: 'rgba(5, 5, 5, 0.98)',
-            backdropFilter: 'blur(32px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 0,
-          }}
-          onClick={() => setSelectedArticle(null)}
-        >
+      {selectedArticle && (() => {
+        const isLight = typeof document !== 'undefined' && document.body.classList.contains('light-mode')
+        return createPortal(
           <div
             style={{
-              position: 'relative',
-              width: '100vw',
-              height: 'calc(100vh - 76px)',
-              background: '#0B0B0C',
+              position: 'fixed',
+              top: '76px',
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 99999,
+              background: isLight ? 'rgba(248, 250, 252, 0.96)' : 'rgba(5, 5, 5, 0.98)',
+              backdropFilter: 'blur(32px)',
               display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 0,
             }}
-            className="flex-col md:flex-row overflow-y-auto md:overflow-hidden animate-fade-in-up"
-            onClick={e => e.stopPropagation()}
+            onClick={() => setSelectedArticle(null)}
           >
-            {/* Close Button (X) - Top Right */}
-            <div style={{ position: 'absolute', top: '16px', right: '20px', zIndex: 80 }}>
-              <button
-                onClick={() => setSelectedArticle(null)}
-                className="w-11 h-11 rounded-full bg-black/90 hover:bg-[#FF6B00] text-white flex items-center justify-center text-xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95 border border-white/30"
-                aria-label={tx.close}
-                title={tx.close}
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* LEFT COLUMN: Main Image Showcase - FULL FRAME WITHOUT CROPPING (object-contain) */}
-            <div className="w-full md:w-[45%] min-h-[300px] md:h-full bg-[#030303] flex flex-col p-6 border-b md:border-b-0 md:border-r border-white/10 items-center justify-center shrink-0">
-              <img
-                src={selectedArticle.img}
-                alt={lang === 'ENG' ? selectedArticle.title : selectedArticle.titleVIE}
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
-                }}
-                className="w-full h-full max-h-[78vh] object-contain rounded-2xl drop-shadow-2xl"
-              />
-            </div>
-
-            {/* RIGHT COLUMN: Full Article Text & Content (occupies 55% width, full height scrollable) */}
-            <div className="w-full md:w-[55%] h-full p-6 md:p-12 bg-[#0B0B0C] overflow-y-auto pr-8 md:pr-14">
-              <div className="flex items-center gap-3 mb-4 pr-14">
-                <span className="font-mono text-xs tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3.5 py-1.5 rounded-full border border-[#FF6B00]/40 font-bold">
-                  {lang === 'ENG' ? selectedArticle.category : selectedArticle.categoryVIE}
-                </span>
-                <span className="text-white/60 font-mono text-xs font-bold">📅 {lang === 'ENG' ? selectedArticle.date : selectedArticle.dateVIE}</span>
+            <div
+              style={{
+                position: 'relative',
+                width: '100vw',
+                height: 'calc(100vh - 76px)',
+                background: isLight ? '#FFFFFF' : '#0B0B0C',
+                display: 'flex',
+              }}
+              className="flex-col md:flex-row overflow-y-auto md:overflow-hidden animate-fade-in-up"
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Close Button (X) - Top Right */}
+              <div style={{ position: 'absolute', top: '16px', right: '20px', zIndex: 80 }}>
+                <button
+                  onClick={() => setSelectedArticle(null)}
+                  className={`w-11 h-11 rounded-full flex items-center justify-center text-xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95 border ${
+                    isLight
+                      ? 'bg-slate-100 hover:bg-[#EA580C] text-slate-800 hover:text-white border-slate-300'
+                      : 'bg-black/90 hover:bg-[#FF6B00] text-white border-white/30'
+                  }`}
+                  aria-label={tx.close}
+                  title={tx.close}
+                >
+                  ✕
+                </button>
               </div>
 
-              <h1 className="font-display text-2xl md:text-4xl font-extrabold text-white mb-6 uppercase leading-tight pr-12">
-                {lang === 'ENG' ? selectedArticle.title : selectedArticle.titleVIE}
-              </h1>
-
-              <div className="flex flex-wrap items-center gap-4 text-white/70 font-mono text-xs pb-6 mb-8 border-b border-white/10">
-                <span>✍ {tx.author}: <strong className="text-[#FF9E00]">{selectedArticle.author}</strong></span>
-                <span>&bull;</span>
-                <span>⏱ {lang === 'ENG' ? selectedArticle.readTime : selectedArticle.readTimeVIE}</span>
+              {/* LEFT COLUMN: Main Image Showcase - FULL FRAME WITHOUT CROPPING (object-contain) */}
+              <div className={`w-full md:w-[45%] min-h-[300px] md:h-full flex flex-col p-6 border-b md:border-b-0 md:border-r items-center justify-center shrink-0 ${
+                isLight ? 'bg-[#0F172A] border-slate-200' : 'bg-[#030303] border-white/10'
+              }`}>
+                <img
+                  src={selectedArticle.img}
+                  alt={lang === 'ENG' ? selectedArticle.title : selectedArticle.titleVIE}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                  }}
+                  className="w-full h-full max-h-[78vh] object-contain rounded-2xl drop-shadow-2xl"
+                />
               </div>
 
-              <p className="text-white/95 text-base md:text-lg leading-relaxed font-semibold italic p-6 rounded-2xl bg-white/5 border-l-4 border-[#FF6B00] mb-8">
-                "{lang === 'ENG' ? selectedArticle.excerpt : selectedArticle.excerptVIE}"
-              </p>
-
-              {/* Sections */}
-              {((lang === 'ENG' ? selectedArticle.sectionsENG : selectedArticle.sectionsVIE) || []).map((sec, idx) => (
-                <div key={idx} className="mb-8">
-                  <h3 className="font-display font-bold text-xl md:text-2xl text-[#FF9E00] mb-3 uppercase">
-                    {sec.heading}
-                  </h3>
-                  <p className="text-white/85 text-sm md:text-base leading-relaxed">
-                    {sec.content}
-                  </p>
+              {/* RIGHT COLUMN: Full Article Text & Content (occupies 55% width, full height scrollable) */}
+              <div className={`w-full md:w-[55%] h-full p-6 md:p-12 overflow-y-auto pr-8 md:pr-14 ${
+                isLight ? 'bg-[#FFFFFF] text-[#0F172A]' : 'bg-[#0B0B0C] text-white'
+              }`}>
+                <div className="flex items-center gap-3 mb-4 pr-14">
+                  <span className={`font-mono text-xs tracking-widest uppercase px-3.5 py-1.5 rounded-full border font-bold ${
+                    isLight ? 'text-[#C2410C] bg-[#EA580C]/12 border-[#EA580C]/40' : 'text-[#FF9E00] bg-[#FF6B00]/20 border-[#FF6B00]/40'
+                  }`}>
+                    {lang === 'ENG' ? selectedArticle.category : selectedArticle.categoryVIE}
+                  </span>
+                  <span className={`font-mono text-xs font-bold ${isLight ? 'text-[#64748B]' : 'text-white/60'}`}>
+                    📅 {lang === 'ENG' ? selectedArticle.date : selectedArticle.dateVIE}
+                  </span>
                 </div>
-              ))}
 
-              {/* Sub Images Gallery */}
-              {selectedArticle.subImages && selectedArticle.subImages.length > 0 && (
-                <div className="mt-10 pt-8 border-t border-white/10">
-                  <h4 className="font-mono text-xs text-[#FF9E00] uppercase tracking-widest font-bold mb-4">
-                    ◆ Media Gallery
-                  </h4>
-                  <div className="grid grid-cols-2 gap-4">
-                    {selectedArticle.subImages.map((sImg, sIdx) => (
-                      <div key={sIdx} className="overflow-hidden rounded-xl border border-white/10 h-40 bg-black">
-                        <img
-                          src={sImg}
-                          alt={`Sub ${sIdx + 1}`}
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
-                          }}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
+                <h1 className={`font-display text-2xl md:text-4xl font-extrabold mb-6 uppercase leading-tight pr-12 ${
+                  isLight ? 'text-[#0F172A]' : 'text-white'
+                }`}>
+                  {lang === 'ENG' ? selectedArticle.title : selectedArticle.titleVIE}
+                </h1>
+
+                <div className={`flex flex-wrap items-center gap-4 font-mono text-xs pb-6 mb-8 border-b ${
+                  isLight ? 'text-[#475569] border-slate-200' : 'text-white/70 border-white/10'
+                }`}>
+                  <span>✍ {tx.author}: <strong className={isLight ? 'text-[#EA580C]' : 'text-[#FF9E00]'}>{selectedArticle.author}</strong></span>
+                  <span>&bull;</span>
+                  <span>⏱ {lang === 'ENG' ? selectedArticle.readTime : selectedArticle.readTimeVIE}</span>
+                </div>
+
+                <p className={`text-base md:text-lg leading-relaxed font-semibold italic p-6 rounded-2xl mb-8 border-l-4 ${
+                  isLight
+                    ? 'text-[#0F172A] bg-slate-100 border-[#EA580C]'
+                    : 'text-white/95 bg-white/5 border-[#FF6B00]'
+                }`}>
+                  "{lang === 'ENG' ? selectedArticle.excerpt : selectedArticle.excerptVIE}"
+                </p>
+
+                {/* Sections */}
+                {((lang === 'ENG' ? selectedArticle.sectionsENG : selectedArticle.sectionsVIE) || []).map((sec, idx) => (
+                  <div key={idx} className="mb-8">
+                    <h3 className={`font-display font-bold text-xl md:text-2xl mb-3 uppercase ${
+                      isLight ? 'text-[#EA580C]' : 'text-[#FF9E00]'
+                    }`}>
+                      {sec.heading}
+                    </h3>
+                    <p className={`text-sm md:text-base leading-relaxed ${
+                      isLight ? 'text-[#334155]' : 'text-white/85'
+                    }`}>
+                      {sec.content}
+                    </p>
                   </div>
-                </div>
-              )}
+                ))}
+
+                {/* Sub Images Gallery */}
+                {selectedArticle.subImages && selectedArticle.subImages.length > 0 && (
+                  <div className={`mt-10 pt-8 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
+                    <h4 className={`font-mono text-xs uppercase tracking-widest font-bold mb-4 ${
+                      isLight ? 'text-[#EA580C]' : 'text-[#FF9E00]'
+                    }`}>
+                      ◆ Media Gallery
+                    </h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      {selectedArticle.subImages.map((sImg, sIdx) => (
+                        <div key={sIdx} className={`overflow-hidden rounded-xl border h-40 bg-black ${
+                          isLight ? 'border-slate-200' : 'border-white/10'
+                        }`}>
+                          <img
+                            src={sImg}
+                            alt={`Sub ${sIdx + 1}`}
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                            }}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </div>,
-        document.body
-      )}
+          </div>,
+          document.body
+        )
+      })()}
     </div>
   )
 }

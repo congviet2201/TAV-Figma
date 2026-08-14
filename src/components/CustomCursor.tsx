@@ -5,6 +5,7 @@ export default function CustomCursor() {
   const [isHovered, setIsHovered] = useState(false)
   const [cursorText, setCursorText] = useState('')
   const [isVisible, setIsVisible] = useState(false)
+  const isLight = typeof document !== 'undefined' && document.body.classList.contains('light-mode')
 
   useEffect(() => {
     // Only activate custom cursor on non-touch desktop devices
@@ -57,12 +58,18 @@ export default function CustomCursor() {
       <div
         className={`rounded-full border flex items-center justify-center transition-all duration-300 ease-out ${
           isHovered
-            ? 'w-11 h-11 bg-[#FF6B00]/15 border-[#FF9E00]/80 scale-105'
+            ? isLight
+              ? 'w-11 h-11 bg-[#EA580C]/15 border-[#EA580C] scale-105'
+              : 'w-11 h-11 bg-[#FF6B00]/15 border-[#FF9E00]/80 scale-105'
+            : isLight
+            ? 'w-5 h-5 bg-transparent border-slate-700/50 scale-100'
             : 'w-5 h-5 bg-transparent border-white/40 scale-100'
         }`}
       >
         {cursorText && (
-          <span className="font-mono text-[8px] font-extrabold text-[#FF9E00] tracking-widest uppercase animate-fade-in select-none">
+          <span className={`font-mono text-[8px] font-extrabold tracking-widest uppercase animate-fade-in select-none ${
+            isLight ? 'text-[#EA580C]' : 'text-[#FF9E00]'
+          }`}>
             {cursorText}
           </span>
         )}
@@ -71,7 +78,13 @@ export default function CustomCursor() {
       {/* Center Core Dot */}
       <div
         className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-200 ${
-          isHovered ? 'w-1.5 h-1.5 bg-[#FF9E00]' : 'w-1 h-1 bg-white'
+          isHovered
+            ? isLight
+              ? 'w-1.5 h-1.5 bg-[#EA580C]'
+              : 'w-1.5 h-1.5 bg-[#FF9E00]'
+            : isLight
+            ? 'w-1 h-1 bg-[#0F172A]'
+            : 'w-1 h-1 bg-white'
         }`}
       />
     </div>

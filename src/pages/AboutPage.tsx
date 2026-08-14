@@ -97,7 +97,7 @@ export default function AboutPage({ lang }: Props) {
   return (
     <div className="pt-[76px]">
       {/* Hero */}
-      <section className="relative py-28 overflow-hidden bg-[#050505]">
+      <section className="relative py-28 overflow-hidden bg-[#050505] hero-overlay-text">
         <div className="absolute inset-0 bg-[#0A0A0A]">
           <img
             src="https://images.unsplash.com/photo-1633109611134-c41b5c0bbc1a?w=1920&h=700&fit=crop&auto=format"
@@ -110,9 +110,9 @@ export default function AboutPage({ lang }: Props) {
           <div className="section-label mb-6">◆ {tx.label}</div>
           <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.5rem)] font-bold leading-[1.05] text-white mb-8 uppercase">
             {tx.headline}<br />
-            <span className="text-gradient">{tx.headline2}</span>
+            <span className="text-orange">{tx.headline2}</span>
           </h1>
-          <p className="max-w-[620px] text-white/75 text-lg leading-relaxed">{tx.intro}</p>
+          <p className="max-w-[620px] text-white/90 text-lg leading-relaxed">{tx.intro}</p>
         </div>
       </section>
 
@@ -120,25 +120,25 @@ export default function AboutPage({ lang }: Props) {
       <section className="py-24 bg-[#050505]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="glass-panel rounded-2xl p-10 border border-[#FF6B00]/25 card-hover">
+            <div className="glass-panel rounded-2xl p-10 border border-[#FF6B00]/30 card-hover bg-[#0A0A0A] dark:bg-[#0A0A0A] light:bg-white">
               <div className="w-12 h-12 rounded-xl bg-[#FF6B00]/15 border border-[#FF6B00]/40 flex items-center justify-center mb-6">
                 <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
                   <circle cx="9" cy="9" r="7" stroke="#FF6B00" strokeWidth="1.5" />
-                  <path d="M9 5v4l3 2" stroke="#FF9E00" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M9 5v4l3 2" stroke="#FF6B00" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </div>
-              <div className="section-label mb-4">{tx.visionLabel}</div>
-              <p className="text-white text-lg leading-relaxed font-light">{tx.vision}</p>
+              <div className="section-label mb-4">◆ {tx.visionLabel}</div>
+              <p className="text-white dark:text-white light:text-[#0F172A] text-lg leading-relaxed font-light">{tx.vision}</p>
             </div>
-            <div className="glass-panel rounded-2xl p-10 border border-[#FF9E00]/25 card-hover">
-              <div className="w-12 h-12 rounded-xl bg-[#FF9E00]/15 border border-[#FF9E00]/40 flex items-center justify-center mb-6">
+            <div className="glass-panel rounded-2xl p-10 border border-[#FF6B00]/30 card-hover bg-[#0A0A0A] dark:bg-[#0A0A0A] light:bg-white">
+              <div className="w-12 h-12 rounded-xl bg-[#FF6B00]/15 border border-[#FF6B00]/40 flex items-center justify-center mb-6">
                 <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
-                  <path d="M9 2L16 6.5v5L9 16 2 11.5v-5L9 2Z" stroke="#FF9E00" strokeWidth="1.5" fill="none" />
+                  <path d="M9 2L16 6.5v5L9 16 2 11.5v-5L9 2Z" stroke="#FF6B00" strokeWidth="1.5" fill="none" />
                   <circle cx="9" cy="9" r="2" fill="#FF6B00" />
                 </svg>
               </div>
-              <div className="section-label mb-4">{tx.missionLabel}</div>
-              <p className="text-white text-lg leading-relaxed font-light">{tx.mission}</p>
+              <div className="section-label mb-4">◆ {tx.missionLabel}</div>
+              <p className="text-white dark:text-white light:text-[#0F172A] text-lg leading-relaxed font-light">{tx.mission}</p>
             </div>
           </div>
         </div>
@@ -152,11 +152,11 @@ export default function AboutPage({ lang }: Props) {
             {tx.values.map((val, i) => (
               <div key={i} data-cursor="DISCOVER" className="card-running-border group">
                 <div className="card-running-border-inner p-8">
-                  <div className="font-display text-5xl font-extrabold text-[#FF9E00] mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
+                  <div className="font-display text-5xl font-extrabold text-[#FF6B00] dark:text-[#FF6B00] light:text-[#EA580C] mb-4 opacity-90 group-hover:opacity-100 transition-opacity">
                     0{i + 1}
                   </div>
-                  <h3 className="font-display text-xl font-bold text-white mb-3 uppercase tracking-wide group-hover:text-[#FF9E00] transition-colors">{val.title}</h3>
-                  <p className="text-white/70 text-sm leading-relaxed">{val.desc}</p>
+                  <h3 className="font-display text-xl font-bold text-white dark:text-white light:text-[#0F172A] mb-3 uppercase tracking-wide group-hover:text-[#FF6B00] transition-colors">{val.title}</h3>
+                  <p className="text-white/80 dark:text-white/80 light:text-[#475569] text-sm leading-relaxed">{val.desc}</p>
                 </div>
               </div>
             ))}
@@ -181,14 +181,14 @@ export default function AboutPage({ lang }: Props) {
                       decoding="async"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0E1217] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   </div>
                   <div className="p-6">
-                    <h3 className="font-display font-bold text-white text-lg group-hover:text-[#FF9E00] transition-colors uppercase">{member.name}</h3>
-                    <div className="text-[#FF9E00] text-xs font-mono mt-1.5 mb-3 bg-[#FF6B00]/15 px-3 py-1 rounded-full inline-block border border-[#FF6B00]/40 font-bold uppercase">
+                    <h3 className="font-display font-bold text-white dark:text-white light:text-[#0F172A] text-lg group-hover:text-[#FF6B00] transition-colors uppercase">{member.name}</h3>
+                    <div className="text-[#FF6B00] dark:text-[#FF9E00] light:text-[#C2410C] text-xs font-mono mt-1.5 mb-3 bg-[#FF6B00]/15 dark:bg-[#FF6B00]/15 light:bg-[#EA580C]/10 px-3 py-1 rounded-full inline-block border border-[#FF6B00]/40 dark:border-[#FF6B00]/40 light:border-[#EA580C]/30 font-bold uppercase">
                       {lang === 'ENG' ? member.role : member.roleVIE}
                     </div>
-                    <p className="text-white/70 text-sm leading-relaxed">
+                    <p className="text-white/80 dark:text-white/80 light:text-[#475569] text-sm leading-relaxed">
                       {lang === 'ENG' ? member.bio : member.bioVIE}
                     </p>
                   </div>
@@ -218,16 +218,16 @@ export default function AboutPage({ lang }: Props) {
                       className={`card-running-border group ${i % 2 === 0 ? 'md:mr-12' : 'md:ml-12'}`}
                     >
                       <div className="card-running-border-inner p-7">
-                        <div className="font-display text-3xl font-extrabold text-[#FF9E00] mb-2">{m.year}</div>
-                        <h3 className="font-display font-bold text-white text-lg mb-2 uppercase group-hover:text-[#FF9E00] transition-colors">
+                        <div className="font-display text-3xl font-extrabold text-[#FF6B00] dark:text-[#FF6B00] light:text-[#EA580C] mb-2">{m.year}</div>
+                        <h3 className="font-display font-bold text-white dark:text-white light:text-[#0F172A] text-lg mb-2 uppercase group-hover:text-[#FF6B00] transition-colors">
                           {lang === 'ENG' ? m.title : m.titleVIE}
                         </h3>
-                        <p className="text-white/70 text-sm leading-relaxed">{m.desc}</p>
+                        <p className="text-white/80 dark:text-white/80 light:text-[#475569] text-sm leading-relaxed">{m.desc}</p>
                       </div>
                     </div>
                   </div>
                   {/* Glowing Dot */}
-                  <div className="absolute left-[-5px] md:left-1/2 top-7 w-3.5 h-3.5 rounded-full bg-[#FF6B00] md:-translate-x-1/2 ring-4 ring-[#0A0A0A] shadow-[0_0_15px_#FF6B00]" />
+                  <div className="absolute left-[-5px] md:left-1/2 top-7 w-3.5 h-3.5 rounded-full bg-[#FF6B00] md:-translate-x-1/2 ring-4 ring-[#F8FAFC] dark:ring-[#0A0A0A] shadow-[0_0_15px_#FF6B00]" />
                   <div className="hidden md:block md:w-1/2" />
                 </div>
               ))}

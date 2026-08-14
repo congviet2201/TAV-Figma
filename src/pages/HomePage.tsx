@@ -418,17 +418,30 @@ export default function HomePage({ navigate, lang, onOpenContact }: Props) {
                   style={{ minHeight: '260px' }}
                   onClick={() => navigate('projects')}
                 >
-                  <img
-                    src={proj.img}
-                    alt={proj.title}
-                    loading="lazy"
-                    decoding="async"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
-                    }}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    style={{ minHeight: '260px' }}
-                  />
+                  {proj.video ? (
+                    <video
+                      src={proj.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      style={{ minHeight: '260px' }}
+                    />
+                  ) : (
+                    <img
+                      src={proj.img}
+                      alt={proj.title}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                      }}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      style={{ minHeight: '260px' }}
+                    />
+                  )}
                   <div className="absolute inset-0 img-overlay" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6">

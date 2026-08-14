@@ -29,8 +29,8 @@ const t = {
 
 const services = [
   {
-    titleENG: '3D Render CG (Exterior & Interior)',
-    titleVIE: 'Kết Xuất 3D CG (Ngoại Thất & Nội Thất)',
+    titleENG: '3D Rendering (Exterior & Interior)',
+    titleVIE: 'Rendering 3D (Ngoại Thất & Nội Thất)',
     descENG: 'Photorealistic architectural rendering for exterior masterplans and luxury interior spaces. Using V-Ray, Corona, and Unreal Engine 5 to capture perfect global illumination, natural materials, and depth.',
     descVIE: 'Dịch vụ diễn họa 3D siêu thực cho quy hoạch ngoại thất và không gian nội thất cao cấp. Sử dụng V-Ray, Corona và Unreal Engine 5 để tái tạo ánh sáng tự nhiên, vật liệu và độ sâu kiến trúc.',
     img: '/assets/image/TAVOFFICEJAPAN/TAV_villa office ariel view.png',
@@ -49,6 +49,7 @@ const services = [
     descENG: 'Transform any surface — building facades, stages, exhibition halls — into a living digital canvas. Full-event projection mapping production and content creation.',
     descVIE: 'Biến mọi bề mặt — mặt tiền tòa nhà, sân khấu, phòng triển lãm — thành bức tranh số sống động. Sản xuất trình chiếu 3D mapping sự kiện chuyên nghiệp.',
     img: '/assets/image/sv-3d-mapping.png',
+    video: '/video/mapping_3d.mp4',
     subMedia: [
       '/video/mapping_3d.mp4',
     ],
@@ -88,6 +89,7 @@ const services = [
     descENG: 'Cinematic 3D walkthrough movies combining camera movement, soundscapes, and lighting to guide viewers through luxury real estate projects.',
     descVIE: 'Thước phim hoạt họa 3D kiến trúc điện ảnh kết hợp góc quay điện ảnh và âm thanh sống động dắt người xem tham quan toàn bộ dự án.',
     img: 'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/icon%2FTAV%20TOWER%20DAY.jpg?alt=media&token=96afe78e-8efd-4be3-be24-ca9f2e58a5c0',
+    video: 'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/gif%2F0531_%20VIDEO%2016-9%20rut%20ngan%20.mp4?alt=media&token=0cb96c76-ca7d-48da-9d7c-8da18678b248',
     subMedia: [
       'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/gif%2F0531_%20VIDEO%2016-9%20rut%20ngan%20.mp4?alt=media&token=0cb96c76-ca7d-48da-9d7c-8da18678b248',
     ],
@@ -135,40 +137,52 @@ export default function ServicesPage({ lang, navigate }: Props) {
             <div
               key={i}
               data-cursor="DISCOVER"
-              className={`glass-panel rounded-3xl overflow-hidden interactive-card border border-white/10 flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} bg-[#0A0A0A]`}
+              className={`rounded-3xl overflow-hidden interactive-card border border-white/10 dark:border-white/10 light:border-slate-200 flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} bg-[#0A0A0A] dark:bg-[#0A0A0A] light:bg-white !shadow-none`}
+              style={{ boxShadow: 'none' }}
             >
               <div className="relative md:w-1/2 overflow-hidden" style={{ minHeight: '380px' }}>
-                <img
-                  src={svc.img}
-                  alt={lang === 'ENG' ? svc.titleENG : svc.titleVIE}
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
-                  }}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  style={{ minHeight: '380px' }}
-                />
-                <div className="absolute top-6 left-6 z-10 font-display text-5xl md:text-7xl font-extrabold text-white/20 select-none">
-                  0{i + 1}
-                </div>
-                <div className="absolute inset-0" style={{ background: `linear-gradient(${i % 2 === 0 ? '90deg' : '270deg'}, rgba(5,5,5,0.9), transparent)` }} />
+                {svc.video ? (
+                  <video
+                    src={svc.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    style={{ minHeight: '380px' }}
+                  />
+                ) : (
+                  <img
+                    src={svc.img}
+                    alt={lang === 'ENG' ? svc.titleENG : svc.titleVIE}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                    }}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    style={{ minHeight: '380px' }}
+                  />
+                )}
               </div>
               <div className="md:w-1/2 p-10 md:p-14 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="font-mono text-xs tracking-widest uppercase bg-white/5 px-3 py-1 rounded-full border border-white/15 font-semibold text-[#FF9E00]">
-                    {lang === 'ENG' ? `SERVICE 0${i + 1}` : `DỊCH VỤ 0${i + 1}`}
+                  <span className="font-mono text-xs md:text-sm tracking-widest uppercase bg-white/10 dark:bg-white/10 light:bg-slate-100 px-3.5 py-1 rounded-full border border-white/20 dark:border-white/20 light:border-slate-300 font-bold text-[#FF9E00] dark:text-[#FF9E00] light:text-[#EA580C]">
+                    {lang === 'ENG' ? 'SERVICE' : 'DỊCH VỤ'}
                   </span>
                 </div>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-4 uppercase leading-tight">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-white dark:text-white light:text-[#0F172A] mb-4 uppercase leading-tight">
                   {lang === 'ENG' ? svc.titleENG : svc.titleVIE}
                 </h2>
-                <p className="text-white/70 leading-relaxed mb-6 text-sm md:text-base">
+                <p className="text-white/70 dark:text-white/70 light:text-[#334155] leading-relaxed mb-6 text-sm md:text-base">
                   {lang === 'ENG' ? svc.descENG : svc.descVIE}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
                   {svc.tags.map((tag) => (
-                    <span key={tag} className="font-mono text-[11px] px-3 py-1 rounded-full bg-white/5 text-white/80 border border-white/15 uppercase font-semibold">
+                    <span
+                      key={tag}
+                      className="font-mono text-[11px] px-3.5 py-1 rounded-full bg-white/5 dark:bg-white/5 light:bg-slate-100 text-white/80 dark:text-white/80 light:text-[#1E293B] border border-white/15 dark:border-white/15 light:border-slate-300 uppercase font-semibold"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -189,19 +203,21 @@ export default function ServicesPage({ lang, navigate }: Props) {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 border-t border-white/10 bg-[#050505]">
+      <section className="py-24 border-t border-white/10 dark:border-white/10 light:border-slate-200 bg-[#050505] dark:bg-[#050505] light:bg-[#F8FAFC]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="mb-16 text-center max-w-2xl mx-auto">
             <div className="section-label justify-center mb-4">◆ {tx.processLabel}</div>
-            <h2 className="font-display text-3xl md:text-5xl font-bold text-white uppercase">{tx.processHeadline}</h2>
+            <h2 className="font-display text-3xl md:text-5xl font-bold text-white dark:text-white light:text-[#0F172A] uppercase">{tx.processHeadline}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {process.map((p) => (
-              <div key={p.step} className="glass-panel p-8 rounded-2xl border border-white/10 bg-[#0A0A0A] flex flex-col justify-between">
-                <div>
-                  <div className="font-mono text-3xl font-bold text-[#FF6B00] mb-6">{p.step}</div>
-                  <h3 className="font-display text-xl font-bold text-white mb-3 uppercase">{lang === 'ENG' ? p.titleENG : p.titleVIE}</h3>
-                  <p className="text-white/60 text-xs leading-relaxed">{lang === 'ENG' ? p.descENG : p.descVIE}</p>
+              <div key={p.step} data-cursor="DISCOVER" className="card-running-border group">
+                <div className="card-running-border-inner p-8 flex flex-col justify-between">
+                  <div>
+                    <div className="font-mono text-4xl md:text-5xl font-extrabold text-[#FF6B00] dark:text-[#FF6B00] light:text-[#EA580C] mb-6">{p.step}</div>
+                    <h3 className="font-display text-xl font-bold text-white dark:text-white light:text-[#0F172A] mb-3 uppercase group-hover:text-[#FF6B00] transition-colors">{lang === 'ENG' ? p.titleENG : p.titleVIE}</h3>
+                    <p className="text-white/70 dark:text-white/70 light:text-[#475569] text-xs leading-relaxed">{lang === 'ENG' ? p.descENG : p.descVIE}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -210,14 +226,17 @@ export default function ServicesPage({ lang, navigate }: Props) {
       </section>
 
       {/* Tech Stack Bar */}
-      <section className="py-16 border-t border-white/10 bg-[#050505]">
+      <section className="py-16 border-t border-white/10 dark:border-white/10 light:border-slate-200 bg-[#050505] dark:bg-[#050505] light:bg-[#F8FAFC]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="text-center mb-8 font-mono text-xs text-white/40 uppercase tracking-widest">
+          <div className="text-center mb-8 font-mono text-xs text-white/50 dark:text-white/50 light:text-[#64748B] uppercase tracking-widest font-bold">
             {tx.techHeadline}
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
             {tech.map((tItem) => (
-              <span key={tItem} className="px-5 py-2 rounded-full glass border border-white/15 font-mono text-xs text-white/80 font-bold bg-[#0A0A0A]">
+              <span
+                key={tItem}
+                className="px-5 py-2 rounded-full border font-mono text-xs font-bold transition-all bg-[#0A0A0A] dark:bg-[#0A0A0A] light:bg-white text-white/80 dark:text-white/80 light:text-[#0F172A] border-white/15 dark:border-white/15 light:border-slate-300 shadow-sm"
+              >
                 {tItem}
               </span>
             ))}

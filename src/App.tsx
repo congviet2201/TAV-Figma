@@ -97,7 +97,7 @@ export default function App() {
         </main>
       </PageTransitionController>
 
-      {currentPage !== 'intro' && <Footer navigate={navigate} lang={lang} />}
+      {currentPage !== 'intro' && <Footer navigate={navigate} lang={lang} theme={theme} />}
 
       <ContactModal
         isOpen={contactOpen}

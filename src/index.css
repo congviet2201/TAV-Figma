@@ -18,35 +18,135 @@
   --color-brand-glass: rgba(14, 18, 23, 0.8);
 }
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SEMANTIC THEME VARIABLE SYSTEM (DARK & LIGHT)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+  --bg-main: #050505;
+  --bg-surface: #0A0A0A;
+  --bg-elevated: #0E1217;
+  --bg-card: rgba(14, 18, 23, 0.94);
+  --bg-glass: rgba(15, 15, 15, 0.75);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.55);
+
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 107, 0, 0.45);
+
+  --brand-orange: #FF6B00;
+  --brand-amber: #FF9E00;
+
+  --card-running-inner: rgba(14, 18, 23, 0.94);
+  --card-running-inner-hover: rgba(18, 24, 32, 0.96);
+  --card-running-conic-stop1: #FF6B00;
+  --card-running-conic-stop2: #FF9E00;
+  --card-running-conic-stop3: #FFFFFF;
+
+  --shadow-glow: 0 0 35px rgba(255, 107, 0, 0.35);
+  --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+
+  --modal-bg: #0B0B0C;
+  --modal-sidebar: #0E1217;
+
+  --shutter-bg: rgba(5, 5, 5, 0.98);
+  --shutter-text: #FFFFFF;
+}
+
+body.light-mode {
+  --bg-main: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #F1F5F9;
+  --bg-card: #FFFFFF;
+  --bg-glass: rgba(255, 255, 255, 0.92);
+
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+
+  --border-subtle: #E2E8F0;
+  --border-strong: rgba(234, 88, 12, 0.5);
+
+  --brand-orange: #EA580C;
+  --brand-amber: #D97706;
+
+  --card-running-inner: #FFFFFF;
+  --card-running-inner-hover: #F8FAFC;
+  --card-running-conic-stop1: #EA580C;
+  --card-running-conic-stop2: #D97706;
+  --card-running-conic-stop3: #0F172A;
+
+  --shadow-glow: 0 10px 30px rgba(234, 88, 12, 0.2);
+  --shadow-card: 0 20px 40px -10px rgba(15, 23, 42, 0.08);
+
+  --modal-bg: #F8FAFC;
+  --modal-sidebar: #FFFFFF;
+
+  --shutter-bg: rgba(248, 250, 252, 0.98);
+  --shutter-text: #0F172A;
+}
+
 * {
   box-sizing: border-box;
   font-family: 'Be Vietnam Pro', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif !important;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, span, div, a, button, input, textarea, select,
+.font-mono, .font-display, .font-body,
+.section-label, .mobile-nav-num, .filter-btn {
+  font-family: 'Be Vietnam Pro', sans-serif !important;
+}
+
+/* ALL HEADINGS IN UPPERCASE */
+h1, h2, h3, h4, h5, h6,
+.project-card-title,
+.blog-featured-title,
+.overlay-title,
+.mobile-nav-title,
+.hero-title {
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em;
+}
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   INTERACTION-DRIVEN PREMIUM ARCHITECTURAL UTILITIES
+   INTERACTION-DRIVEN CARDS & TECH UTILITIES
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 /* Fluid 3D Tilt & Spatial Interactive Cards */
 .interactive-card {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease, background-color 0.35s ease;
   will-change: transform;
 }
 
 .interactive-card:hover {
   transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 107, 0, 0.25);
-  border-color: rgba(255, 158, 0, 0.45) !important;
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+  border-color: var(--border-strong) !important;
 }
 
-/* Master Highlight Feature Cards (3D Solutions, Tech Engine, Core Values, Leadership, Journey) */
+/* Master Highlight Feature Cards */
 .card-highlight {
   position: relative;
-  background: rgba(14, 18, 23, 0.85);
+  background: var(--bg-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-top: 2px solid rgba(255, 158, 0, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-top: 2px solid var(--brand-amber);
   border-radius: 1.25rem;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
@@ -55,8 +155,8 @@
 
 .card-highlight:hover {
   transform: translateY(-8px) scale(1.02);
-  border-color: rgba(255, 158, 0, 0.75) !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 107, 0, 0.35);
+  border-color: var(--brand-amber) !important;
+  box-shadow: var(--shadow-card), var(--shadow-glow);
 }
 
 .card-highlight::before {
@@ -76,16 +176,16 @@
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   ANIMATED RUNNING CYBER ORANGE LINE BORDER UTILITY
+   ANIMATED RUNNING CYBER LINE BORDER UTILITY (THEME-AWARE)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .card-running-border {
   position: relative;
   border-radius: 1.25rem;
   padding: 1.5px; /* Border thickness */
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, background-color 0.35s ease;
   will-change: transform, box-shadow;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--border-subtle);
 }
 
 .card-running-border::before {
@@ -98,10 +198,10 @@
   background: conic-gradient(
     transparent 0deg,
     transparent 270deg,
-    #FF6B00 310deg,
-    #FF9E00 340deg,
-    #FFFFFF 355deg,
-    #FF9E00 360deg
+    var(--card-running-conic-stop1) 310deg,
+    var(--card-running-conic-stop2) 340deg,
+    var(--card-running-conic-stop3) 355deg,
+    var(--card-running-conic-stop2) 360deg
   );
   animation: rotateBorderLine 4s linear infinite;
   pointer-events: none;
@@ -111,21 +211,17 @@
 
 .card-running-border:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 107, 0, 0.4);
+  box-shadow: var(--shadow-card), var(--shadow-glow);
 }
 
 .card-running-border:hover::before {
   opacity: 1;
-  animation-duration: 2.2s; /* Speeds up gracefully on hover */
+  animation-duration: 2.2s;
 }
 
 @keyframes rotateBorderLine {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .card-running-border-inner {
@@ -133,18 +229,18 @@
   z-index: 10;
   width: 100%;
   height: 100%;
-  background: rgba(14, 18, 23, 0.94);
+  background: var(--card-running-inner);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: calc(1.25rem - 1.5px);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 .card-running-border:hover .card-running-border-inner {
-  background: rgba(18, 24, 32, 0.96);
+  background: var(--card-running-inner-hover);
 }
 
-/* Magnetic Responsive Buttons */
+/* Magnetic Buttons */
 .btn-magnetic {
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   will-change: transform;
@@ -154,40 +250,9 @@
   transform: scale(0.96);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Be Vietnam Pro', sans-serif !important;
-  background-color: #050505; /* Obsidian Black */
-  color: #FFFFFF; /* High contrast White */
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-h1, h2, h3, h4, h5, h6,
-p, span, div, a, button, input, textarea, select,
-.font-mono, .font-display, .font-body,
-.section-label, .mobile-nav-num, .filter-btn {
-  font-family: 'Be Vietnam Pro', sans-serif !important;
-}
-
-/* ALL HEADINGS IN UPPERCASE (IN HOA) */
-h1, h2, h3, h4, h5, h6,
-.project-card-title,
-.blog-featured-title,
-.overlay-title,
-.mobile-nav-title,
-.hero-title {
-  text-transform: uppercase !important;
-  letter-spacing: 0.03em;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   FACEBOOK-STYLE HIGH-CONTRAST LIGHT MODE
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FACEBOOK-STYLE HIGH-CONTRAST LIGHT MODE ARCHITECTURE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 body.light-mode {
   background-color: #F8FAFC !important;
@@ -206,21 +271,19 @@ body.light-mode .bg-\[\#121212\] {
   color: #0F172A !important;
 }
 
-/* Alternating clean white sections for contrast */
+/* Alternating clean white sections for visual contrast */
 body.light-mode section:nth-child(even),
 body.light-mode .bg-\[\#0A0A0A\] {
   background-color: #FFFFFF !important;
 }
 
-/* Heading & Text Color Overrides */
+/* Primary Headings & Dark Slate Typography in Light Mode */
 body.light-mode h1,
 body.light-mode h2,
 body.light-mode h3,
 body.light-mode h4,
-body.light-mode .text-white,
-body.light-mode .text-white\/90,
-body.light-mode .text-white\/85,
-body.light-mode .text-white\/80 {
+body.light-mode h5,
+body.light-mode h6 {
   color: #0F172A !important;
 }
 
@@ -243,7 +306,7 @@ body.light-mode p.text-white\/65,
 body.light-mode p.text-white\/60,
 body.light-mode p.text-white\/55,
 body.light-mode p.text-white\/50 {
-  color: #475569 !important;
+  color: #334155 !important;
 }
 
 body.light-mode .text-white\/40,
@@ -253,48 +316,17 @@ body.light-mode .text-white\/20 {
   color: #64748B !important;
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   EXPLICIT HIGH-CONTRAST OVERLAY TEXT PRESERVATION
-   (Preserves 100% pure white text over photo/video background overlays in Light Mode)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-body.light-mode .project-card-title,
-body.light-mode .blog-featured-title,
-body.light-mode .overlay-title,
-body.light-mode .img-overlay ~ div h3,
-body.light-mode .img-overlay ~ div h2,
-body.light-mode .hero-overlay-text h1,
-body.light-mode .hero-overlay-text h2 {
-  color: #FFFFFF !important;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95) !important;
-}
-
-body.light-mode .project-card-desc,
-body.light-mode .blog-featured-desc,
-body.light-mode .overlay-desc,
-body.light-mode .img-overlay ~ div p,
-body.light-mode .hero-overlay-text p {
-  color: rgba(255, 255, 255, 0.9) !important;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.95) !important;
-}
-
-body.light-mode .project-card-meta,
-body.light-mode .blog-featured-meta,
-body.light-mode .img-overlay ~ div span {
-  color: rgba(255, 255, 255, 0.8) !important;
-}
-
-/* Card & Glass Panels Overrides */
+/* Card & Glass Panels Overrides in Light Mode */
 body.light-mode .glass-panel {
   background: #FFFFFF !important;
   border-color: #E2E8F0 !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04) !important;
 }
 
 body.light-mode .glass {
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
   border-color: #E2E8F0 !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
 }
 
 body.light-mode .glass-light {
@@ -305,10 +337,18 @@ body.light-mode .glass-light {
 body.light-mode .glass-pill {
   background: #FFFFFF !important;
   border-color: #CBD5E1 !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08) !important;
 }
 
-/* Border Overrides */
+/* Service & Card Tag Pills in Light Mode */
+body.light-mode .bg-white\/5,
+body.light-mode .bg-white\/10 {
+  background-color: #F1F5F9 !important;
+  color: #1E293B !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Border Overrides in Light Mode */
 body.light-mode .border-white\/10,
 body.light-mode .border-white\/15,
 body.light-mode .border-white\/20,
@@ -327,28 +367,103 @@ body.light-mode .text-gradient {
   -webkit-text-fill-color: transparent !important;
 }
 
-/* Section label tag */
+/* Section label tag in Light Mode */
 body.light-mode .section-label {
   background: rgba(234, 88, 12, 0.1) !important;
   border-color: rgba(234, 88, 12, 0.3) !important;
   color: #C2410C !important;
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   HIGH-CONTRAST FILTER CATEGORY BUTTONS
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* High Contrast Amber & Orange Text Overrides in Light Mode */
+body.light-mode .text-\[\#FF9E00\] {
+  color: #C2410C !important;
+}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   100% UNIVERSAL SIGNATURE HOVER SYSTEM
-   (Excluding Hamburger Menu Button & Menu Links)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+body.light-mode .text-\[\#FF6B00\] {
+  color: #EA580C !important;
+}
 
-button:not([aria-label="Toggle menu"]):not(.mobile-nav-link),
+body.light-mode .bg-\[\#FF6B00\]\/15,
+body.light-mode .bg-\[\#FF6B00\]\/20 {
+  background-color: rgba(234, 88, 12, 0.12) !important;
+}
+
+body.light-mode .border-\[\#FF6B00\]\/40,
+body.light-mode .border-\[\#FF6B00\]\/50 {
+  border-color: rgba(234, 88, 12, 0.4) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EXPLICIT HIGH-CONTRAST OVERLAY TEXT PRESERVATION
+   (Ensures text rendered on top of dark photo/video overlays stays pure white)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.blog-featured-title,
+.hero-overlay-text h1,
+.hero-overlay-text h2,
+body.light-mode .project-card-title,
+body.light-mode .blog-featured-title,
+body.light-mode .overlay-title,
+body.light-mode .img-overlay ~ div h1,
+body.light-mode .img-overlay ~ div h2,
+body.light-mode .img-overlay ~ div h3,
+body.light-mode .img-overlay ~ div h4,
+body.light-mode .hero-overlay-text h1,
+body.light-mode .hero-overlay-text h2 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Explicit Orange Headline Text Override */
+.hero-overlay-text h1 span.text-orange,
+.hero-overlay-text h1 .text-orange,
+span.text-orange,
+.text-orange {
+  color: #FF6B00 !important;
+  text-shadow: none !important;
+}
+
+body.light-mode .hero-overlay-text h1 span.text-orange,
+body.light-mode .hero-overlay-text h1 .text-orange,
+body.light-mode span.text-orange,
+body.light-mode .text-orange {
+  color: #EA580C !important;
+  text-shadow: none !important;
+}
+
+.blog-featured-desc,
+.hero-overlay-text p,
+body.light-mode .project-card-desc,
+body.light-mode .blog-featured-desc,
+body.light-mode .overlay-desc,
+body.light-mode .img-overlay ~ div p,
+body.light-mode .hero-overlay-text p {
+  color: rgba(255, 255, 255, 0.92) !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.95) !important;
+}
+
+.blog-featured-meta,
+.blog-featured-meta span,
+.hero-overlay-text span,
+body.light-mode .project-card-meta,
+body.light-mode .blog-featured-meta,
+body.light-mode .blog-featured-meta span,
+body.light-mode .hero-overlay-text span,
+body.light-mode .img-overlay ~ div span {
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   UNIVERSAL BUTTON & INTERACTIVE HOVER SYSTEM
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):not(.btn-logo),
 .btn-primary,
 .btn-outline,
 .filter-btn,
 .btn-page-switch,
-.btn-icon:not([aria-label="Toggle menu"]),
+.btn-icon:not([aria-label="Toggle menu"]):not(.btn-logo),
 .btn-page-num,
 .btn-lang-toggle {
   position: relative;
@@ -356,13 +471,13 @@ button:not([aria-label="Toggle menu"]):not(.mobile-nav-link),
   will-change: transform, box-shadow;
 }
 
-/* Universal Hover State - Excludes Hamburger Menu Controls */
-button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover,
+/* Dark Mode Hover State */
+button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):not(.btn-logo):hover,
 .btn-primary:hover,
 .btn-outline:hover,
 .filter-btn:hover,
 .btn-page-switch:hover,
-.btn-icon:not([aria-label="Toggle menu"]):hover,
+.btn-icon:not([aria-label="Toggle menu"]):not(.btn-logo):hover,
 .btn-page-num:hover,
 .btn-lang-toggle:hover {
   background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 100%) !important;
@@ -374,26 +489,25 @@ button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover,
   text-shadow: none !important;
 }
 
-button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover *,
+button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):not(.btn-logo):hover *,
 .btn-primary:hover *,
 .btn-outline:hover *,
 .filter-btn:hover *,
 .btn-page-switch:hover *,
-.btn-icon:not([aria-label="Toggle menu"]):hover *,
+.btn-icon:not([aria-label="Toggle menu"]):not(.btn-logo):hover *,
 .btn-page-num:hover *,
 .btn-lang-toggle:hover * {
   color: #050505 !important;
   stroke: #050505 !important;
-  fill: opacity-100 !important;
 }
 
-/* Light mode universal hover override */
-body.light-mode button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover,
+/* Light Mode Hover State */
+body.light-mode button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):not(.btn-logo):hover,
 body.light-mode .btn-primary:hover,
 body.light-mode .btn-outline:hover,
 body.light-mode .filter-btn:hover,
 body.light-mode .btn-page-switch:hover,
-body.light-mode .btn-icon:not([aria-label="Toggle menu"]):hover,
+body.light-mode .btn-icon:not([aria-label="Toggle menu"]):not(.btn-logo):hover,
 body.light-mode .btn-page-num:hover,
 body.light-mode .btn-lang-toggle:hover {
   background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
@@ -405,40 +519,34 @@ body.light-mode .btn-lang-toggle:hover {
   text-shadow: none !important;
 }
 
-body.light-mode button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):hover *,
+body.light-mode button:not([aria-label="Toggle menu"]):not(.mobile-nav-link):not(.btn-logo):hover *,
 body.light-mode .btn-primary:hover *,
 body.light-mode .btn-outline:hover *,
 body.light-mode .filter-btn:hover *,
 body.light-mode .btn-page-switch:hover *,
-body.light-mode .btn-icon:not([aria-label="Toggle menu"]):hover *,
+body.light-mode .btn-icon:not([aria-label="Toggle menu"]):not(.btn-logo):hover *,
 body.light-mode .btn-page-num:hover *,
 body.light-mode .btn-lang-toggle:hover * {
   color: #FFFFFF !important;
   stroke: #FFFFFF !important;
 }
 
-/* Specific Hamburger Trigger Button Hover (Clean Glow & Line Accent, No Solid Orange Box) */
-button[aria-label="Toggle menu"]:hover {
-  background: rgba(255, 107, 0, 0.2) !important;
-  border-color: #FF6B00 !important;
-  box-shadow: 0 0 25px rgba(255, 107, 0, 0.5) !important;
-  transform: scale(1.08) !important;
-}
-
-button[aria-label="Toggle menu"]:hover .hamburger-line {
-  background-color: #FF6B00 !important;
-}
-
-/* Mobile Nav Link Hover (Clean Scale Enlarge, No Orange Box Background) */
-.mobile-nav-link:hover {
+/* Explicit Logo Button Transparency (No background box on hover in any theme) */
+.btn-logo,
+.btn-logo:hover,
+.btn-logo:focus,
+.btn-logo:active,
+body.light-mode .btn-logo,
+body.light-mode .btn-logo:hover,
+body.light-mode .btn-logo:focus,
+body.light-mode .btn-logo:active {
   background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
   box-shadow: none !important;
-  transform: scale(1.12) !important;
-}
-
-.mobile-nav-link:hover .mobile-nav-title {
-  color: #FF9E00 !important;
-  text-shadow: 0 0 22px rgba(255, 158, 0, 0.9) !important;
+  outline: none !important;
+  transform: none !important;
 }
 
 /* Active press feedback */
@@ -453,10 +561,18 @@ button:active,
 }
 
 /* Light mode input override */
-body.light-mode input[type="text"] {
+body.light-mode input[type="text"],
+body.light-mode input[type="tel"],
+body.light-mode textarea,
+body.light-mode select {
   background: #FFFFFF !important;
   border-color: #CBD5E1 !important;
   color: #0F172A !important;
+}
+
+body.light-mode input::placeholder,
+body.light-mode textarea::placeholder {
+  color: #94A3B8 !important;
 }
 
 /* Light mode sticky section backdrop override */
@@ -465,7 +581,7 @@ body.light-mode section.sticky {
   border-bottom-color: #E2E8F0 !important;
 }
 
-/* Buttons in Light Mode */
+/* Light Mode Button Outlines */
 body.light-mode .btn-outline {
   background: #FFFFFF !important;
   border-color: #EA580C !important;
@@ -473,39 +589,16 @@ body.light-mode .btn-outline {
   box-shadow: 0 2px 10px rgba(234, 88, 12, 0.12) !important;
 }
 
-body.light-mode .btn-outline:hover {
-  background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
-  color: #FFFFFF !important;
-  border-color: #EA580C !important;
-  box-shadow: 0 0 30px rgba(234, 88, 12, 0.6), 0 4px 15px rgba(234, 88, 12, 0.35) !important;
-  transform: translateY(-3px) scale(1.03) !important;
-}
-
 body.light-mode .btn-page-switch {
-  background: rgba(234, 88, 12, 0.1) !important;
-  border-color: rgba(234, 88, 12, 0.4) !important;
+  background: rgba(234, 88, 12, 0.08) !important;
+  border-color: rgba(234, 88, 12, 0.35) !important;
   color: #C2410C !important;
-}
-
-body.light-mode .btn-page-switch:hover {
-  background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
-  color: #FFFFFF !important;
-  border-color: #EA580C !important;
-  box-shadow: 0 0 30px rgba(234, 88, 12, 0.6) !important;
-  transform: translateY(-3px) scale(1.03) !important;
 }
 
 body.light-mode .btn-icon {
   background: #F1F5F9 !important;
   border-color: #CBD5E1 !important;
   color: #0F172A !important;
-}
-
-body.light-mode .btn-icon:hover {
-  background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%) !important;
-  border-color: #EA580C !important;
-  color: #FFFFFF !important;
-  box-shadow: 0 0 25px rgba(234, 88, 12, 0.5) !important;
 }
 
 body.light-mode .card-hover:hover {
@@ -521,20 +614,22 @@ body.light-mode footer {
   color: #334155 !important;
 }
 
-body.light-mode footer a {
+body.light-mode footer a,
+body.light-mode footer button {
   color: #475569 !important;
 }
 
-body.light-mode footer a:hover {
+body.light-mode footer a:hover,
+body.light-mode footer button:hover {
   color: #EA580C !important;
 }
 
-/* Custom Scrollbar - Cyber Orange */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: var(--bg-main);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 107, 0, 0.4);
@@ -547,13 +642,13 @@ body.light-mode footer a:hover {
 
 /* Typography utilities */
 .font-display {
-  font-family: 'Be Vietnam Pro', 'Outfit', sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Be Vietnam Pro', sans-serif;
 }
 
-/* Glassmorphism - Apple Vision Pro & Tesla UI */
+/* Glassmorphism System */
 .glass {
   background: rgba(15, 15, 15, 0.75);
   backdrop-filter: blur(20px);
@@ -595,7 +690,7 @@ body.light-mode footer a:hover {
 
 /* Futuristic Text Gradient */
 .text-gradient {
-  background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 50%, #FFFFFF 100%);
+  background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -609,12 +704,13 @@ body.light-mode footer a:hover {
   background-size: 60px 60px;
 }
 
-/* Noise overlay */
-.noise {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+body.light-mode .grid-overlay {
+  background-image:
+    linear-gradient(rgba(234, 88, 12, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(234, 88, 12, 0.06) 1px, transparent 1px);
 }
 
-/* Card hover lift & specular orange border glow */
+/* Card hover lift & specular border glow */
 .card-hover {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -626,7 +722,6 @@ body.light-mode footer a:hover {
   transform: translateY(-8px) scale(1.015);
   box-shadow: 0 25px 60px rgba(255, 107, 0, 0.3), 0 0 35px rgba(255, 107, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 107, 0, 0.65);
-  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Animations */
@@ -676,12 +771,6 @@ body.light-mode footer a:hover {
   animation: spin-slow 25s linear infinite;
 }
 
-/* Light sweep shimmer effect */
-@keyframes lightSweep {
-  0% { transform: translateX(-150%) skewX(-25deg); }
-  100% { transform: translateX(250%) skewX(-25deg); }
-}
-
 /* Hamburger menu morphing lines */
 .hamburger-line {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
@@ -692,53 +781,9 @@ body.light-mode footer a:hover {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   MOBILE OVERLAY HAMBURGER MENU HOVER EFFECT
-   (Clean: Only Color Change + Scale Enlarge, No Lines, No Shadow)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-.mobile-nav-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  outline: none;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
-  will-change: transform;
-}
-
-/* Remove underline line completely */
-.mobile-nav-link::after {
-  display: none !important;
-}
-
-/* Hover: Scale up & change color only, zero shadow blur */
-.mobile-nav-link:hover {
-  transform: scale(1.12);
-}
-
-.mobile-nav-link:hover .mobile-nav-title {
-  color: #FF9E00;
-  text-shadow: none !important;
-  filter: none !important;
-}
-
-.mobile-nav-link:hover .mobile-nav-num {
-  color: #FF9E00;
-  text-shadow: none !important;
-  filter: none !important;
-}
-
-.mobile-nav-link:active {
-  transform: scale(1.02);
-  transition: transform 0.12s ease;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    HEADER FLOATING PILL & NAV BUTTON SYSTEM
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 .nav-pill-container {
   position: relative;
@@ -747,104 +792,19 @@ body.light-mode footer a:hover {
   gap: 0.35rem;
   padding: 0.35rem 0.5rem;
   border-radius: 9999px;
-  background: rgba(18, 18, 18, 0.7);
+  background: var(--bg-glass);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-pill-container:hover {
-  border-color: rgba(255, 107, 0, 0.35);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 107, 0, 0.15);
+  border-color: var(--brand-orange);
 }
 
-.nav-pill-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 1.25rem;
-  border-radius: 9999px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.75);
-  background: transparent;
-  border: 1px solid transparent;
-  cursor: pointer;
-  outline: none;
-  overflow: hidden;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, box-shadow;
-}
-
-.nav-pill-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-  transform: translateX(-150%) skewX(-25deg);
-  pointer-events: none;
-}
-
-.nav-pill-btn:hover {
-  color: #FFFFFF;
-  background: rgba(255, 107, 0, 0.14);
-  border-color: rgba(255, 107, 0, 0.4);
-  box-shadow: 0 0 20px rgba(255, 107, 0, 0.35);
-  text-shadow: 0 0 10px rgba(255, 158, 0, 0.5);
-  transform: translateY(-1px);
-}
-
-.nav-pill-btn:hover::before {
-  animation: lightSweep 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.nav-pill-btn.active {
-  color: #FFFFFF;
-  font-weight: 700;
-  background: linear-gradient(135deg, rgba(255, 158, 0, 0.22) 0%, rgba(255, 107, 0, 0.22) 100%);
-  border-color: #FF6B00;
-  box-shadow: 0 0 25px rgba(255, 107, 0, 0.6), inset 0 0 12px rgba(255, 107, 0, 0.3);
-  text-shadow: 0 0 12px rgba(255, 158, 0, 0.7);
-}
-
-.nav-pill-btn:active {
-  transform: scale(0.92);
-  transition: transform 0.12s ease;
-}
-
-.nav-pill-btn:focus-visible {
-  outline: 2px solid #FF6B00;
-  outline-offset: 2px;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   ADVANCED CYBER TECH BUTTON & HOVER SYSTEM
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-/* Light sweep shimmer effect keyframe */
-@keyframes lightSweep {
-  0% { transform: translateX(-150%) skewX(-25deg); }
-  100% { transform: translateX(250%) skewX(-25deg); }
-}
-
-@keyframes cyberPulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 107, 0, 0.5), 0 0 40px rgba(255, 158, 0, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 35px rgba(255, 107, 0, 0.85), 0 0 70px rgba(255, 158, 0, 0.5);
-  }
-}
-
-/* Primary Button - Cyber Tech Orange & Amber Gradient */
+/* Primary Button */
 .btn-primary {
   position: relative;
   display: inline-flex;
@@ -853,7 +813,7 @@ body.light-mode footer a:hover {
   gap: 0.6rem;
   background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 60%, #E65100 100%);
   color: #050505;
-  font-family: 'Be Vietnam Pro', 'Outfit', sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 800;
   letter-spacing: 0.04em;
   border-radius: 12px;
@@ -862,20 +822,15 @@ body.light-mode footer a:hover {
   cursor: pointer;
   outline: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 25px rgba(255, 107, 0, 0.5), 0 4px 15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 25px rgba(255, 107, 0, 0.5), 0 4px 15px rgba(0, 0, 0, 0.6);
   will-change: transform, box-shadow;
 }
 
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 45%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-  transform: translateX(-150%) skewX(-25deg);
-  pointer-events: none;
+body.light-mode .btn-primary {
+  background: linear-gradient(135deg, #FF6B00 0%, #EA580C 100%);
+  color: #FFFFFF !important;
+  border-color: #EA580C;
+  box-shadow: 0 0 25px rgba(234, 88, 12, 0.5), 0 4px 15px rgba(15, 23, 42, 0.15);
 }
 
 .btn-primary:hover {
@@ -883,16 +838,6 @@ body.light-mode footer a:hover {
   transform: translateY(-3px) scale(1.02);
   filter: brightness(1.12);
   border-color: #FFFFFF;
-}
-
-.btn-primary:hover::before {
-  animation: lightSweep 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-primary:active {
-  transform: scale(0.95) translateY(0);
-  box-shadow: 0 0 18px rgba(255, 107, 0, 0.5);
-  transition: transform 0.12s ease;
 }
 
 /* Secondary / Outline Button */
@@ -907,7 +852,7 @@ body.light-mode footer a:hover {
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 107, 0, 0.45);
   color: #FF9E00;
-  font-family: 'Be Vietnam Pro', 'Outfit', sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 700;
   letter-spacing: 0.03em;
   border-radius: 9999px;
@@ -916,24 +861,7 @@ body.light-mode footer a:hover {
   cursor: pointer;
   outline: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: none;
   will-change: transform, box-shadow;
-}
-
-.btn-outline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 45%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
-  transform: translateX(-150%) skewX(-25deg);
-  pointer-events: none;
-}
-
-.btn-outline:hover::before {
-  animation: lightSweep 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-outline.active {
@@ -941,7 +869,6 @@ body.light-mode footer a:hover {
   border-color: #FF9E00 !important;
   color: #050505 !important;
   font-weight: 800 !important;
-  box-shadow: none !important;
 }
 
 /* Icon Button System */
@@ -961,27 +888,14 @@ body.light-mode footer a:hover {
   overflow: hidden;
 }
 
-.btn-icon:hover {
-  background: rgba(255, 107, 0, 0.25);
-  border-color: #FF6B00;
-  color: #FF9E00;
-  box-shadow: 0 0 28px rgba(255, 107, 0, 0.6);
-  transform: translateY(-2px) scale(1.08) rotate(4deg);
-}
-
-.btn-icon:active {
-  transform: scale(0.90);
-  transition: transform 0.12s ease;
-}
-
-/* High-Tech Language Toggle Button */
+/* Language Toggle Button */
 .btn-lang-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0.4rem 0.85rem;
   border-radius: 10px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -995,21 +909,20 @@ body.light-mode footer a:hover {
   box-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
 }
 
+body.light-mode .btn-lang-toggle.active {
+  color: #FFFFFF !important;
+  background: linear-gradient(135deg, #FF6B00, #EA580C);
+  box-shadow: 0 0 20px rgba(234, 88, 12, 0.5);
+}
+
 .btn-lang-toggle.inactive {
   color: rgba(255, 255, 255, 0.55);
 }
-.btn-lang-toggle.inactive:hover {
-  color: #FF9E00;
-  background: rgba(255, 107, 0, 0.18);
-  box-shadow: 0 0 16px rgba(255, 107, 0, 0.45);
-  transform: scale(1.06);
+body.light-mode .btn-lang-toggle.inactive {
+  color: #475569 !important;
 }
 
-.btn-lang-toggle:active {
-  transform: scale(0.92);
-}
-
-/* Page Navigation / Switcher Buttons (Next, Prev, View All) */
+/* Page Navigation / Switcher Buttons */
 .btn-page-switch {
   position: relative;
   display: inline-flex;
@@ -1018,47 +931,16 @@ body.light-mode footer a:hover {
   gap: 0.6rem;
   padding: 0.75rem 1.4rem;
   border-radius: 12px;
-  font-family: 'Be Vietnam Pro', 'Outfit', sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   color: #FF9E00;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 107, 0, 0.4);
-  box-shadow: none;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-page-switch::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 45%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
-  transform: translateX(-150%) skewX(-25deg);
-  pointer-events: none;
-}
-
-.btn-page-switch:hover {
-  background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 100%) !important;
-  border-color: #FF9E00 !important;
-  color: #050505 !important;
-  font-weight: 800 !important;
-  box-shadow: 0 0 35px rgba(255, 107, 0, 0.85), 0 6px 20px rgba(255, 107, 0, 0.45) !important;
-  transform: translateY(-3px) scale(1.04) !important;
-}
-
-.btn-page-switch:hover::before {
-  animation: lightSweep 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-page-switch:active {
-  transform: scale(0.94) translateY(0);
-  transition: transform 0.12s ease;
 }
 
 /* Numbered Pagination Buttons */
@@ -1070,7 +952,7 @@ body.light-mode footer a:hover {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 12px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
@@ -1083,7 +965,12 @@ body.light-mode footer a:hover {
   border: 1px solid #FF9E00;
   color: #050505;
   font-weight: 800;
-  box-shadow: none;
+}
+
+body.light-mode .btn-page-num.active {
+  background: linear-gradient(135deg, #FF6B00, #EA580C);
+  border-color: #EA580C;
+  color: #FFFFFF !important;
 }
 
 .btn-page-num.inactive {
@@ -1092,22 +979,15 @@ body.light-mode footer a:hover {
   color: #FF9E00;
 }
 
-.btn-page-num.inactive:hover {
-  background: linear-gradient(135deg, #FF9E00 0%, #FF6B00 100%) !important;
-  border-color: #FF9E00 !important;
-  color: #050505 !important;
-  font-weight: 800 !important;
-  box-shadow: 0 0 35px rgba(255, 107, 0, 0.85) !important;
-  transform: translateY(-3px) scale(1.06) !important;
-}
-
-.btn-page-num:active {
-  transform: scale(0.90);
+body.light-mode .btn-page-num.inactive {
+  background: #FFFFFF;
+  border-color: #CBD5E1;
+  color: #334155 !important;
 }
 
 /* Section label tech tag */
 .section-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Be Vietnam Pro', sans-serif;
   font-size: 0.725rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1122,21 +1002,21 @@ body.light-mode footer a:hover {
   box-shadow: 0 0 15px rgba(255, 107, 0, 0.15);
 }
 
-/* Image overlay - Obsidian Black gradient */
+/* Image overlay gradient */
 .img-overlay {
   background: linear-gradient(to bottom, transparent 20%, rgba(5, 5, 5, 0.95) 100%);
 }
 
-/* Timeline connector - Cyber Orange gradient */
+/* Timeline connector */
 .timeline-line {
   background: linear-gradient(to bottom, #FF6B00, #FF9E00, transparent);
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   INTRO VIDEO & HIGH-TECH PLAYER UTILITIES
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+body.light-mode .timeline-line {
+  background: linear-gradient(to bottom, #EA580C, #D97706, transparent);
+}
 
-/* Scanline Effect overlay for video */
+/* Video Scanlines */
 .scanlines {
   background: linear-gradient(
     rgba(18, 16, 16, 0) 50%, 
@@ -1146,7 +1026,7 @@ body.light-mode footer a:hover {
   pointer-events: none;
 }
 
-/* Custom Video Scrubber Range Input */
+/* Custom Video Scrubber */
 input[type="range"].video-scrubber {
   -webkit-appearance: none;
   appearance: none;
@@ -1176,21 +1056,6 @@ input[type="range"].video-scrubber::-webkit-slider-thumb {
   transition: transform 0.15s ease;
 }
 
-input[type="range"].video-scrubber::-webkit-slider-thumb:hover {
-  transform: scale(1.3);
-}
-
-input[type="range"].video-scrubber::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #FF9E00;
-  border: 2px solid #FFFFFF;
-  box-shadow: 0 0 12px #FF6B00;
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
-
 /* Modal Fade Animation */
 @keyframes modalFadeIn {
   from {
@@ -1207,7 +1072,7 @@ input[type="range"].video-scrubber::-moz-range-thumb {
   animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Pulse animation for live video badges */
+/* Live video pulse */
 @keyframes livePulse {
   0%, 100% {
     transform: scale(1);
@@ -1223,7 +1088,7 @@ input[type="range"].video-scrubber::-moz-range-thumb {
   animation: livePulse 2s ease-in-out infinite;
 }
 
-/* Chapter Highlight Card Hover Glow */
+/* Chapter Card */
 .chapter-card {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }

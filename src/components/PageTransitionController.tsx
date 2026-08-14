@@ -40,6 +40,7 @@ export default function PageTransitionController({
   const [phase, setPhase] = useState<'idle' | 'pre' | 'scan' | 'spatial' | 'reveal'>('idle')
   const [activePageMeta, setActivePageMeta] = useState<PageMeta>(PAGE_META[currentPage] || PAGE_META.home)
   const timerRef = useRef<NodeJS.Timeout[]>([])
+  const isLight = typeof document !== 'undefined' && document.body.classList.contains('light-mode')
 
   const clearTimers = () => {
     timerRef.current.forEach(t => clearTimeout(t))
@@ -134,7 +135,11 @@ export default function PageTransitionController({
         <div className="fixed inset-0 z-[999] pointer-events-none overflow-hidden flex items-center justify-center">
           {/* Top Shutter Panel */}
           <div
-            className="absolute top-0 left-0 right-0 h-[50.5vh] bg-[#050505]/98 backdrop-blur-2xl border-b border-[#FF6B00]/40 transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform"
+            className={`absolute top-0 left-0 right-0 h-[50.5vh] backdrop-blur-2xl transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+              isLight
+                ? 'bg-[#F8FAFC]/98 border-b border-[#EA580C]/40'
+                : 'bg-[#050505]/98 border-b border-[#FF6B00]/40'
+            }`}
             style={{
               transform:
                 phase === 'pre'
@@ -147,7 +152,11 @@ export default function PageTransitionController({
 
           {/* Bottom Shutter Panel */}
           <div
-            className="absolute bottom-0 left-0 right-0 h-[50.5vh] bg-[#050505]/98 backdrop-blur-2xl border-t border-[#FF6B00]/40 transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform"
+            className={`absolute bottom-0 left-0 right-0 h-[50.5vh] backdrop-blur-2xl transition-transform duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+              isLight
+                ? 'bg-[#F8FAFC]/98 border-t border-[#EA580C]/40'
+                : 'bg-[#050505]/98 border-t border-[#FF6B00]/40'
+            }`}
             style={{
               transform:
                 phase === 'pre'
@@ -162,8 +171,12 @@ export default function PageTransitionController({
           <div
             className="absolute left-0 right-0 h-[2px] z-30 transition-all duration-300 ease-out pointer-events-none"
             style={{
-              background: 'linear-gradient(90deg, transparent 0%, #FF6B00 20%, #FF9E00 50%, #FF6B00 80%, transparent 100%)',
-              boxShadow: '0 0 35px #FF9E00, 0 0 70px #FF6B00',
+              background: isLight
+                ? 'linear-gradient(90deg, transparent 0%, #EA580C 20%, #D97706 50%, #EA580C 80%, transparent 100%)'
+                : 'linear-gradient(90deg, transparent 0%, #FF6B00 20%, #FF9E00 50%, #FF6B00 80%, transparent 100%)',
+              boxShadow: isLight
+                ? '0 0 35px #EA580C, 0 0 70px #D97706'
+                : '0 0 35px #FF9E00, 0 0 70px #FF6B00',
               top: '50%',
               transform: 'translateY(-50%)',
               opacity: phase === 'scan' || phase === 'spatial' ? 1 : 0,
@@ -188,18 +201,28 @@ export default function PageTransitionController({
             }}
           >
             {/* Active Page Badge */}
-            <div className="inline-flex items-center gap-2.5 px-5 py-1.5 rounded-full bg-[#FF6B00]/20 border border-[#FF6B00]/60 text-[#FF9E00] font-mono text-xs uppercase tracking-widest mb-4 shadow-[0_0_20px_rgba(255,107,0,0.3)] backdrop-blur-md font-bold">
-              <span className="w-2 h-2 rounded-full bg-[#FF9E00] animate-pulse" />
+            <div className={`inline-flex items-center gap-2.5 px-5 py-1.5 rounded-full font-mono text-xs uppercase tracking-widest mb-4 backdrop-blur-md font-bold ${
+              isLight
+                ? 'bg-[#EA580C]/15 border border-[#EA580C]/50 text-[#C2410C] shadow-[0_0_20px_rgba(234,88,12,0.2)]'
+                : 'bg-[#FF6B00]/20 border border-[#FF6B00]/60 text-[#FF9E00] shadow-[0_0_20px_rgba(255,107,0,0.3)]'
+            }`}>
+              <span className={`w-2 h-2 rounded-full animate-pulse ${isLight ? 'bg-[#EA580C]' : 'bg-[#FF9E00]'}`} />
               <span>{activePageMeta.code}</span>
             </div>
 
             {/* Large Architectural Editorial Title (IN HOA) */}
-            <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-wider uppercase mb-3 drop-shadow-[0_0_40px_rgba(255,107,0,0.8)]">
+            <h2 className={`font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-wider uppercase mb-3 ${
+              isLight
+                ? 'text-[#0F172A] drop-shadow-[0_2px_20px_rgba(234,88,12,0.3)]'
+                : 'text-white drop-shadow-[0_0_40px_rgba(255,107,0,0.8)]'
+            }`}>
               {lang === 'ENG' ? activePageMeta.titleENG : activePageMeta.titleVIE}
             </h2>
 
             {/* Subtitle */}
-            <p className="font-mono text-xs sm:text-sm text-white/70 uppercase tracking-widest font-semibold">
+            <p className={`font-mono text-xs sm:text-sm uppercase tracking-widest font-semibold ${
+              isLight ? 'text-[#475569]' : 'text-white/70'
+            }`}>
               TAV 3D VISUALIZATION STUDIO
             </p>
           </div>

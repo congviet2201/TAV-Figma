@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { type Page, type Lang } from '../App'
 
 interface Props {
@@ -50,6 +51,17 @@ export default function Navigation({
 }: Props) {
   const labels = t[lang]
 
+  useEffect(() => {
+    if (!menuOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [menuOpen, setMenuOpen])
+
   return (
     <>
       <header
@@ -73,7 +85,7 @@ export default function Navigation({
           {/* Logo TAV 3D Button */}
           <button
             onClick={() => navigate('home')}
-            className="flex items-center group active:scale-95 transition-transform duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B00] rounded-xl p-1"
+            className="btn-logo flex items-center group active:scale-95 transition-transform duration-150 outline-none focus-visible:ring-2 focus-visible:ring-[#FF6B00] rounded-xl p-1"
           >
             <img
               src={theme === 'dark' ? '/assets/gif/logoDark.gif' : '/assets/gif/logoLight.gif'}
@@ -175,12 +187,16 @@ export default function Navigation({
           transform: menuOpen ? 'translateX(0)' : 'translateX(100%)',
           opacity: menuOpen ? 1 : 0,
           pointerEvents: menuOpen ? 'auto' : 'none',
-          background: theme === 'dark' ? 'rgba(5, 5, 5, 0.35)' : 'rgba(248, 250, 252, 0.45)',
-          backdropFilter: 'blur(6px)',
-          WebkitBackdropFilter: 'blur(6px)',
+          background: theme === 'dark' ? 'rgba(5, 5, 5, 0.45)' : 'rgba(248, 250, 252, 0.55)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
         }}
+        onClick={() => setMenuOpen(false)}
       >
-        <div className="flex flex-col justify-center items-center h-full max-w-[650px] w-full mx-auto px-6 py-12 overflow-y-auto">
+        <div
+          className="flex flex-col justify-center items-center h-full max-w-[650px] w-full mx-auto px-6 py-12 overflow-y-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="w-full flex flex-col gap-3">
             {navPages.map((page, i) => {
               const isActive = currentPage === page
@@ -194,7 +210,9 @@ export default function Navigation({
                   className={`w-full flex items-center justify-between py-3.5 px-6 rounded-2xl border transition-all duration-300 group ${
                     isActive
                       ? 'bg-[#FF6B00]/15 border-[#FF9E00]/60 shadow-[0_0_20px_rgba(255,107,0,0.2)]'
-                      : 'border-white/10 hover:border-[#FF9E00]/40 hover:bg-white/5'
+                      : theme === 'dark'
+                      ? 'border-white/10 hover:border-[#FF9E00]/40 hover:bg-white/5'
+                      : 'border-slate-200 bg-white hover:border-[#EA580C]/50 hover:bg-slate-50'
                   }`}
                   style={{
                     transitionDelay: menuOpen ? `${i * 50}ms` : '0ms',

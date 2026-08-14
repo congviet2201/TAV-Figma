@@ -33,7 +33,7 @@ const t = {
 const projects = projectsData
 
 const categories = ['All', '3D Rendering', '3D Mapping', 'VR Tour', '3D Modeling', 'Interactive App']
-const categoriesVIE = ['Tất Cả', 'Kết Xuất 3D', '3D Mapping', 'Tour VR', 'Mô Hình 3D', 'Ứng Dụng Tương Tác']
+const categoriesVIE = ['Tất Cả', 'Rendering 3D', '3D Mapping', 'Tour VR', 'Mô Hình 3D', 'Ứng Dụng Tương Tác']
 
 export default function ProjectsPage({ lang }: Props) {
   const tx = t[lang]
@@ -55,8 +55,8 @@ export default function ProjectsPage({ lang }: Props) {
 
   const handleOpenModal = (proj: typeof projects[0]) => {
     const list: string[] = []
-    if (proj.img) list.push(proj.img)
-    if (proj.video && !list.includes(proj.video)) list.push(proj.video)
+    if (proj.video) list.push(proj.video)
+    if (proj.img && !list.includes(proj.img)) list.push(proj.img)
     if (proj.subMedia) {
       proj.subMedia.forEach(m => {
         if (!list.includes(m)) list.push(m)
@@ -151,17 +151,30 @@ export default function ProjectsPage({ lang }: Props) {
                 style={{ minHeight: '340px' }}
                 onClick={() => handleOpenModal(proj)}
               >
-                <img
-                  src={proj.img}
-                  alt={proj.title}
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
-                  }}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  style={{ minHeight: 'inherit' }}
-                />
+                {proj.video ? (
+                  <video
+                    src={proj.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    style={{ minHeight: 'inherit' }}
+                  />
+                ) : (
+                  <img
+                    src={proj.img}
+                    alt={proj.title}
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                    }}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    style={{ minHeight: 'inherit' }}
+                  />
+                )}
                 <div className="absolute inset-0 img-overlay" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent transition-opacity duration-300" />
 
@@ -190,169 +203,202 @@ export default function ProjectsPage({ lang }: Props) {
       </section>
 
       {/* Lightbox Modal: Portaled directly to document.body to escape any transform parent blocks */}
-      {selectedProject && createPortal(
-        <div
-          style={{
-            position: 'fixed',
-            top: '76px',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 99999,
-            background: 'rgba(5, 5, 5, 0.98)',
-            backdropFilter: 'blur(32px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 0,
-          }}
-          onClick={() => setSelectedProject(null)}
-        >
+      {selectedProject && (() => {
+        const isLight = typeof document !== 'undefined' && document.body.classList.contains('light-mode')
+        return createPortal(
           <div
             style={{
-              position: 'relative',
-              width: '100vw',
-              height: 'calc(100vh - 76px)',
-              background: '#0B0B0C',
+              position: 'fixed',
+              top: '76px',
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 99999,
+              background: isLight ? 'rgba(248, 250, 252, 0.96)' : 'rgba(5, 5, 5, 0.98)',
+              backdropFilter: 'blur(32px)',
               display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: 0,
             }}
-            className="flex-col md:flex-row overflow-y-auto md:overflow-hidden animate-fade-in-up"
-            onClick={e => e.stopPropagation()}
+            onClick={() => setSelectedProject(null)}
           >
-            {/* Close Button (X) - Top Right */}
-            <div style={{ position: 'absolute', top: '16px', right: '20px', zIndex: 80 }}>
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="w-11 h-11 rounded-full bg-black/90 hover:bg-[#FF6B00] text-white flex items-center justify-center text-xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95 border border-white/30"
-                aria-label={tx.close}
-                title={tx.close}
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* LEFT COLUMN: Media Showcase - FULL FRAME WITHOUT CROPPING (object-contain) */}
-            <div className="relative w-full md:w-[62%] min-h-[360px] md:h-full bg-[#030303] flex items-center justify-center select-none p-4 md:p-8 border-b md:border-b-0 md:border-r border-white/10 shrink-0">
-              {/* Left Navigation Button (<) */}
-              {mediaList.length > 1 && (
-                <div style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 60 }}>
-                  <button
-                    onClick={prevMedia}
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/85 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl md:text-4xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
-                    title={tx.prev}
-                    aria-label={tx.prev}
-                  >
-                    ‹
-                  </button>
-                </div>
-              )}
-
-              {/* Right Navigation Button (>) */}
-              {mediaList.length > 1 && (
-                <div style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 60 }}>
-                  <button
-                    onClick={nextMedia}
-                    className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/85 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl md:text-4xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
-                    title={tx.next}
-                    aria-label={tx.next}
-                  >
-                    ›
-                  </button>
-                </div>
-              )}
-
-              {/* Media Display (Full frame, object-contain, no cropping) */}
-              {isVideoUrl(mediaList[currentMediaIndex]) ? (
-                <video
-                  src={mediaList[currentMediaIndex]}
-                  controls
-                  autoPlay
-                  className="w-full h-full max-h-[78vh] object-contain shadow-2xl"
-                />
-              ) : (
-                <img
-                  src={mediaList[currentMediaIndex] || selectedProject.img}
-                  alt={`${selectedProject.title} ${currentMediaIndex + 1}`}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
-                  }}
-                  className="w-full h-full max-h-[78vh] object-contain shadow-2xl transition-opacity duration-300"
-                />
-              )}
-
-              {/* Counter Badge */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/85 border border-[#FF6B00]/50 px-4 py-1.5 rounded-full text-xs font-mono text-[#FF9E00] font-bold z-20 backdrop-blur-md shadow-lg pointer-events-none">
-                {currentMediaIndex + 1} / {mediaList.length} &bull; {lang === 'ENG' ? 'Use ← → keys' : 'Dùng phím ← →'}
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN: Project Info & Thumbnails (occupies 38% width, full height scrollable) */}
-            <div className="w-full md:w-[38%] h-full flex flex-col justify-between p-6 md:p-10 bg-[#0B0B0C] overflow-y-auto pr-8 md:pr-10">
-              <div>
-                <div className="flex items-center gap-3 mb-4 pr-14">
-                  <span className="font-mono text-xs tracking-widest text-[#FF9E00] uppercase bg-[#FF6B00]/20 px-3.5 py-1.5 rounded-full border border-[#FF6B00]/40 font-bold">
-                    {lang === 'ENG' ? selectedProject.category : selectedProject.categoryVIE}
-                  </span>
-                </div>
-
-                <h2 className="font-display font-extrabold text-2xl md:text-3xl text-white mb-3 uppercase leading-tight">
-                  {selectedProject.title}
-                </h2>
-
-                <div className="text-white/60 font-mono text-xs font-bold mb-6 flex items-center gap-2 pb-3 border-b border-white/10">
-                  📍 <span>{selectedProject.location} &bull; {selectedProject.year}</span>
-                </div>
-
-                <p className="text-white/85 text-sm md:text-base leading-relaxed mb-6">
-                  {lang === 'ENG' ? selectedProject.descENG : selectedProject.descVIE}
-                </p>
+            <div
+              style={{
+                position: 'relative',
+                width: '100vw',
+                height: 'calc(100vh - 76px)',
+                background: isLight ? '#FFFFFF' : '#0B0B0C',
+                display: 'flex',
+              }}
+              className="flex-col md:flex-row overflow-y-auto md:overflow-hidden animate-fade-in-up"
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Close Button (X) - Top Right */}
+              <div style={{ position: 'absolute', top: '16px', right: '20px', zIndex: 80 }}>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className={`w-11 h-11 rounded-full flex items-center justify-center text-xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95 border ${
+                    isLight
+                      ? 'bg-slate-100 hover:bg-[#EA580C] text-slate-800 hover:text-white border-slate-300'
+                      : 'bg-black/90 hover:bg-[#FF6B00] text-white border-white/30'
+                  }`}
+                  aria-label={tx.close}
+                  title={tx.close}
+                >
+                  ✕
+                </button>
               </div>
 
-              {/* Thumbnails Carousel */}
-              {mediaList.length > 1 && (
-                <div className="pt-4 border-t border-white/10 mt-auto">
-                  <h3 className="font-mono text-xs font-bold text-[#FF9E00] uppercase tracking-widest mb-3">
-                    ◆ {tx.gallery} ({mediaList.length})
-                  </h3>
-                  <div className="flex gap-2.5 overflow-x-auto no-scrollbar py-1">
-                    {mediaList.map((mUrl, idx) => {
-                      const isVid = isVideoUrl(mUrl)
-                      const isActive = idx === currentMediaIndex
-                      return (
-                        <div
-                          key={idx}
-                          onClick={() => setCurrentMediaIndex(idx)}
-                          className={`relative w-20 h-14 shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 transition-all bg-black ${
-                            isActive ? 'border-[#FF6B00] scale-105 shadow-[0_0_18px_rgba(255,107,0,0.8)]' : 'border-white/10 opacity-60 hover:opacity-100'
-                          }`}
-                        >
-                          {isVid ? (
-                            <div className="w-full h-full flex items-center justify-center bg-black/90 text-[#FF9E00] font-mono text-[9px] font-bold">
-                              ▶ VIDEO
-                            </div>
-                          ) : (
-                            <img
-                              src={mUrl}
-                              alt={`Thumb ${idx + 1}`}
-                              loading="lazy"
-                              decoding="async"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
-                              }}
-                              className="w-full h-full object-cover"
-                            />
-                          )}
-                        </div>
-                      )
-                    })}
+              {/* LEFT COLUMN: Media Showcase - FULL FRAME WITHOUT CROPPING (object-contain) */}
+              <div className={`relative w-full md:w-[62%] min-h-[360px] md:h-full flex items-center justify-center select-none p-4 md:p-8 border-b md:border-b-0 md:border-r shrink-0 ${
+                isLight ? 'bg-[#0F172A] border-slate-200' : 'bg-[#030303] border-white/10'
+              }`}>
+                {/* Left Navigation Button (<) */}
+                {mediaList.length > 1 && (
+                  <div style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 60 }}>
+                    <button
+                      onClick={prevMedia}
+                      className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/85 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl md:text-4xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+                      title={tx.prev}
+                      aria-label={tx.prev}
+                    >
+                      ‹
+                    </button>
                   </div>
+                )}
+
+                {/* Right Navigation Button (>) */}
+                {mediaList.length > 1 && (
+                  <div style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', zIndex: 60 }}>
+                    <button
+                      onClick={nextMedia}
+                      className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/85 hover:bg-[#FF6B00] border border-white/30 text-white flex items-center justify-center text-3xl md:text-4xl font-bold transition-all shadow-2xl cursor-pointer hover:scale-110 active:scale-95"
+                      title={tx.next}
+                      aria-label={tx.next}
+                    >
+                      ›
+                    </button>
+                  </div>
+                )}
+
+                {/* Media Display (Full frame, object-contain, no cropping) */}
+                {isVideoUrl(mediaList[currentMediaIndex]) ? (
+                  <video
+                    key={mediaList[currentMediaIndex]}
+                    src={mediaList[currentMediaIndex]}
+                    controls
+                    autoPlay
+                    playsInline
+                    preload="auto"
+                    className="w-full h-full max-h-[78vh] object-contain shadow-2xl"
+                    onCanPlay={(e) => {
+                      const v = e.currentTarget
+                      v.play().catch(() => {
+                        v.muted = true
+                        v.play()
+                      })
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={mediaList[currentMediaIndex] || selectedProject.img}
+                    alt={`${selectedProject.title} ${currentMediaIndex + 1}`}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                    }}
+                    className="w-full h-full max-h-[78vh] object-contain shadow-2xl transition-opacity duration-300"
+                  />
+                )}
+
+                {/* Counter Badge */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/85 border border-[#FF6B00]/50 px-4 py-1.5 rounded-full text-xs font-mono text-[#FF9E00] font-bold z-20 backdrop-blur-md shadow-lg pointer-events-none">
+                  {currentMediaIndex + 1} / {mediaList.length} &bull; {lang === 'ENG' ? 'Use ← → keys' : 'Dùng phím ← →'}
                 </div>
-              )}
+              </div>
+
+              {/* RIGHT COLUMN: Project Info & Thumbnails (occupies 38% width, full height scrollable) */}
+              <div className={`w-full md:w-[38%] h-full flex flex-col justify-between p-6 md:p-10 overflow-y-auto pr-8 md:pr-10 ${
+                isLight ? 'bg-[#FFFFFF] text-[#0F172A]' : 'bg-[#0B0B0C] text-white'
+              }`}>
+                <div>
+                  <div className="flex items-center gap-3 mb-4 pr-14">
+                    <span className={`font-mono text-xs tracking-widest uppercase px-3.5 py-1.5 rounded-full border font-bold ${
+                      isLight ? 'text-[#C2410C] bg-[#EA580C]/12 border-[#EA580C]/40' : 'text-[#FF9E00] bg-[#FF6B00]/20 border-[#FF6B00]/40'
+                    }`}>
+                      {lang === 'ENG' ? selectedProject.category : selectedProject.categoryVIE}
+                    </span>
+                  </div>
+
+                  <h2 className={`font-display font-extrabold text-2xl md:text-3xl mb-3 uppercase leading-tight ${
+                    isLight ? 'text-[#0F172A]' : 'text-white'
+                  }`}>
+                    {selectedProject.title}
+                  </h2>
+
+                  <div className={`font-mono text-xs font-bold mb-6 flex items-center gap-2 pb-3 border-b ${
+                    isLight ? 'text-[#64748B] border-slate-200' : 'text-white/60 border-white/10'
+                  }`}>
+                    📍 <span>{selectedProject.location} &bull; {selectedProject.year}</span>
+                  </div>
+
+                  <p className={`text-sm md:text-base leading-relaxed mb-6 ${
+                    isLight ? 'text-[#334155]' : 'text-white/85'
+                  }`}>
+                    {lang === 'ENG' ? selectedProject.descENG : selectedProject.descVIE}
+                  </p>
+                </div>
+
+                {/* Thumbnails Carousel */}
+                {mediaList.length > 1 && (
+                  <div className={`pt-4 border-t mt-auto ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
+                    <h3 className={`font-mono text-xs font-bold uppercase tracking-widest mb-3 ${
+                      isLight ? 'text-[#C2410C]' : 'text-[#FF9E00]'
+                    }`}>
+                      ◆ {tx.gallery} ({mediaList.length})
+                    </h3>
+                    <div className="flex gap-2.5 overflow-x-auto no-scrollbar py-1">
+                      {mediaList.map((mUrl, idx) => {
+                        const isVid = isVideoUrl(mUrl)
+                        const isActive = idx === currentMediaIndex
+                        return (
+                          <div
+                            key={idx}
+                            onClick={() => setCurrentMediaIndex(idx)}
+                            className={`relative w-20 h-14 shrink-0 rounded-xl overflow-hidden cursor-pointer border-2 transition-all bg-black ${
+                              isActive
+                                ? 'border-[#FF6B00] scale-105 shadow-[0_0_18px_rgba(255,107,0,0.8)]'
+                                : isLight ? 'border-slate-300 opacity-70 hover:opacity-100' : 'border-white/10 opacity-60 hover:opacity-100'
+                            }`}
+                          >
+                            {isVid ? (
+                              <div className="w-full h-full flex items-center justify-center bg-black/90 text-[#FF9E00] font-mono text-[9px] font-bold">
+                                ▶ VIDEO
+                              </div>
+                            ) : (
+                              <img
+                                src={mUrl}
+                                alt={`Thumb ${idx + 1}`}
+                                loading="lazy"
+                                decoding="async"
+                                onError={(e) => {
+                                  (e.target as HTMLImageElement).src = '/assets/image/blogs/blog1.png'
+                                }}
+                                className="w-full h-full object-cover"
+                              />
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </div>,
-        document.body
-      )}
+          </div>,
+          document.body
+        )
+      })()}
     </div>
   )
 }
