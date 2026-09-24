@@ -1,0 +1,9 @@
+.swiper {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  transform: none !important;
+}

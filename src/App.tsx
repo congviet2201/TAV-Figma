@@ -8,6 +8,7 @@ import BlogPage from './pages/BlogPage'
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
+import SaBan3dViewer from './components/SaBan3dViewer'
 import PageTransitionController from './components/PageTransitionController'
 import CustomCursor from './components/CustomCursor'
 
@@ -24,6 +25,7 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [contactOpen, setContactOpen] = useState(false)
+  const [saBan3dOpen, setSaBan3dOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -62,6 +64,7 @@ export default function App() {
   }
 
   const handleOpenContact = () => setContactOpen(true)
+  const handleOpenSaBan3d = () => setSaBan3dOpen(true)
 
   return (
     <div className={`min-h-screen transition-colors duration-400 ${theme === 'dark' ? 'bg-[#050505] text-[#F8FAFC]' : 'bg-[#F8FAFC] text-[#0F172A]'}`}>
@@ -77,6 +80,7 @@ export default function App() {
         theme={theme}
         setTheme={setTheme}
         onOpenContact={handleOpenContact}
+        onOpenSaBan3d={handleOpenSaBan3d}
       />
 
       <PageTransitionController
@@ -102,6 +106,12 @@ export default function App() {
       <ContactModal
         isOpen={contactOpen}
         onClose={() => setContactOpen(false)}
+        lang={lang}
+      />
+
+      <SaBan3dViewer
+        isOpen={saBan3dOpen}
+        onClose={() => setSaBan3dOpen(false)}
         lang={lang}
       />
     </div>

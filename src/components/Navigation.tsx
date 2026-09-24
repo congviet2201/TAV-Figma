@@ -12,6 +12,7 @@ interface Props {
   theme: 'dark' | 'light'
   setTheme: (t: 'dark' | 'light') => void
   onOpenContact?: () => void
+  onOpenSaBan3d?: () => void
 }
 
 const t = {
@@ -48,6 +49,7 @@ export default function Navigation({
   theme,
   setTheme,
   onOpenContact,
+  onOpenSaBan3d,
 }: Props) {
   const labels = t[lang]
 
@@ -81,7 +83,7 @@ export default function Navigation({
           boxShadow: scrolled ? '0 10px 35px rgba(0, 0, 0, 0.15)' : 'none',
         }}
       >
-        <div className="w-full px-4 sm:px-6 md:px-8 h-[90px] flex items-center justify-between">
+        <div className="w-full px-4 sm:px-6 md:px-8 h-[90px] flex items-center justify-between relative">
           {/* Logo TAV 3D Button */}
           <button
             onClick={() => navigate('home')}
@@ -96,6 +98,23 @@ export default function Navigation({
               className="h-20 md:h-[84px] w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-[0_0_26px_rgba(255,107,0,0.8)]"
             />
           </button>
+
+          {/* Desktop Layout 1 Center Navigation Button: SA BÀN 3D */}
+          {currentPage === 'home' && (
+            <div className="hidden md:flex items-center justify-center absolute left-1/2 -translate-x-1/2">
+              <button
+                onClick={onOpenSaBan3d}
+                data-cursor="SPIN 3D"
+                className="btn-primary btn-magnetic px-6 py-2.5 text-xs font-display font-extrabold uppercase tracking-wider shadow-lg flex items-center gap-2.5 group border border-[#FF6B00]/60 hover:border-[#FF9E00]"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
+                <span>SA BÀN 3D</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="group-hover:rotate-180 transition-transform duration-500">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+                </svg>
+              </button>
+            </div>
+          )}
 
           {/* Minimalist Right Controls (Theme Toggle + Language Switcher + Main Hamburger Menu) */}
           <div className="flex items-center gap-3">

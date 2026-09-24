@@ -1,4 +1,5 @@
 import { type Lang } from '../App'
+import { teamLeaders, teamMembers } from '../data/tavData'
 
 interface Props { lang: Lang }
 
@@ -19,8 +20,10 @@ const t = {
       { title: 'Integrity', desc: 'Transparent communication and honest partnerships.' },
       { title: 'Impact', desc: 'We measure success by the results we create for clients.' },
     ],
-    teamLabel: 'Leadership',
-    teamHeadline: 'The Minds Behind the Work',
+    leadershipTitle: 'BOARD OF DIRECTORS',
+    leadershipSubtitle: 'Image of TAV leadership',
+    staffTitle: 'STAFF',
+    staffSubtitle: 'Talented team members',
     milestoneLabel: 'Journey',
     milestoneHeadline: 'Our Story',
   },
@@ -40,47 +43,34 @@ const t = {
       { title: 'Chính Trực', desc: 'Giao tiếp minh bạch và đối tác trung thực.' },
       { title: 'Tác Động', desc: 'Chúng tôi đo lường thành công bằng kết quả tạo ra cho khách hàng.' },
     ],
-    teamLabel: 'Lãnh Đạo',
-    teamHeadline: 'Những Bộ Óc Đằng Sau Công Việc',
+    leadershipTitle: 'BAN LÃNH ĐẠO',
+    leadershipSubtitle: 'Hình ảnh ban lãnh đạo TAV',
+    staffTitle: 'NHÂN SỰ',
+    staffSubtitle: 'Đội ngũ nhân sự tài năng',
     milestoneLabel: 'Hành Trình',
     milestoneHeadline: 'Câu Chuyện Của Chúng Tôi',
   },
 }
 
-const team = [
-  {
-    name: 'Phước Nguyễn',
-    role: 'Chief Executive Officer',
-    roleVIE: 'C.E.O',
-    img: 'https://res.cloudinary.com/dvazxxprl/image/upload/v1747359467/ceo_fsuvfg.png',
-    bio: 'Leader and strategist with 15+ years in architecture and digital visualization.',
-    bioVIE: 'Nhà lãnh đạo và chiến lược gia hơn 15 năm trong kiến trúc và diễn họa số.',
-  },
-  {
-    name: 'Gia Tuấn',
-    role: 'Founder',
-    roleVIE: 'Nhà Sáng Lập',
-    img: 'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/BOARD_OF_DIRECTOR%2FTR%E1%BA%A6N%20NG%E1%BB%8CC%20TU%E1%BA%A4N%20FOUNDER.jpg?alt=media&token=a8bf6718-485c-452f-891f-2cf8b9a29a56',
-    bio: 'Visionary founder shaping TAV 3D technological footprint across Vietnam.',
-    bioVIE: 'Nhà sáng lập định hình dấu ấn công nghệ TAV 3D trên khắp Việt Nam.',
-  },
-  {
-    name: 'Gia Quyết',
-    role: 'Art Director',
-    roleVIE: 'Giám Đốc Nghệ Thuật',
-    img: 'https://res.cloudinary.com/dvazxxprl/image/upload/v1747359466/art_direc_qdqbxn.png',
-    bio: 'Artistic director driving 3D aesthetics and photorealistic quality standards.',
-    bioVIE: 'Giám đốc nghệ thuật định hướng thẩm mỹ 3D và tiêu chuẩn chất lượng siêu thực.',
-  },
-  {
-    name: 'Minh Tiến',
-    role: 'Leader Visual',
-    roleVIE: 'Leader Visual',
-    img: 'https://firebasestorage.googleapis.com/v0/b/tavgallery-507cd.firebasestorage.app/o/MEMBER%2FMINH%20TI%E1%BA%BEN.jpg?alt=media&token=67ddae49-8c1a-425b-9f7c-d56a12bffe48',
-    bio: 'Visual rendering specialist leading high-profile architectural projects.',
-    bioVIE: 'Chuyên gia diễn họa hình ảnh dẫn dắt các dự án kiến trúc trọng điểm.',
-  },
-]
+const leaders = teamLeaders.map((item) => ({
+  name: item.name,
+  role: item.position,
+  roleVIE: item.positionVIE,
+  img: item.img,
+  localImg: item.localImg,
+  bio: item.bioENG,
+  bioVIE: item.bioVIE,
+}))
+
+const members = teamMembers.map((item) => ({
+  name: item.name,
+  role: item.positionENG,
+  roleVIE: item.positionVIE,
+  img: item.img,
+  localImg: item.localImg,
+  bio: item.bioENG,
+  bioVIE: item.bioVIE,
+}))
 
 const milestones = [
   { year: '2012', title: 'Founded', titleVIE: 'Thành Lập', desc: 'Started as a 3-person architectural visualization boutique in Ho Chi Minh City.' },
@@ -164,34 +154,71 @@ export default function AboutPage({ lang }: Props) {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-24 bg-[#050505]">
+      {/* Part 1: BAN LÃNH ĐẠO (Leadership) */}
+      <section className="py-24 bg-[#050505] border-t border-white/10">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-          <div className="section-label mb-4">◆ {tx.teamLabel}</div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16 uppercase">{tx.teamHeadline}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {team.map((member, i) => (
-              <div key={i} data-cursor="DISCOVER" className="group card-running-border">
-                <div className="card-running-border-inner overflow-hidden">
-                  <div className="relative overflow-hidden" style={{ height: '280px' }}>
-                    <img
-                      src={member.img}
-                      alt={member.name}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-display font-bold text-white dark:text-white light:text-[#0F172A] text-lg group-hover:text-[#FF6B00] transition-colors uppercase">{member.name}</h3>
-                    <div className="text-[#FF6B00] dark:text-[#FF9E00] light:text-[#C2410C] text-xs font-mono mt-1.5 mb-3 bg-[#FF6B00]/15 dark:bg-[#FF6B00]/15 light:bg-[#EA580C]/10 px-3 py-1 rounded-full inline-block border border-[#FF6B00]/40 dark:border-[#FF6B00]/40 light:border-[#EA580C]/30 font-bold uppercase">
-                      {lang === 'ENG' ? member.role : member.roleVIE}
-                    </div>
-                    <p className="text-white/80 dark:text-white/80 light:text-[#475569] text-sm leading-relaxed">
-                      {lang === 'ENG' ? member.bio : member.bioVIE}
-                    </p>
-                  </div>
+          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-white mb-2 uppercase tracking-wide">{tx.leadershipTitle}</h2>
+          <p className="text-[#696969] text-base md:text-lg mb-12 font-medium">{tx.leadershipSubtitle}</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {leaders.map((member, i) => (
+              <div key={i} data-cursor="DISCOVER" className="group flex flex-col items-center">
+                <div className="relative w-full overflow-hidden rounded-[3rem] bg-[#141414] aspect-[3/4]">
+                  <img
+                    src={member.img}
+                    onError={(e) => {
+                      if (member.localImg && member.img !== member.localImg) {
+                        ;(e.target as HTMLImageElement).src = member.localImg
+                      }
+                    }}
+                    alt={member.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="mt-6 text-center">
+                  <h3 className="font-display font-extrabold text-white dark:text-white light:text-[#0F172A] text-2xl uppercase tracking-wider group-hover:text-[#FF6B00] transition-colors">{member.name}</h3>
+                  <p className="text-[#888888] text-sm font-mono mt-1 uppercase font-bold tracking-widest">{lang === 'ENG' ? member.role : member.roleVIE}</p>
+                  <p className="text-white/70 dark:text-white/70 light:text-[#475569] text-sm leading-relaxed mt-3 max-w-xs mx-auto font-normal">
+                    {lang === 'ENG' ? member.bio : member.bioVIE}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Part 2: NHÂN SỰ (Team / Staff) */}
+      <section className="py-24 bg-[#0A0A0A] border-t border-white/10">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-white mb-2 uppercase tracking-wide">{tx.staffTitle}</h2>
+          <p className="text-[#696969] text-base md:text-lg mb-12 font-medium">{tx.staffSubtitle}</p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {members.map((member, i) => (
+              <div key={i} data-cursor="DISCOVER" className="group flex flex-col items-center">
+                <div className="relative w-full overflow-hidden rounded-[3rem] bg-[#141414] aspect-[3/4]">
+                  <img
+                    src={member.img}
+                    onError={(e) => {
+                      if (member.localImg && member.img !== member.localImg) {
+                        ;(e.target as HTMLImageElement).src = member.localImg
+                      }
+                    }}
+                    alt={member.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="mt-6 text-center">
+                  <h3 className="font-display font-extrabold text-white dark:text-white light:text-[#0F172A] text-2xl uppercase tracking-wider group-hover:text-[#FF6B00] transition-colors">{member.name}</h3>
+                  <p className="text-[#888888] text-sm font-mono mt-1 uppercase font-bold tracking-widest">{lang === 'ENG' ? member.role : member.roleVIE}</p>
+                  <p className="text-white/70 dark:text-white/70 light:text-[#475569] text-sm leading-relaxed mt-3 max-w-xs mx-auto font-normal">
+                    {lang === 'ENG' ? member.bio : member.bioVIE}
+                  </p>
                 </div>
               </div>
             ))}
@@ -200,7 +227,7 @@ export default function AboutPage({ lang }: Props) {
       </section>
 
       {/* Timeline */}
-      <section className="py-24 bg-[#0A0A0A]">
+      <section className="py-24 bg-[#050505] border-t border-white/10">
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="section-label mb-4">◆ {tx.milestoneLabel}</div>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-16 uppercase">{tx.milestoneHeadline}</h2>

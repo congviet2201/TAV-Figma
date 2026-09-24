@@ -1,0 +1,24 @@
+.swiperBlog .swiper-pagination-bullet {
+  width: 2.5rem !important;
+  height: 6px !important;
+  border-radius: 20px !important;
+  background: #ffffff !important;
+}
+
+.swiperBlog .swiper-pagination-bullet-active {
+  background: white !important;
+}
+
+.swiperBlog .swiper-pagination {
+  bottom: 0 !important;
+  left: 50px !important;
+  top: auto !important;
+  transform: none !important;
+  width: fit-content !important;
+  height: fit-content;
+}
+.swiperBlog,
+.swiperBlog .swiper-wrapper,
+.swiperBlog .swiper-slide {
+  max-width: 100dvw !important;
+}

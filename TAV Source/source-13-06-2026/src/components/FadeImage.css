@@ -1,0 +1,24 @@
+.products-fade-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--tav-border-radius-media, 2.4rem);
+  background: #1c1c1c;
+  display: block;
+}
+
+.products-fade-wrap--light-bg {
+  background: #e4e4e4;
+}
+
+.products-fade-img {
+  width: 100%;
+  display: block;
+  border-radius: var(--tav-border-radius-media, 2.4rem);
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.products-fade-img--loaded {
+  opacity: 1;
+}
